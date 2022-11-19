@@ -1,0 +1,31 @@
+{
+  "name": "ca-auction",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --emptyOutDir",
+    "pretty": "npx prettier --write .",
+    "checkPretty": "npx prettier --check .",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SolveigRebnord/ca-auction.git"
+  },
+  "author": "sunroad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SolveigRebnord/ca-auction/issues"
+  },
+  "homepage": "https://github.com/SolveigRebnord/ca-auction#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "husky": "^8.0.2",
+    "postcss": "^8.4.19",
+    "prettier": "2.7.1",
+    "tailwindcss": "^3.2.4",
+    "vite": "^3.2.4"
+  }
+}
