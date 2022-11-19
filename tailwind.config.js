@@ -1,12 +1,9 @@
 module.exports = {
-    content: ["./src/**/*.{html,js}"],
-    theme: {
-      extend: {
-        colors: {
-        },
-        fontFamily: {
-        },
-      },
+  content: ["./src/**/*.{html,js}"],
+  theme: {
+    extend: {
+      colors: {},
+      fontFamily: {},
     },
-  };
-  
+  },
+};
