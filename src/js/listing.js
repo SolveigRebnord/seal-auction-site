@@ -1,1 +1,1 @@
-console.log("this is one listing site")
+console.log("this is one listing site");
