@@ -3,12 +3,104 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="./img/small_logo.svg" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Log in</title>
+    <title>Log In | Seal</title>
     <script type="module" src="./js/ingredients/all.js" defer></script>
     <script type="module" src="./js/login.js" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cuprum:wght@400;500&family=Dosis:wght@200;300;400;500;600;700&family=Kaushan+Script&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Londrina+Shadow&family=Quicksand:wght@300;400;500&family=Satisfy&display=swap"
+      rel="stylesheet" />
   </head>
-  <body>
-    <h1 class="uppercase">Log in</h1>
+  <body class="py-20 md:py-40">
+    <header></header>
+    <main class="flex flex-col gap-8 items-center">
+      <div class="flex flex-col items-center justify-center gap-8">
+        <h1 class="text-5xl font-cool font-light tracking-wide text-blue">
+          Log in
+        </h1>
+        <h2 class="pb-8 text-md md:pb-20 lg:pb-24">
+            Welcome back!
+          </h2>
+      </div>
+      <section
+      class="flex flex-col items-center font-quickS gap-8 w-2/3 md:gap-8 lg:gap-6">
+      <form
+        id="login-form"
+        class="flex flex-col w-full text-sm md:w-2/3 gap-10 text-center lg:w-2/5">
+        <label for="email" class="relative w-full">
+          <input
+            type="text"
+            name="email"
+            id="email"
+            placeholder="email"
+            class="w-full focus:outline-none border-b border-blue h-14 px-5" />
+          <span
+            class="absolute text-xs tracking-wide -bottom-6 right-0 whitespace-nowrap lg:text-sm"
+            id="email-message"></span>
+        </label>
+        <label for="password" class="relative w-full">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="password"
+            class="w-full focus:outline-none border-b border-blue h-14 px-5" />
+          <span
+            id="password-message"
+            class="absolute text-xs tracking-wide -bottom-6 right-0 whitespace-nowrap lg:text-sm"></span>
+        </label>
+        <button
+          class="py-2 border px-10 text-sm w-fit m-auto rounded-md tracking-wider font-dosis font-medium text-white bg-blue shadow-md"
+          id="submitform"
+          type="submit">
+          Log In
+        </button>
+      </form>
+      <span
+        class="bg-white text-black h-12 w-full flex justify-center items-center whitespace-nowrap md:text-md invisible"
+        id="error-message"></span>
+      <div
+        class="flex flex-col gap-1 items-center md:mt-12 lg:mt-2">
+        <p>Don't have an account yet?</p>
+        <a class="underline" href="signup.html">
+          <p>Let's get you one in no time!</p>
+        </a>
+      </div>
+    </section>
+
+      <section id="mobile_nav" class="md:hidden">
+        <ul
+          class="flex flex-row align-middle justify-between px-12 py-6 fixed bottom-0 left-0 w-full border-t border-gray-200 bg-white">
+          <a href="index.html">
+            <li>
+              <img
+                class="w-8 h-8"
+                src="./img/icon_home_blue.png"
+                alt="Home icon" />
+            </li>
+          </a>
+          <a href="newlisting.html">
+            <li>
+              <img
+                class="w-8 h-8"
+                src="./img/icon_newlisting_blue.png"
+                alt="New post icon" />
+            </li>
+          </a>
+          <a href="myprofile.html">
+            <li>
+              <img
+                class="w-8 h-8"
+                src="./img/icon_profile_blue.png"
+                alt="Profile icon" />
+            </li>
+          </a>
+        </ul>
+      </section>
+    </main>
   </body>
 </html>
