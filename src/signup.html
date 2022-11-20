@@ -3,12 +3,116 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="./img/small_logo.svg" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign up</title>
+    <title>Sign up | Seal</title>
     <script type="module" src="./js/ingredients/all.js" defer></script>
     <script type="module" src="./js/signup.js" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cuprum:wght@400;500&family=Dosis:wght@200;300;400;500;600;700&family=Kaushan+Script&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Londrina+Shadow&family=Quicksand:wght@300;400;500&family=Satisfy&display=swap"
+      rel="stylesheet" />
   </head>
-  <body>
-    <h1 class="uppercase">Sign up</h1>
+  <body class="py-20 md:py-40">
+    <header></header>
+    <main class="flex flex-col gap-16 items-center">
+      <div class="flex flex-col items-center justify-center gap-8">
+        <h1 class="text-5xl font-cool font-light tracking-wide text-blue">
+          Registrer
+        </h1>
+      </div>
+      <form
+        id="sign-up-form"
+        class="m-auto flex flex-col rounded-md gap-10 w-3/4 md:w-1/2 text-center font-quickS tracking-wide font-light md:px-8 md:py-12 md:text-md lg:gap-12 lg:w-1/3 lg:p-8 lg:m-0 lg:bg-opacity-90">
+        <label for="username" class="relative">
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Username"
+            class="px-4 rounded-md focus:outline-none h-12 w-full border border-blue placeholder:text-gray-500" />
+          <span
+            class="absolute text-xs tracking-wide -bottom-6 right-0 whitespace-nowrap lg:text-sm"
+            id="username-message"></span>
+        </label>
+        <label for="email" class="relative">
+          <input
+            type="text"
+            name="email"
+            id="email"
+            placeholder="Email"
+            class="px-4 rounded-md focus:outline-none h-12 w-full border border-blue placeholder:text-gray-500" />
+          <span
+            class="absolute text-xs tracking-wide -bottom-6 right-0 whitespace-nowrap lg:text-sm"
+            id="email-message"></span>
+        </label>
+        <label for="password" class="relative">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            class="px-4 rounded-md focus:outline-none h-12 w-full border border-blue placeholder:text-gray-500" />
+          <span
+            class="absolute text-xs tracking-wide -bottom-6 right-0 whitespace-nowrap lg:text-sm"
+            id="password-message"></span>
+        </label>
+        <label for="confirm-password" class="relative">
+          <input
+            type="password"
+            name="confirm-password"
+            id="confirm-password"
+            placeholder="Confirm password"
+            class="px-4 rounded-md focus:outline-none h-12 w-full border border-blue placeholder:text-gray-500" />
+          <span
+            class="absolute text-xs tracking-wide -bottom-6 right-0 whitespace-nowrap lg:text-sm"
+            id="confirm-password-message"></span>
+        </label>
+        <button
+          class="w-fit m-auto py-3 px-10 md:mt-2 rounded-md tracking-wider font-dosis font-medium text-white bg-blue shadow-md"
+          id="sign-up-button"
+          type="submit">
+          Sign up
+        </button>
+        <span id="error-message" class="hidden"></span>
+      </form>
+      <div
+        class="flex flex-col items-center font-light md:text-md md:tracking-wide">
+        <p>Got an account after all?</p>
+        <a class="underline" href="login.html">Go back to log in</a>
+      </div>
+
+      <section id="mobile_nav" class="md:hidden">
+        <ul
+          class="flex flex-row align-middle justify-between px-12 py-6 fixed bottom-0 left-0 w-full border-t border-gray-200 bg-white">
+          <a href="index.html">
+            <li>
+              <img
+                class="w-8 h-8"
+                src="./img/icon_home_blue.png"
+                alt="Home icon" />
+            </li>
+          </a>
+          <a href="newlisting.html">
+            <li>
+              <img
+                class="w-8 h-8"
+                src="./img/icon_newlisting_blue.png"
+                alt="New post icon" />
+            </li>
+          </a>
+          <a href="myprofile.html">
+            <li>
+              <img
+                class="w-8 h-8"
+                src="./img/icon_profile_blue.png"
+                alt="Profile icon" />
+            </li>
+          </a>
+        </ul>
+      </section>
+    </main>
   </body>
 </html>
