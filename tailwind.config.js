@@ -17,6 +17,12 @@ module.exports = {
         satisfy: "Satisfy",
         cool: "Kaushan Script",
       },
+      maxWidth: {
+        'xxs': '240px',
+      },
+      ringWidth: {
+        '10': '10px',
+      },
     },
   },
 };

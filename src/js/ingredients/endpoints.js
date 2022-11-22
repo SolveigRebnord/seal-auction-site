@@ -1,5 +1,9 @@
-const API_BASE_URL = "https://api.noroff.dev/";
+const API_BASE_URL = "https://api.noroff.dev/api/v1/";
 
-const ALL_LIS_URL = API_BASE_URL + "api/v1/auction/listings";
+const ALL_LIS_URL = API_BASE_URL + "auction/listings";
 
-export { ALL_LIS_URL };
+const LOG_IN_URL = API_BASE_URL + "auction/auth/login";
+
+const ALL_PROFILES_URL = API_BASE_URL + "auction/profiles";
+
+export { ALL_LIS_URL, LOG_IN_URL, ALL_PROFILES_URL };
