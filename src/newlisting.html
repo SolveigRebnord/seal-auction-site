@@ -7,8 +7,102 @@
     <title>New listing</title>
     <script type="module" src="./js/ingredients/all.js" defer></script>
     <script type="module" src="./js/newlisting.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cuprum:wght@400;500&family=Dosis:wght@200;300;400;500;600;700&family=Kaushan+Script&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Londrina+Shadow&family=Quicksand:wght@300;400;500&family=Satisfy&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <h1 class="uppercase">New listing</h1>
+  <body class="bg-bgGrey">
+    <header>
+        <section
+        id="mobile_header"
+        class="flex flex-row items-center justify-between p-8 pb-12"
+      >
+        <div>
+          <img src="./img/small_logo.svg" alt="Small seal logo" />
+        </div>
+        <div>
+          <img src="./img/icon_search.svg" alt="Search icon" />
+        </div>
+      </section>
+    </header>
+    <main class="p-4 md:w-2/3 m-auto md:pl-24 lg:px-42">
+      <h1 class="font-quickS text-5xl pb-20">New deal</h1>
+      <div
+          id="create_post"
+          class="">
+          <form
+            id="create_post_form"
+            class="p-6 md:shadow-none flex flex-col w-full gap-8 md:gap-8 font-quickS font-light lg:flex-row lg:justify-between lg:gap-32 lg:items-stretch">
+            <div class="flex flex-col w-full gap-4 lg:w-1/2 lg:justify-between lg:gap-8">
+              <div>
+                <input
+                  type="text"
+                  name="title"
+                  id="title"
+                  placeholder="title"
+                  required
+                  class="italic font-quickS pl-4 tracking-wide font-light placeholder:text-black text-2xl focus:outline-none bg-transparent" />
+                  <hr class="bg-black mb-4 lg:mb-12">
+                <textarea
+                  name="body"
+                  id="body"
+                  placeholder="description..."
+                  class="auto-rows-max auto-cols-auto w-full h-full border-none font-josefine font-light placeholder:text-black focus:outline-none bg-transparent"></textarea>
+              </div>
+              <div class="flex flex-row gap-6">
+                <input
+                  type="text"
+                  placeholder="Add Tags"
+                  name="tags"
+                  id="tags"
+                  class="text-right w-16" />
+                <input
+                  id="media-button"
+                  placeholder="Add Media"
+                  class="text-right w-20" />
+                </div>
+              </div>
+              <div class="flex flex-col gap-12 pt-8 lg:p-0">
+                <div class="flex flex-col gap-4 md:flex-row lg:justify-between lg:items-center">
+                  <label for="endingTime">Ending time</label>
+                  <input type="datetime-local" name="endingTime" id="endingTime" class="hover:cursor-pointer shadow-md p-2 focus:outline-none">
+                </div>
+                <div class="flex justify-between items-center w-full">
+                  <label for="price">Starting bid</label>
+                  <input type="text" name="price" id="price" min="0" max="1000" class="focus:outline-none w-1/2 text-right text-2xl bg-transparent" placeholder="0 NOK">
+                </div>
+                <button
+                id="submit"
+                class="tracking-wide bg-white text-xs px-8 py-4 w-full shadow-md md:mt-12 uppercase">
+                Post
+              </button>
+              </div>
+              
+          </form>
+        </div>
+    </main>
+    <section id="bigScreen_nav" class="hidden md:inline">
+      <ul
+        class="flex flex-col pt-20 justify-start items-center gap-20 px-6 py-6 fixed top-0 left-0 h-full font-quickS tracking-wide bg-lightBlue border-r border-gray-300 uppercase"
+      >
+        <a href="index.html">
+          <li class="pl-2 pb-10">
+            <img class="w-20" src="./img/small_logo.svg" alt="" />
+          </li>
+        </a>
+        <a href="index.html">
+          <li>Listings</li>
+        </a>
+        <a href="newlisting.html">
+          <li>New listing</li>
+        </a>
+        <a href="myprofile.html">
+          <li>My profile</li>
+        </a>
+      </ul>
+    </section>
   </body>
 </html>
