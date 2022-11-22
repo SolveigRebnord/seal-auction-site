@@ -5,6 +5,8 @@ module.exports = {
       colors: {
         lightBlue: "#EBF2F6",
         blue: "#657E8C",
+        bgGrey: "#FCFCFC",
+        darkerBlue: "#113245",
       },
       fontFamily: {
         cuprum: "Cuprum",

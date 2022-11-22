@@ -7,12 +7,18 @@
     <title>Document</title>
     <script type="module" src="./js/ingredients/all.js" defer></script>
     <script type="module" src="./js/index.js" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cuprum:wght@400;500&family=Dosis:wght@200;300;400;500;600;700&family=Kaushan+Script&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Londrina+Shadow&family=Quicksand:wght@300;400;500&family=Satisfy&display=swap"
+      rel="stylesheet" />
   </head>
-  <body>
+  <body  class="bg-bgGrey mb-32 md:mb-0">
     <header>
       <section
         id="mobile_header"
-        class="flex flex-row items-center justify-between p-12">
+        class="flex flex-row items-center justify-between p-12 lg:hidden">
         <div>
           <img src="./img/small_logo.svg" alt="Small seal logo" />
         </div>
@@ -21,6 +27,86 @@
         </div>
       </section>
     </header>
-    <main></main>
+    <main class="px-2 md:ml-40 md:px-8">
+      <section class=" shadow-lg p-4 lg:pt-32">
+          <div class="flex flex-row justify-between">
+            <h1 class="text-3xl font-quickS">Find your next deal</h1>
+            <button class="border border-blue">Filter</button>
+          </div>
+          <section
+          id="feed"
+          class="w-full gap-16 pt-24 flex flex-wrap flex-row justify-center lg:justify-between"></section>
+          </section>
+        </section>
+    </main>
+
+    <section id="bigScreen_profile" class="hidden lg:inline">
+      <div class="pt-12 w-60 fixed top-40 right-12 h-full">
+        <div class="w-60 h-40 mb-12 bg-lightBlue rounded-lg shadow-lg">
+          <img class="m-auto" src="./img/big_logo.svg" alt="">
+          <p class="text-center text-xl">Simon</p>
+        </div>
+        <div class="w-60 h-96 bg-lightBlue rounded-lg shadow-lg">
+        </div>
+      </div>
+       
+       
+    </section>
+
+    <section id="bigScreen_nav" class="hidden md:inline">
+      <ul
+        class="flex flex-col pt-20 justify-start items-center gap-20 px-6 py-6 fixed top-0 left-0 h-full font-quickS tracking-wide bg-lightBlue border-r border-gray-300 uppercase">
+        <a href="index.html">
+          <li class="pl-2 pb-10">
+            <img class="w-20" src="./img/small_logo.svg" alt="">
+          </li>
+        </a>
+        <a href="index.html">
+          <li>
+            Listings
+          </li>
+        </a>
+        <a href="newlisting.html">
+          <li>
+            New listing
+          </li>
+        </a>
+        <a href="myprofile.html">
+          <li>
+            My profile
+          </li>
+        </a>
+      </ul>
+    </section>
+
+    <section id="mobile_nav" class="md:hidden">
+      <ul
+        class="flex flex-row align-middle justify-between px-12 py-6 fixed bottom-0 left-0 w-full border-t border-gray-200 bg-white">
+        <a href="index.html">
+          <li>
+            <img
+              class="w-8 h-8"
+              src="./img/icon_home_blue.png"
+              alt="Home icon" />
+          </li>
+        </a>
+        <a href="newlisting.html">
+          <li>
+            <img
+              class="w-8 h-8"
+              src="./img/icon_newlisting_blue.png"
+              alt="New post icon" />
+          </li>
+        </a>
+        <a href="myprofile.html">
+          <li>
+            <img
+              class="w-8 h-8"
+              src="./img/icon_profile_blue.png"
+              alt="Profile icon" />
+          </li>
+        </a>
+      </ul>
+    </section>
   </body>
 </html>
