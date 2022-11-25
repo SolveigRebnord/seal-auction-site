@@ -16,6 +16,8 @@ module.exports = {
         quickS: "Quicksand",
         satisfy: "Satisfy",
         cool: "Kaushan Script",
+        robotoC: 'Roboto Condensed',
+        fjalla: 'Fjalla One'
       },
       maxWidth: {
         'xxs': '240px',

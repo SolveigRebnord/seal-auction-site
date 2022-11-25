@@ -31,4 +31,8 @@ function getStoredData(key) {
   }
 }
 
-export { saveToken, saveUser, getToken, getUsername };
+function clearStorage() {
+  localStorage.clear();
+}
+
+export { saveToken, saveUser, getToken, getUsername, clearStorage };

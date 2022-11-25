@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.active-button {
+    background-color: #657E8C;
+    color: white;
+    border: none;
+}
