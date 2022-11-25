@@ -6,74 +6,70 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
-
 const profileName = document.getElementById("profile_name");
-const tagsInput = document.getElementById("tags")
-const tagSpan = document.getElementById("tags_array")
+const tagsInput = document.getElementById("tags");
+const tagSpan = document.getElementById("tags_array");
 const ul = document.querySelector("ul");
-const mediaInput = document.getElementById("media_input")
-const mediaBtn = document.getElementById("media_button")
-const prew = document.getElementById("show_img")
-const newListing = document.getElementById("preview-section")
-const previewBtn = document.getElementById("preview_listing")
+const mediaInput = document.getElementById("media_input");
+const mediaBtn = document.getElementById("media_button");
+const prew = document.getElementById("show_img");
+const newListing = document.getElementById("preview-section");
+const previewBtn = document.getElementById("preview_listing");
 
-const title = document.getElementById("title")
-const desc = document.getElementById("desc")
-const endingTime = document.getElementById("endingTime")
-
-
-
-
+const title = document.getElementById("title");
+const desc = document.getElementById("desc");
+const endingTime = document.getElementById("endingTime");
 
 profileName.innerHTML = getUsername();
 
 let tagArray = [];
 
 tagsInput.addEventListener("keyup", () => {
-    if (tagsInput.value.endsWith(',')) {
-        let tag = tagsInput.value.slice(0,-1);
-        tagArray.push(tag)
-        tagsInput.value = "";
-        tagSpan.innerHTML = tagArray;
-    }
-})
+  if (tagsInput.value.endsWith(",")) {
+    let tag = tagsInput.value.slice(0, -1);
+    tagArray.push(tag);
+    tagsInput.value = "";
+    tagSpan.innerHTML = tagArray;
+  }
+});
 
 let prewiew;
 
-
-
 mediaBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    console.log(mediaInput.value)
-    prewiew = `<img src="${mediaInput.value}">`
-    prew.innerHTML = prewiew;
-    prew.classList.toggle("hidden")
-})
+  e.preventDefault();
+  console.log(mediaInput.value);
+  prewiew = `<img src="${mediaInput.value}">`;
+  prew.innerHTML = prewiew;
+  prew.classList.toggle("hidden");
+});
 
 mediaInput.addEventListener("", () => {
-    if (tagsInput.value.endsWith(',')) {
-        let tag = tagsInput.value.slice(0,-1);
-        tagArray.push(tag)
-        tagsInput.value = "";
-        tagSpan.innerHTML = tagArray;
-    }
-})
+  if (tagsInput.value.endsWith(",")) {
+    let tag = tagsInput.value.slice(0, -1);
+    tagArray.push(tag);
+    tagsInput.value = "";
+    tagSpan.innerHTML = tagArray;
+  }
+});
 
 previewBtn.addEventListener("click", (e) => {
-e.preventDefault();
-    newListing.classList.toggle("hidden");
-    showPreview(title.value, desc.value, tagsInput.value, mediaInput.value, endingTime.value)
-})
-
+  e.preventDefault();
+  newListing.classList.toggle("hidden");
+  showPreview(
+    title.value,
+    desc.value,
+    tagsInput.value,
+    mediaInput.value,
+    endingTime.value
+  );
+});
 
 //  <h2 class="text-3xl font-lobster2 pb-8 self-center">Preview<h2>
-    function showPreview(title, desc, tags, media, endTime) {
+function showPreview(title, desc, tags, media, endTime) {
+  let showTime = dayjs(endTime).format("DD/MM/YYYY HH:mm:ss");
+  let fromNow = dayjs(endTime).fromNow();
 
-        let showTime = dayjs(endTime).format('DD/MM/YYYY HH:mm:ss')
-        let fromNow = dayjs(endTime).fromNow()
-
-        let fullPreview = 
-        `<div class="thingy bg-bgGrey rounded-md px-4 py-8 shadow-lg m-auto md:w-2/3 md:mr-12 md:mt-1/2 md:p-14 lg:m-auto lg:w-1/3 h-fit font-robotoC font-light">
+  let fullPreview = `<div class="thingy bg-bgGrey rounded-md px-4 py-8 shadow-lg m-auto md:w-2/3 md:mr-12 md:mt-1/2 md:p-14 lg:m-auto lg:w-1/3 h-fit font-robotoC font-light">
       
         <div class="flex flex-col gap-4">
             <img class="lg:w-4/5 max-h-60 self-center rounded-md md:w-full" src="${media}">
@@ -103,88 +99,77 @@ e.preventDefault();
             </div>
 
         </div>
-        `
-        console.log(fullPreview)
-        newListing.innerHTML = fullPreview;
+        `;
+  console.log(fullPreview);
+  newListing.innerHTML = fullPreview;
 
-     
-        document.getElementById("exit_preview").addEventListener("click", closeOverlay)
-        document.getElementById("post_listing").addEventListener("click", createRequest)
-  
-
-    }
-
-    document.addEventListener(
-        "click",
-        function (event) {
-          if (event.target.closest(".modal")) {
-            if (event.target.closest(".thingy")) {
-                return;
-            }
-            else {
-                closeOverlay();
-            }
-
-          }
-        },
-        false
-      );
-
-
-function closeOverlay() {
-    newListing.classList.toggle("hidden");
+  document
+    .getElementById("exit_preview")
+    .addEventListener("click", closeOverlay);
+  document
+    .getElementById("post_listing")
+    .addEventListener("click", createRequest);
 }
 
+document.addEventListener(
+  "click",
+  function (event) {
+    if (event.target.closest(".modal")) {
+      if (event.target.closest(".thingy")) {
+        return;
+      } else {
+        closeOverlay();
+      }
+    }
+  },
+  false
+);
+
+function closeOverlay() {
+  newListing.classList.toggle("hidden");
+}
 
 function createRequest() {
-    let finTitle = title.value
-    let finDesc = desc.value
-    let finTags = tagsInput.value
-    let finImg = mediaInput.value
-    let finEndTime = endingTime.value
+  let finTitle = title.value;
+  let finDesc = desc.value;
+  let finTags = tagsInput.value;
+  let finImg = mediaInput.value;
+  let finEndTime = endingTime.value;
 
-    const reqBody = {
-        "title": finTitle,
-        "description": finDesc, 
-        "tags": [finTags], 
-        "media": [finImg],
-        "endsAt": finEndTime
-      }
-      console.log(reqBody)
-      let bodyJSON = JSON.stringify(reqBody);
-      requestListing(bodyJSON)
+  const reqBody = {
+    title: finTitle,
+    description: finDesc,
+    tags: [finTags],
+    media: [finImg],
+    endsAt: finEndTime,
+  };
+  console.log(reqBody);
+  let bodyJSON = JSON.stringify(reqBody);
+  requestListing(bodyJSON);
 }
 
 async function requestListing(body) {
-    try {
-      const response = await fetch(ALL_LIS_URL, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          Authorization: `Bearer ${getToken()}`,
-        },
-        body: body,
-      });
-  
-      const data = await response.json();
-  
-      if (response.ok) {
-        console.log(data);
-      } else {
-        console.log("oh no" + data);
-      }
-    } catch (error) {
-      console.log(error);
+  try {
+    const response = await fetch(ALL_LIS_URL, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${getToken()}`,
+      },
+      body: body,
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      console.log(data);
+    } else {
+      console.log("oh no" + data);
     }
+  } catch (error) {
+    console.log(error);
   }
-
-
-
-
-
-
-
-
+}
 
 /*
 function createTag(){

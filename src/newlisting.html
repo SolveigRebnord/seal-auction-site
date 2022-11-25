@@ -13,91 +13,136 @@
       href="https://fonts.googleapis.com/css2?family=Cuprum:wght@400;500&family=Dosis:wght@200;300;400;500;600;700&family=Kaushan+Script&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Londrina+Shadow&family=Quicksand:wght@300;400;500&family=Satisfy&display=swap"
       rel="stylesheet"
     />
-    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet"> 
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body id="body_newlisting" class="bg-bgGrey transition-all duration-500 ease-out">
+  <body
+    id="body_newlisting"
+    class="bg-bgGrey transition-all duration-500 ease-out"
+  >
     <header>
       <section
-        id="mobile_header" class="flex flex-row items-center justify-end p-12 lg:p-8 gap-8">
+        id="mobile_header"
+        class="flex flex-row items-center justify-end p-12 lg:p-8 gap-8"
+      >
         <div class="pr-2 flex flex-row gap-4 items-center">
-          <input type="text" name="search_input" id="search_input" class="hidden border-b border-gray-400 h-6 w-80 px-4 outline-none bg-transparent text-sm pb-1" placeholder="What are you looking for?">
-          <img src="./img/icon_search.svg" id="search_btn" alt="Search icon" class="hover:cursor-pointer" />
+          <input
+            type="text"
+            name="search_input"
+            id="search_input"
+            class="hidden border-b border-gray-400 h-6 w-80 px-4 outline-none bg-transparent text-sm pb-1"
+            placeholder="What are you looking for?"
+          />
+          <img
+            src="./img/icon_search.svg"
+            id="search_btn"
+            alt="Search icon"
+            class="hover:cursor-pointer"
+          />
         </div>
         <a href="myprofile.html" class="hover:cursor-pointer">
-          <div class="flex flex-row items-center gap-2 font-robotoC text-sm tracking-wide">
-            <img class="w-6" src="./img/profile.png" alt="Profile icon"><p id="profile_name"></p>
+          <div
+            class="flex flex-row items-center gap-2 font-robotoC text-sm tracking-wide"
+          >
+            <img class="w-6" src="./img/profile.png" alt="Profile icon" />
+            <p id="profile_name"></p>
           </div>
         </a>
         <div id="log_out" class="hover:cursor-pointer">
-          <img class="w-4 border border-black rounded-sm" src="./img/close.svg" alt="x icon">
+          <img
+            class="w-4 border border-black rounded-sm"
+            src="./img/close.svg"
+            alt="x icon"
+          />
         </div>
       </section>
     </header>
     <main class="p-4 md:w-2/3 m-auto md:pl-24 lg:px-42 lg:pt-20">
-     
-      <div
-          id="create_post"
-          class="">
-          <form
-            id="create_post_form"
-            class="p-6 md:shadow-none flex flex-col w-full gap-8 md:gap-8 font-quickS font-light lg:flex-row lg:justify-between lg:gap-32 lg:items-stretch">
-            <div class="flex flex-col w-full gap-4 lg:w-1/2 lg:justify-between lg:gap-8">
-              <div>
-                <input
-                  type="text"
-                  name="title"
-                  id="title"
-                  placeholder="title"
-                  required
-                  class="italic font-quickS pl-4 tracking-wide font-light placeholder:text-black text-2xl focus:outline-none bg-transparent" />
-                  <hr class="bg-black mb-4 mt-2 lg:mb-12">
-                <textarea
-                  name="desc"
-                  id="desc"
-                  placeholder="description..."
-                  class="auto-rows-max auto-cols-auto w-full h-full border-none font-josefine font-light placeholder:text-black focus:outline-none bg-transparent"></textarea>
-              </div>
-              <div class="flex flex-col gap-2">
-                <input
-                  type="text"
-                  placeholder="Add Tags"
-                  name="tags"
-                  id="tags"
-                  class="text-right w-16" />
-                  <span id="tags_array">
-                    <ul id="ul">
-                    </ul>
-                  </span>
-                <input
-                  id="media_input"
-                  placeholder="Add Media"
-                  class="text-right w-full" />
-                  <button id="media_button">Preview</button>
-                  <div class="hidden" id="show_img"></div>
-                </div>
-              </div>
-              <div class="flex flex-col gap-12 pt-8 lg:p-0">
-                <div class="flex flex-col gap-4 md:flex-row lg:justify-between lg:items-center">
-                  <label for="endingTime">Ending time</label>
-                  <input type="datetime-local" name="endingTime" id="endingTime" class="hover:cursor-pointer shadow-md p-2 focus:outline-none">
-                </div>
-                <div class="flex justify-between items-center w-full">
-                  <label for="price">Starting bid</label>
-                  <input type="text" name="price" id="price" min="0" max="1000" class="focus:outline-none w-1/2 text-right text-2xl bg-transparent" placeholder="0 NOK">
-                </div>
-                <button
-                id="preview_listing"
-                class="tracking-wide bg-white text-xs px-8 py-4 w-full shadow-md md:mt-12 uppercase">
-                Preview
-              </button>
-              </div>
-              
-          </form>
-        </div>
+      <div id="create_post" class="">
+        <form
+          id="create_post_form"
+          class="p-6 md:shadow-none flex flex-col w-full gap-8 md:gap-8 font-quickS font-light lg:flex-row lg:justify-between lg:gap-32 lg:items-stretch"
+        >
+          <div
+            class="flex flex-col w-full gap-4 lg:w-1/2 lg:justify-between lg:gap-8"
+          >
+            <div>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                placeholder="title"
+                required
+                class="italic font-quickS pl-4 tracking-wide font-light placeholder:text-black text-2xl focus:outline-none bg-transparent"
+              />
+              <hr class="bg-black mb-4 mt-2 lg:mb-12" />
+              <textarea
+                name="desc"
+                id="desc"
+                placeholder="description..."
+                class="auto-rows-max auto-cols-auto w-full h-full border-none font-josefine font-light placeholder:text-black focus:outline-none bg-transparent"
+              ></textarea>
+            </div>
+            <div class="flex flex-col gap-2">
+              <input
+                type="text"
+                placeholder="Add Tags"
+                name="tags"
+                id="tags"
+                class="text-right w-16"
+              />
+              <span id="tags_array">
+                <ul id="ul"></ul>
+              </span>
+              <input
+                id="media_input"
+                placeholder="Add Media"
+                class="text-right w-full"
+              />
+              <button id="media_button">Preview</button>
+              <div class="hidden" id="show_img"></div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-12 pt-8 lg:p-0">
+            <div
+              class="flex flex-col gap-4 md:flex-row lg:justify-between lg:items-center"
+            >
+              <label for="endingTime">Ending time</label>
+              <input
+                type="datetime-local"
+                name="endingTime"
+                id="endingTime"
+                class="hover:cursor-pointer shadow-md p-2 focus:outline-none"
+              />
+            </div>
+            <div class="flex justify-between items-center w-full">
+              <label for="price">Starting bid</label>
+              <input
+                type="text"
+                name="price"
+                id="price"
+                min="0"
+                max="1000"
+                class="focus:outline-none w-1/2 text-right text-2xl bg-transparent"
+                placeholder="0 NOK"
+              />
+            </div>
+            <button
+              id="preview_listing"
+              class="tracking-wide bg-white text-xs px-8 py-4 w-full shadow-md md:mt-12 uppercase"
+            >
+              Preview
+            </button>
+          </div>
+        </form>
+      </div>
 
-        <section
+      <section
         id="preview-section"
-        class="hidden modal w-full h-full bg-black bg-opacity-50 fixed left-0 top-0 flex items-center">
+        class="hidden modal w-full h-full bg-black bg-opacity-50 fixed left-0 top-0 flex items-center"
+      >
         <!--
   <button
         id="exit_preview"
@@ -105,15 +150,14 @@
         X
       </button>
         -->
-      
-        </section>
+      </section>
     </main>
     <section id="bigScreen_nav" class="hidden md:inline">
       <ul
-        class="flex flex-col pt-20 justify-start text-center items-center gap-20 w-44 py-6 fixed top-0 left-0 h-full text-base tracking-wide text-white font-fjalla font-medium bg-blue uppercase "
+        class="flex flex-col pt-20 justify-start text-center items-center gap-20 w-44 py-6 fixed top-0 left-0 h-full text-base tracking-wide text-white font-fjalla font-medium bg-blue uppercase"
       >
         <a href="index.html">
-          <li  class="pl-2 pb-10">
+          <li class="pl-2 pb-10">
             <img class="w-20" src="./img/small_logo.svg" alt="" />
           </li>
         </a>

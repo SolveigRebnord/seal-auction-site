@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .active-button {
-    background-color: #657E8C;
-    color: white;
-    border: none;
+  background-color: #657e8c;
+  color: white;
+  border: none;
 }

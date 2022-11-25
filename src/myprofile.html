@@ -14,53 +14,100 @@
       href="https://fonts.googleapis.com/css2?family=Cuprum:wght@400;500&family=Dosis:wght@200;300;400;500;600;700&family=Kaushan+Script&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Londrina+Shadow&family=Quicksand:wght@300;400;500&family=Satisfy&display=swap"
       rel="stylesheet"
     />
-    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet"> 
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="bg-bgGrey transition-all duration-500 ease-out">
- 
     <header>
       <section
-        id="mobile_header" class="flex flex-row items-center justify-end p-12 lg:p-8 gap-8">
+        id="mobile_header"
+        class="flex flex-row items-center justify-end p-12 lg:p-8 gap-8"
+      >
         <div class="pr-2 flex flex-row gap-4 items-center">
-          <input type="text" name="search_input" id="search_input" class="hidden border-b border-gray-400 h-6 w-80 px-4 outline-none bg-transparent text-sm pb-1" placeholder="What are you looking for?">
-          <img src="./img/icon_search.svg" id="search_btn" alt="Search icon" class="hover:cursor-pointer" />
+          <input
+            type="text"
+            name="search_input"
+            id="search_input"
+            class="hidden border-b border-gray-400 h-6 w-80 px-4 outline-none bg-transparent text-sm pb-1"
+            placeholder="What are you looking for?"
+          />
+          <img
+            src="./img/icon_search.svg"
+            id="search_btn"
+            alt="Search icon"
+            class="hover:cursor-pointer"
+          />
         </div>
         <a href="myprofile.html" class="hover:cursor-pointer">
-          <div class="flex flex-row items-center gap-2 font-robotoC text-sm tracking-wide">
-            <img class="w-6" src="./img/profile.png" alt="Profile icon"><p id="profile_name"></p>
+          <div
+            class="flex flex-row items-center gap-2 font-robotoC text-sm tracking-wide"
+          >
+            <img class="w-6" src="./img/profile.png" alt="Profile icon" />
+            <p id="profile_name"></p>
           </div>
         </a>
         <div id="log_out" class="hover:cursor-pointer">
-          <img class="w-4 border border-black rounded-sm" src="./img/close.svg" alt="x icon">
+          <img
+            class="w-4 border border-black rounded-sm"
+            src="./img/close.svg"
+            alt="x icon"
+          />
         </div>
       </section>
     </header>
-    <main class="p-4 flex flex-col md:pl-52 gap-6 md:p-12 lg:flex-row-reverse lg:justify-between lg:pl-64 lg:pt-40 lg:pr-24 lg:gap-20">
+    <main
+      class="p-4 flex flex-col md:pl-52 gap-6 md:p-12 lg:flex-row-reverse lg:justify-between lg:pl-64 lg:pt-40 lg:pr-24 lg:gap-20"
+    >
       <section class="lg:w-1/2" id="profile_info"></section>
 
       <section class="lg:w-1/2">
-        <section id="active" class="rounded-md border border-blue p-2 w-full flex flex-col gap-4">
+        <section
+          id="active"
+          class="rounded-md border border-blue p-2 w-full flex flex-col gap-4"
+        >
           <div class="flex flex-row gap-2 font-quickS text-blue">
-            <button id="active_listings_button" disabled class="active-button w-1/2 shadow-xl h-14 border border-gray-100 rounded-md">Active listings</button>
-            <button id="active_bids_button" class="w-1/2 shadow-lg h-14 border border-gray-100 rounded-md">Active bids</button>
+            <button
+              id="active_listings_button"
+              disabled
+              class="active-button w-1/2 shadow-xl h-14 border border-gray-100 rounded-md"
+            >
+              Active listings
+            </button>
+            <button
+              id="active_bids_button"
+              class="w-1/2 shadow-lg h-14 border border-gray-100 rounded-md"
+            >
+              Active bids
+            </button>
           </div>
-          <div id="show_active">
-          </div>
+          <div id="show_active"></div>
         </section>
 
         <section class="flex flex-col gap-4 pt-6 w-full">
-          <button id="my_listings_button" class="w-full shadow-lg h-14 border border-gray-100 font-quickS text-blue">My listings</button>
-          <button id="archive_button" class="w-full shadow-lg h-14 border border-gray-100 font-quickS text-blue">Archive</button>
+          <button
+            id="my_listings_button"
+            class="w-full shadow-lg h-14 border border-gray-100 font-quickS text-blue"
+          >
+            My listings
+          </button>
+          <button
+            id="archive_button"
+            class="w-full shadow-lg h-14 border border-gray-100 font-quickS text-blue"
+          >
+            Archive
+          </button>
         </section>
       </section>
     </main>
 
     <section id="bigScreen_nav" class="hidden md:inline">
       <ul
-        class="flex flex-col pt-20 justify-start text-center items-center gap-20 w-44 py-6 fixed top-0 left-0 h-full text-base tracking-wide text-white font-fjalla font-medium bg-blue uppercase "
+        class="flex flex-col pt-20 justify-start text-center items-center gap-20 w-44 py-6 fixed top-0 left-0 h-full text-base tracking-wide text-white font-fjalla font-medium bg-blue uppercase"
       >
         <a href="index.html">
-          <li  class="pl-2 pb-10">
+          <li class="pl-2 pb-10">
             <img class="w-20" src="./img/small_logo.svg" alt="" />
           </li>
         </a>
