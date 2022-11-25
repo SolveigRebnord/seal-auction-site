@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="./img/small_logo.svg" type="image/x-icon" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
@@ -14,61 +15,99 @@
       href="https://fonts.googleapis.com/css2?family=Cuprum:wght@400;500&family=Dosis:wght@200;300;400;500;600;700&family=Kaushan+Script&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Londrina+Shadow&family=Quicksand:wght@300;400;500&family=Satisfy&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class="bg-bgGrey mb-32 md:mb-0">
+  <body
+    id="body"
+    class="bg-bgGrey mb-32 md:mb-0 transition-all duration-500 ease-out"
+  >
     <header>
       <section
         id="mobile_header"
-        class="flex flex-row items-center justify-between p-12 lg:hidden"
+        class="flex flex-row items-center justify-end p-12 lg:p-8 gap-8"
       >
-        <div>
-          <img src="./img/small_logo.svg" alt="Small seal logo" />
+        <div class="pr-2 flex flex-row gap-4 items-center">
+          <input
+            type="text"
+            name="search_input"
+            id="search_input"
+            class="hidden border-b border-gray-400 h-6 w-80 px-4 outline-none bg-transparent text-sm pb-1"
+            placeholder="What are you looking for?"
+          />
+          <img
+            src="./img/icon_search.svg"
+            id="search_btn"
+            alt="Search icon"
+            class="hover:cursor-pointer"
+          />
         </div>
-        <div>
-          <img src="./img/icon_search.svg" alt="Search icon" />
+        <a href="myprofile.html" class="hover:cursor-pointer">
+          <div
+            class="flex flex-row items-center gap-2 font-robotoC text-sm tracking-wide"
+          >
+            <img class="w-6" src="./img/profile.png" alt="Profile icon" />
+            <p id="profile_name"></p>
+          </div>
+        </a>
+        <div id="log_out" class="hover:cursor-pointer">
+          <img
+            class="w-4 border border-black rounded-sm"
+            src="./img/close.svg"
+            alt="x icon"
+          />
         </div>
       </section>
     </header>
-    <main class="px-2 md:ml-40 md:px-8">
-      <section class="shadow-lg p-4 lg:pt-32">
-        <div class="flex flex-row justify-between">
-          <h1 class="text-3xl font-quickS">Find your next deal</h1>
-          <button class="border border-blue">Filter</button>
+    <main class="md:px-8 md:pl-48 lg:px-64">
+      <div class="w-full flex flex-row justify-between items-center py-12">
+        <h1 class="font-fjalla text-3xl">Listings</h1>
+        <select
+          name="filter"
+          id="select_filter"
+          class="p-4 bg-white shadow-md cursor-pointer font-robotoC font-light"
+        >
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+          <option value="a-aa">A - Å</option>
+          <option value="aa-a">Å - A</option>
+          <option value="active-listings">Active listings</option>
+          <option value="bidded-listings">Active bids</option>
+        </select>
+      </div>
+
+      <section
+        id="feed"
+        class="w-full gap-12 pt-12 flex flex-wrap flex-row justify-evenly lg:justify-between"
+      >
+        <div
+          class="m-auto flex flex-col text-sm font-robotoC font-light justify-center items-center gap-8"
+        >
+          <img src="./img/Auction.svg" alt="" class="animate-spin w-20" />
+          <p>Getting the latest deals..</p>
         </div>
-        <section
-          id="feed"
-          class="w-full gap-16 pt-24 flex flex-wrap flex-row justify-center lg:justify-between"
-        ></section>
       </section>
     </main>
 
-    <section id="bigScreen_profile" class="hidden lg:inline">
-      <div class="pt-12 w-60 fixed top-40 right-12 h-full">
-        <div class="w-60 h-40 mb-12 bg-lightBlue rounded-lg shadow-lg">
-          <img class="m-auto" src="./img/big_logo.svg" alt="" />
-          <p class="text-center text-xl">Simon</p>
-        </div>
-        <div class="w-60 h-96 bg-lightBlue rounded-lg shadow-lg"></div>
-      </div>
-    </section>
-
     <section id="bigScreen_nav" class="hidden md:inline">
       <ul
-        class="flex flex-col pt-20 justify-start items-center gap-20 px-6 py-6 fixed top-0 left-0 h-full font-quickS tracking-wide bg-lightBlue border-r border-gray-300 uppercase"
+        class="flex flex-col pt-20 justify-start text-center items-center gap-20 w-44 py-6 fixed top-0 left-0 h-full text-base tracking-wide text-white font-fjalla font-medium bg-blue uppercase"
       >
         <a href="index.html">
           <li class="pl-2 pb-10">
             <img class="w-20" src="./img/small_logo.svg" alt="" />
           </li>
         </a>
-        <a href="index.html">
-          <li>Listings</li>
+        <a href="index.html" class="w-full text-center">
+          <li id="listings_li" class="w-full">Listings</li>
         </a>
-        <a href="newlisting.html">
-          <li>New listing</li>
-        </a>
+
+        <li id="newlisting_li">New listing</li>
+
         <a href="myprofile.html">
-          <li>My profile</li>
+          <li id="myprofile_li">My profile</li>
         </a>
       </ul>
     </section>
@@ -108,3 +147,9 @@
     </section>
   </body>
 </html>
+
+<!--
+    className={`mx-auto flex max-w-screen-sm items-center space-x-3 py-3 px-4 sm:py-5 sm:px-0 ${
+          navStyles ? 'border-b transition duration-300 ease-in' : ''
+        }`}
+-->
