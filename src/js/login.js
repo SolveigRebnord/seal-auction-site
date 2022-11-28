@@ -70,7 +70,7 @@ function logIn(event) {
           username = data.name;
           saveToken(accessToken);
           saveUser(username);
-          window.location.replace("/index.html");        
+          window.location.replace("/index.html");
         } else {
           console.log("error", data);
           errorMessage.classList.replace("invisible", "visible");
