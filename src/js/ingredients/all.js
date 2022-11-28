@@ -4,7 +4,7 @@ const listingsLI = document.getElementById("listings_li");
 const newlistingLi = document.getElementById("newlisting_li");
 const myprofileLI = document.getElementById("myprofile_li");
 const theBody = document.getElementById("body");
-const anotherBody = document.getElementById("body_newlisting");
+
 
 const currentURL = window.location.toString();
 console.log(currentURL);

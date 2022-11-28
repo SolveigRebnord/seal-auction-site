@@ -62,7 +62,7 @@ async function getLis() {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 getLis();
 
@@ -123,14 +123,15 @@ function listListing(lis) {
     let lengde = lis.bids.length;
     console.log(lengde);
 
-    let lastIndex = lengde - 1;
+    let lastIndex = lengde-1;
     lastItem = lis.bids.slice(lastIndex);
-    console.log(lastItem);
+    console.log(lastItem)
 
     for (let bid of lis.bids) {
-      let bidderName = bid["bidderName"];
+
+      let bidderName = bid["bidderName"]
       if (bidderName == getUsername()) {
-        bidderName = "Me";
+        bidderName = "Me"
       }
 
       oneBid = `<div class="flex flex-row justify-between items-center gap-2 bg-gray-100 text-gray-400 rounded-lg shadow-lg p-4 last-of-type:bg-white last-of-type:text-black last-of-type:outline-2 last-of-type:outline last-of-type:outline-blue">
@@ -177,7 +178,7 @@ function listListing(lis) {
     `;
   listOutput.innerHTML = listing;
 
-  let theBid = document.getElementById("bid");
+  let theBid = document.getElementById("bid")
 
   theBid.addEventListener("click", makeBid, false);
   theBid.param = lastItem;
@@ -193,11 +194,12 @@ function listListing(lis) {
 function makeBid(e) {
   bidOverlay.classList.toggle("hidden");
   //console.log(e.currentTarget.param);
-  let item = e.currentTarget.param;
+  let item = e.currentTarget.param
   let lastAmount = item[0]["amount"];
   //console.log(lastAmount)
   myCredits(lastAmount);
 }
+
 
 async function myCredits(lastAmount) {
   try {
@@ -210,49 +212,58 @@ async function myCredits(lastAmount) {
     const data = await response.json();
 
     if (response.ok) {
+   
       //console.log(data);
-      bidBox(data, lastAmount);
+      bidBox(data, lastAmount)
+
     } else {
       console.log("error", data);
     }
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 function bidBox(data, number) {
-  console.log(number);
+  console.log(number)
 
   let wallet = data.credits;
-  console.log(wallet);
+  console.log(wallet)
 
-  bidOverlay.innerHTML = `<div>
+ 
+  bidOverlay.innerHTML = 
+  `<div>
     <p>Your credits: ${wallet}</p>
     <p>Min. bid: ${number}</p>
     <input type="number" id="myBid">
     <button id="request-bid">Bid</button>
-  </div>`;
+  </div>`
 
-  let bidReq = document.getElementById("request-bid");
-  bidReq.addEventListener("click", checkBid);
+
+  let bidReq = document.getElementById("request-bid")
+  bidReq.addEventListener("click", checkBid)
 
   function checkBid() {
     let wantedBid = myBid.value;
-    console.log(wantedBid);
+    console.log(wantedBid)
 
     if (wantedBid > number) {
       let bidBody = {
-        amount: wantedBid,
+        amount: wantedBid
       };
 
-      requestBid(bidBody);
-    } else {
-      console.log("nono");
+      requestBid(bidBody)
+    }
+    else {
+      console.log("nono")
     }
   }
 
+ 
+
+
   async function requestBid(body) {
-    console.log(body);
+    console.log(body)
 
     try {
       const response = await fetch(`${ALL_PROFILES_URL}/${getUsername()}`, {
@@ -262,31 +273,35 @@ function bidBox(data, number) {
         },
       });
       const data = await response.json();
-
+  
       if (response.ok) {
+     
         console.log(data);
-        enoughCredits(data, body);
+        enoughCredits(data, body)
+
+  
       } else {
         console.log("error", data);
       }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   function enoughCredits(data, body) {
     //console.log(data.credits + body.amount)
     if (data.credits > body.amount) {
-      sendBid(body);
+      sendBid(body)
     }
   }
 }
 
-async function sendBid(body) {
-  console.log(body);
-  let JSONBody = JSON.stringify(body);
-  console.log(JSONBody);
 
+async function sendBid(body) {
+  console.log(body)
+  let JSONBody = JSON.stringify(body);
+  console.log(JSONBody)
+  
   try {
     const response = await fetch(`${ONE_LIS_URL}/bids`, {
       method: "POST",
@@ -299,12 +314,15 @@ async function sendBid(body) {
     const data = await response.json();
 
     if (response.ok) {
+   
       console.log(data);
       getLis();
+    
+
     } else {
       console.log("error", data);
     }
   } catch (error) {
     console.log(error);
   }
-}
+};
