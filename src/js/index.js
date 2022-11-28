@@ -278,7 +278,7 @@ function listLis(data) {
 
       if (media.length == 0) {
         console.log("teit");
-        media = "../img/no_img.svg";
+        media = "./img/no_img.svg";
       }
     }
 
