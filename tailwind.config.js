@@ -6,7 +6,7 @@ module.exports = {
         lightBlue: "#EBF2F6",
         blue: "#657E8C",
         bgGrey: "#FCFCFC",
-        darkerBlue: "#113245",
+        darkerBlue: "#4B6676",
       },
       fontFamily: {
         cuprum: "Cuprum",
