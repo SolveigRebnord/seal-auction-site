@@ -1,6 +1,5 @@
 import "../style.css";
 
-
 import { LOG_IN_URL } from "./ingredients/endpoints";
 import { saveToken, saveUser } from "./ingredients/storage";
 

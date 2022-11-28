@@ -5,7 +5,6 @@ const newlistingLi = document.getElementById("newlisting_li");
 const myprofileLI = document.getElementById("myprofile_li");
 const theBody = document.getElementById("body");
 
-
 const currentURL = window.location.toString();
 console.log(currentURL);
 
