@@ -27,41 +27,44 @@
     <header>
       <section
         id="mobile_header"
-        class="flex flex-row items-center justify-end p-12 lg:p-8 gap-8"
+        class="flex flex-col p-6 md:p-8 gap-4"
       >
-        <div class="pr-2 flex flex-row gap-4 items-center">
-          <input
-            type="text"
-            name="search_input"
-            id="search_input"
-            class="hidden border-b border-gray-400 h-6 w-80 px-4 outline-none bg-transparent text-sm pb-1"
-            placeholder="What are you looking for?"
-          />
-          <img
-            src="./img/icon_search.svg"
-            id="search_btn"
-            alt="Search icon"
-            class="hover:cursor-pointer"
-          />
-        </div>
+      <div class="flex flex-row items-center justify-between">
+        <a href="index.html"><img class="w-16" src="./img/small_logo.svg" alt="Logo home"></a>
         <a href="myprofile.html" class="hover:cursor-pointer">
           <div
             class="flex flex-row items-center gap-2 font-robotoC text-sm tracking-wide"
           >
+          <p class="font-quickS text-xs" id="profile_name"></p>
             <img class="w-6" src="./img/profile.png" alt="Profile icon" />
-            <p id="profile_name"></p>
+            
           </div>
         </a>
-        <div id="log_out" class="hover:cursor-pointer">
-          <img
-            class="w-4 border border-black rounded-sm"
-            src="./img/close.svg"
-            alt="x icon"
-          />
-        </div>
+      </div>
+        <div class="flex flex-row justify-end">
+          <div class=" flex flex-row gap-4 items-center">
+            <input
+              type="text"
+              name="search_input"
+              id="search_input"
+              class="hidden border-b border-gray-400 h-6 w-80 px-4 outline-none bg-transparent text-sm pb-1"
+              placeholder="What are you looking for?"
+            />
+            <img
+              src="./img/icon_search.svg"
+              id="search_btn"
+              alt="Search icon"
+              class="hover:cursor-pointer"
+            />
+          </div>
       </section>
     </header>
-    <main class="md:px-8 md:pl-48 lg:px-64">
+    <main class="px-6 md:px-8 md:pl-52 lg:px-32 lg:pl-72">
+     
+
+ 
+
+
       <div class="w-full flex flex-row justify-between items-center py-12">
         <h1 class="font-fjalla text-3xl">Listings</h1>
         <select
@@ -80,20 +83,28 @@
 
       <section
         id="feed"
-        class="w-full gap-12 pt-12 flex flex-wrap flex-row justify-evenly lg:justify-between"
+        class="w-full gap-x-8 gap-y-20 pt-12 flex flex-wrap flex-row items-center justify-center lg:justify-between"
       >
         <div
           class="m-auto flex flex-col text-sm font-robotoC font-light justify-center items-center gap-8"
         >
-          <img src="./img/Auction.svg" alt="" class="animate-spin w-20" />
+          <img src="./img/Auction.svg" alt="" class="animate-spin w-14" />
           <p>Getting the latest deals..</p>
         </div>
       </section>
+
+      <div id="log_out" class="hover:cursor-pointer">
+        <img
+          class="w-4 border border-black rounded-sm"
+          src="./img/close.svg"
+          alt="x icon"
+        />
+      </div>
     </main>
 
     <section id="bigScreen_nav" class="hidden md:inline">
       <ul
-        class="flex flex-col pt-20 justify-start text-center items-center gap-20 w-44 py-6 fixed top-0 left-0 h-full text-base tracking-wide text-white font-fjalla font-medium bg-blue uppercase"
+        class="flex flex-col pt-20 justify-start text-center items-center gap-20  py-6 fixed top-0 left-0 h-full text-base tracking-wide text-white font-fjalla font-medium bg-blue uppercase md:w-40 lg:w-44"
       >
         <a href="index.html">
           <li class="pl-2 pb-10">
@@ -114,7 +125,7 @@
 
     <section id="mobile_nav" class="md:hidden">
       <ul
-        class="flex flex-row align-middle justify-between px-16 py-4 pb-6 fixed bottom-0 left-0 w-full border-t border-gray-200 bg-white"
+        class="flex flex-row align-middle justify-between px-12 py-4 pb-6 fixed bottom-0 left-0 w-full border-t border-gray-200 bg-white"
       >
         <a href="index.html">
           <li class="p-2">
@@ -143,6 +154,13 @@
             />
           </li>
         </a>
+          <li class="p-2 pl-6">
+            <img
+              class="w-6 h-6"
+              src="./img/log_out.png"
+              alt="Log out icon"
+            />
+          </li>
       </ul>
     </section>
   </body>
@@ -152,4 +170,7 @@
     className={`mx-auto flex max-w-screen-sm items-center space-x-3 py-3 px-4 sm:py-5 sm:px-0 ${
           navStyles ? 'border-b transition duration-300 ease-in' : ''
         }`}
+
+     
 -->
+

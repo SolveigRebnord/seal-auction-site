@@ -278,7 +278,7 @@ function listLis(data) {
 
       if (media.length == 0) {
         console.log("teit");
-        media = "./img/no_img.svg";
+        media = "./img/no_img.svg"; //Legge til environment variabel?
       }
     }
 
@@ -332,21 +332,20 @@ function listLis(data) {
       }
     }
 
-    oneLi = `<div class=" h-fit w-fit lg:w-fit lg:bg-inherit font-quickS font-light text-xs">
-            <div class="w-64 h-80 rounded-lg bg-cover bg-center" style="background-image: url('${media}')">
-              <a href="listing.html?id=${id}" class="w-full h-full flex items-end">
-              <div class="w-full bg-white flex flex-col shadow-lg rounded-b-lg p-4">
-                <h2 class="text-base font-extralight font-sans tracking-wide truncat whitespace-nowrap">${title}</h2>
-                <div class="flex flex-row justify-between items-baseline pt-2">
-                <p class="text-xs text-blue"> ${endsAt}</p>
-                    ${bids}
-                  
-                </div>
-              </div>
-              </a>
-            </div>  
+    oneLi = `<a href="listing.html?id=${id}" class="max-w-xxs w-full font-quickS font-light text-xs">
+                <div class="h-96 rounded-lg bg-cover bg-center" style="background-image: url('${media}')">
+                  <div class="w-full h-full flex items-end">
+                    <div class="w-full bg-white flex flex-col shadow-lg rounded-b-lg p-4">
+                      <h2 class="text-base max-h-12 font-extralight font-sans tracking-wide overflow-hidden">${title}</h2>
+                      <div class="flex flex-row justify-between items-baseline pt-2">
+                        <p class="text-xs text-blue"> ${endsAt}</p>
+                        ${bids}
+                      </div>
+                    </div>
+                  </div>
+                </div>  
+      
             </a>
-           </div>
                 `;
 
     feed.innerHTML += oneLi;
