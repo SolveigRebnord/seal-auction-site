@@ -274,7 +274,14 @@ function listLis(data) {
     }
 
     if (lis.media) {
+
       media = lis.media;
+
+      if (media.length == 0) {
+        console.log("teit")
+        media = '../img/no_img.svg';
+      }
+ 
     }
 
     if (lis.created) {
@@ -328,7 +335,7 @@ function listLis(data) {
     }
 
     oneLi = `<div class=" h-fit w-fit lg:w-fit lg:bg-inherit font-quickS font-light text-xs">
-            <div class="w-64 h-80 rounded-lg bg-cover bg-center" style="background-image: url('${lis.media}')">
+            <div class="w-64 h-80 rounded-lg bg-cover bg-center" style="background-image: url('${media}')">
               <a href="listing.html?id=${id}" class="w-full h-full flex items-end">
               <div class="w-full bg-white flex flex-col shadow-lg rounded-b-lg p-4">
                 <h2 class="text-base font-extralight font-sans tracking-wide truncat whitespace-nowrap">${title}</h2>

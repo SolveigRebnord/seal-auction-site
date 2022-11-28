@@ -1,4 +1,4 @@
-import { ALL_LIS_URL } from "./ingredients/endpoints.js";
+import { ALL_LIS_URL, ALL_PROFILES_URL } from "./ingredients/endpoints.js";
 import dayjs from "dayjs";
 import { getToken, getUsername } from "./ingredients/storage.js";
 
@@ -42,7 +42,8 @@ const queryString = window.location.search;
 const postId = new URLSearchParams(queryString).get("id");
 const ONE_LIS_URL = `${ALL_LIS_URL}/${postId}`;
 
-(async function getLis() {
+
+async function getLis() {
   try {
     const response = await fetch(`${ONE_LIS_URL}?_bids=true&_seller=true`, {
       method: "GET",
@@ -62,7 +63,9 @@ const ONE_LIS_URL = `${ALL_LIS_URL}/${postId}`;
   } catch (error) {
     console.log(error);
   }
-})();
+};
+
+getLis();
 
 function listListing(lis) {
   let listing;
@@ -121,9 +124,19 @@ function listListing(lis) {
     let lengde = lis.bids.length;
     console.log(lengde);
 
+    let lastIndex = lengde-1;
+    lastItem = lis.bids.slice(lastIndex);
+    console.log(lastItem)
+
     for (let bid of lis.bids) {
+
+      let bidderName = bid["bidderName"]
+      if (bidderName == getUsername()) {
+        bidderName = "Me"
+      }
+
       oneBid = `<div class="flex flex-row justify-between items-center gap-2 bg-gray-100 text-gray-400 rounded-lg shadow-lg p-4 last-of-type:bg-white last-of-type:text-black last-of-type:outline-2 last-of-type:outline last-of-type:outline-blue">
-                <p>${bid["bidderName"]}</p>
+                <p>${bidderName}</p>
                 <p>${bid["amount"]}</p>
             </div>
             `;
@@ -160,13 +173,16 @@ function listListing(lis) {
             ${newarr}
         </div>
         <div class="flex justify-center">
-            <button class="bg-blue rounded-md w-1/2 py-4 text-white" id="bid">Make a bid</button>
+            <button class="bid bg-blue rounded-md w-1/2 py-4 text-white" id="bid">Make a bid</button>
         </div>
     </div>
     `;
   listOutput.innerHTML = listing;
 
-  document.getElementById("bid").addEventListener("click", makeBid);
+  let theBid = document.getElementById("bid")
+
+  theBid.addEventListener("click", makeBid, false);
+  theBid.param = lastItem;
 
   let timing = document.getElementById("time");
   function checkTime() {
@@ -176,20 +192,138 @@ function listListing(lis) {
   setInterval(checkTime, 1000);
 }
 
-function makeBid() {
+function makeBid(e) {
   bidOverlay.classList.toggle("hidden");
+  //console.log(e.currentTarget.param);
+  let item = e.currentTarget.param
+  let lastAmount = item[0]["amount"];
+  //console.log(lastAmount)
+  myCredits(lastAmount);
 }
 
-document.addEventListener(
-  "click",
-  function (event) {
-    if (event.target.closest(".modal")) {
-      if (event.target.closest(".main")) {
-        return;
-      } else {
-        closeOverlay();
-      }
+
+async function myCredits(lastAmount) {
+  try {
+    const response = await fetch(`${ALL_PROFILES_URL}/${getUsername()}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
+    const data = await response.json();
+
+    if (response.ok) {
+   
+      //console.log(data);
+      bidBox(data, lastAmount)
+
+    } else {
+      console.log("error", data);
     }
-  },
-  false
-);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+function bidBox(data, number) {
+  console.log(number)
+
+  let wallet = data.credits;
+  console.log(wallet)
+
+ 
+  bidOverlay.innerHTML = 
+  `<div>
+    <p>Your credits: ${wallet}</p>
+    <p>Min. bid: ${number}</p>
+    <input type="number" id="myBid">
+    <button id="request-bid">Bid</button>
+  </div>`
+
+
+  let bidReq = document.getElementById("request-bid")
+  bidReq.addEventListener("click", checkBid)
+
+  function checkBid() {
+    let wantedBid = myBid.value;
+    console.log(wantedBid)
+
+    if (wantedBid > number) {
+      let bidBody = {
+        amount: wantedBid
+      };
+
+      requestBid(bidBody)
+    }
+    else {
+      console.log("nono")
+    }
+  }
+
+ 
+
+
+  async function requestBid(body) {
+    console.log(body)
+
+    try {
+      const response = await fetch(`${ALL_PROFILES_URL}/${getUsername()}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      });
+      const data = await response.json();
+  
+      if (response.ok) {
+     
+        console.log(data);
+        enoughCredits(data, body)
+
+  
+      } else {
+        console.log("error", data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  function enoughCredits(data, body) {
+    //console.log(data.credits + body.amount)
+    if (data.credits > body.amount) {
+      sendBid(body)
+    }
+  }
+}
+
+
+async function sendBid(body) {
+  console.log(body)
+  let JSONBody = JSON.stringify(body);
+  console.log(JSONBody)
+  
+  try {
+    const response = await fetch(`${ONE_LIS_URL}/bids`, {
+      method: "POST",
+      body: JSONBody,
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    const data = await response.json();
+
+    if (response.ok) {
+   
+      console.log(data);
+      getLis();
+    
+
+    } else {
+      console.log("error", data);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
