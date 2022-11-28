@@ -11,10 +11,9 @@ import { getUsername, getToken } from "./ingredients/storage";
 const profileInfo = document.getElementById("profile_info");
 const profileName = document.getElementById("profile_name");
 const activeFeed = document.getElementById("show_active");
-const activeBidsBtn = document.getElementById("active_bids_button")
-const activeLisBtn = document.getElementById("active_listings_button")
+const activeBidsBtn = document.getElementById("active_bids_button");
+const activeLisBtn = document.getElementById("active_listings_button");
 const editImgOverlay = document.getElementById("edit_img_overlay");
-
 
 profileName.innerHTML = getUsername();
 
@@ -47,15 +46,13 @@ async function myProfile() {
 }
 myProfile();
 
-activeLisBtn.addEventListener("click", myLis)
-
+activeLisBtn.addEventListener("click", myLis);
 
 async function myLis() {
-
   activeLisBtn.disabled = true;
-  activeLisBtn.classList.add("active-button")
+  activeLisBtn.classList.add("active-button");
   activeBidsBtn.disabled = false;
-  activeBidsBtn.classList.remove(("active-button"))
+  activeBidsBtn.classList.remove("active-button");
 
   try {
     const response = await fetch(
@@ -81,7 +78,7 @@ async function myLis() {
   }
 }
 
-myLis()
+myLis();
 
 function listProfile(data) {
   let myProfile;
@@ -145,34 +142,32 @@ function listProfile(data) {
     `;
   profileInfo.innerHTML = myProfile;
 
-  let editImgBtn = document.getElementById("edit_img_btn")
-  editImgBtn.addEventListener("click", editImg)
+  let editImgBtn = document.getElementById("edit_img_btn");
+  editImgBtn.addEventListener("click", editImg);
   editImgBtn.param = profileImg;
 }
 
-  document.addEventListener(
-    "click",
-    function (event) {
-      if (event.target.closest(".modal")) {
-        if (event.target.closest(".main")) {
-          return;
-        } else {
-          editImgOverlay.classList.toggle("hidden");
-        }
+document.addEventListener(
+  "click",
+  function (event) {
+    if (event.target.closest(".modal")) {
+      if (event.target.closest(".main")) {
+        return;
+      } else {
+        editImgOverlay.classList.toggle("hidden");
       }
-    },
-    false
-  );
-
+    }
+  },
+  false
+);
 
 function editImg(e) {
-  editImgOverlay.classList.toggle("hidden")
+  editImgOverlay.classList.toggle("hidden");
 
   let imgUrl = e.currentTarget.param;
-  console.log(imgUrl)
+  console.log(imgUrl);
 
-  editImgOverlay.innerHTML = 
-  `<div  class="main">
+  editImgOverlay.innerHTML = `<div  class="main">
     <p>Current profile image</p>
     <img class="w-20 h-20" src='${imgUrl}'>
     <p>Change URL:</p>
@@ -184,13 +179,13 @@ function editImg(e) {
 
   let imgInput = document.getElementById("edit_img_input");
   let imgPrewBtn = document.getElementById("prew_edit_img");
-  let imgPrew = document.getElementById("show_img")
-   
-  imgPrewBtn.addEventListener("click", showImg)
+  let imgPrew = document.getElementById("show_img");
+
+  imgPrewBtn.addEventListener("click", showImg);
 
   function showImg() {
     let imgValue = imgInput.value;
-    imgPrew.innerHTML =  `<img class="w-20 h-20" src='${imgValue}'>
+    imgPrew.innerHTML = `<img class="w-20 h-20" src='${imgValue}'>
     <button id="approve_img_btn">Change image</button>`;
 
     let approveBtn = document.getElementById("approve_img_btn");
@@ -200,12 +195,11 @@ function editImg(e) {
 }
 
 async function requestImg(e) {
-
   let imgUrl = e.currentTarget.param;
   console.log(imgUrl);
   let body = {
-    avatar: imgUrl
-  }
+    avatar: imgUrl,
+  };
 
   try {
     const response = await fetch(`${ALL_PROFILES_URL}/${getUsername()}/media`, {
@@ -230,7 +224,6 @@ async function requestImg(e) {
   }
 }
 
-
 function activeSection(data) {
   activeFeed.innerHTML = "";
   let activeListings = [];
@@ -246,10 +239,9 @@ function activeSection(data) {
   }
   console.log(activeListings);
   if (activeListings.length == 0) {
-    activeFeed.innerHTML = `<p class="w-full text-center text-sm font-quickS font-light py-4 italic text-gray-700">You have no active listings at the moment</p>`
-  }
-  else {
-  showListings(activeListings);
+    activeFeed.innerHTML = `<p class="w-full text-center text-sm font-quickS font-light py-4 italic text-gray-700">You have no active listings at the moment</p>`;
+  } else {
+    showListings(activeListings);
   }
 }
 
@@ -261,8 +253,6 @@ function showListings(array) {
   let bids;
   let oneListing;
   let id;
-
- 
 
   for (let lis of array) {
     title = lis.title;
@@ -331,26 +321,21 @@ async function deleteListing(id) {
   }
 }
 
-
-activeBidsBtn.addEventListener("click", allLis)
+activeBidsBtn.addEventListener("click", allLis);
 
 async function allLis() {
-
   activeLisBtn.disabled = false;
-  activeLisBtn.classList.remove("active-button")
+  activeLisBtn.classList.remove("active-button");
   activeBidsBtn.disabled = true;
-  activeBidsBtn.classList.add(("active-button"))
+  activeBidsBtn.classList.add("active-button");
 
   try {
-    const response = await fetch(
-      `${ALL_LIS_URL}?_bids=true`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-      }
-    );
+    const response = await fetch(`${ALL_LIS_URL}?_bids=true`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
 
     const data = await response.json();
 
@@ -361,30 +346,25 @@ async function allLis() {
         let ending = listing.endsAt;
         let diff = dayjs().diff(ending, "minute");
         if (diff < 0) {
-        
           for (let bid of listing.bids) {
             let bidsLength = listing.bids.length;
             if (bid["bidderName"] == getUsername()) {
-              console.log(listing.bids)
-              let last = listing.bids.pop()
-              console.log(last)
+              console.log(listing.bids);
+              let last = listing.bids.pop();
+              console.log(last);
               if (last["bidderName"] == getUsername()) {
-                activeLisArr.push(listing)
+                activeLisArr.push(listing);
               }
-              
             }
           }
         }
       }
-      console.log(activeLisArr)
+      console.log(activeLisArr);
       if (activeLisArr.length == 0) {
-        activeFeed.innerHTML = `<p class="w-full text-center text-sm font-quickS font-light py-4 italic text-gray-700">You have no active bids at the moment</p>`
+        activeFeed.innerHTML = `<p class="w-full text-center text-sm font-quickS font-light py-4 italic text-gray-700">You have no active bids at the moment</p>`;
+      } else {
+        showActiveBids(activeLisArr);
       }
-      else {
-        showActiveBids(activeLisArr)
-      }
-
-
     } else {
       console.log("error", data);
     }
@@ -394,10 +374,7 @@ async function allLis() {
 }
 
 function showActiveBids(array) {
-
-
   activeFeed.innerHTML = "";
-
 
   let title;
   let endTime;
@@ -410,38 +387,32 @@ function showActiveBids(array) {
   let allBids = [];
   let newarr;
 
-
-
-
   for (let lis of array) {
-
     title = lis.title;
     endTime = dayjs(lis.endsAt).format("DD/MM/YYYY  | HH:mm");
     img = lis.media;
 
-
     if (lis.bids !== "") {
       let oneBid;
-  
+
       let lengde = lis.bids.length;
-  
-      let lastIndex = lengde-1;
+
+      let lastIndex = lengde - 1;
       lastItem = lis.bids.slice(lastIndex);
-  
+
       for (let bid of lis.bids) {
-  
-        let bidderName = bid["bidderName"]
+        let bidderName = bid["bidderName"];
         if (bidderName == getUsername()) {
-          bidderName = "Me"
+          bidderName = "Me";
         }
-  
+
         oneBid = `<div class="flex flex-row justify-between items-center gap-2 bg-gray-100 text-gray-400 rounded-lg shadow-lg p-4 last-of-type:bg-white last-of-type:text-black last-of-type:outline-2 last-of-type:outline last-of-type:outline-blue">
                   <p>${bidderName}</p>
                   <p>${bid["amount"]}</p>
               </div>
               `;
         allBids.push(oneBid);
-  
+
         newarr = allBids.join(" ");
       }
     }

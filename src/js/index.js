@@ -274,14 +274,12 @@ function listLis(data) {
     }
 
     if (lis.media) {
-
       media = lis.media;
 
       if (media.length == 0) {
-        console.log("teit")
-        media = '../img/no_img.svg';
+        console.log("teit");
+        media = "../img/no_img.svg";
       }
- 
     }
 
     if (lis.created) {
