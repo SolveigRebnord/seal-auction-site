@@ -16,4 +16,5 @@ export default {
       },
     },
   },
+  publicDir: resolve("public"),
 };

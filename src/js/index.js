@@ -278,7 +278,7 @@ function listLis(data) {
 
       if (media.length == 0) {
         console.log("teit");
-        media = "./img/no_img.svg"; //Legge til environment variabel?
+        media = ".././public/no_img.svg";
       }
     }
 
