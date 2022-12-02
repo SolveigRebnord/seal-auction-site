@@ -8,7 +8,8 @@
     "build": "vite build --emptyOutDir",
     "pretty": "npx prettier --write .",
     "checkPretty": "npx prettier --check .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",

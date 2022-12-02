@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="shortcut icon" href="./img/small_logo.svg" type="image/x-icon" />
+    <link rel="shortcut icon" href="/small_logo.svg" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Log In | Seal</title>
     <script type="module" src="./js/login.js" defer></script>
@@ -14,15 +14,19 @@
       href="https://fonts.googleapis.com/css2?family=Cuprum:wght@400;500&family=Dosis:wght@200;300;400;500;600;700&family=Kaushan+Script&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Londrina+Shadow&family=Quicksand:wght@300;400;500&family=Satisfy&display=swap"
       rel="stylesheet"
     />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+    rel="stylesheet"
+  />
   </head>
-  <body class="py-20 md:py-40">
+  <body class="py-20 md:py-40 lg:pt-24 lg:pb-4">
     <header></header>
     <main class="flex flex-col gap-8 items-center">
       <div class="flex flex-col items-center justify-center gap-8">
         <h1 class="text-5xl font-cool font-light tracking-wide text-blue">
           Log in
         </h1>
-        <h2 class="pb-8 text-md md:pb-20 lg:pb-24">Welcome back!</h2>
+        <h2 class="pb-8 text-md md:pb-6">Welcome back!</h2>
       </div>
       <section
         class="flex flex-col items-center font-quickS gap-8 w-2/3 md:gap-8 lg:gap-6"
@@ -58,21 +62,21 @@
             ></span>
           </label>
           <button
-            class="py-2 border px-10 text-sm w-fit m-auto rounded-md tracking-wider font-dosis font-medium text-white bg-blue shadow-md"
+            class="py-4 border px-16  text-sm w-fit m-auto rounded-md tracking-wider font-quickS font-medium text-white bg-blue shadow-md"
             id="submitform"
             type="submit"
           >
-            Log In
+            Sign in
           </button>
         </form>
         <span
-          class="bg-white text-black h-12 w-full flex justify-center items-center whitespace-nowrap md:text-md invisible"
+          class=" flex justify-center items-center text-sm invisible h-20"
           id="error-message"
         ></span>
-        <div class="flex flex-col gap-1 items-center md:mt-12 lg:mt-2">
+        <div class="border-y py-4 border-blue flex flex-col gap-1 items-center mt-6 md:mt-12 lg:mt-6 ">
           <p>Don't have an account yet?</p>
           <a class="underline" href="signup.html">
-            <p>Let's get you one in no time!</p>
+            <p class="text-darkerBlue font-quickS">Sign up</p>
           </a>
         </div>
       </section>
@@ -85,7 +89,7 @@
             <li>
               <img
                 class="w-8 h-8"
-                src="./img/icon_home_blue.png"
+                src="/icon_home_blue.png"
                 alt="Home icon"
               />
             </li>
@@ -94,7 +98,7 @@
             <li>
               <img
                 class="w-8 h-8"
-                src="./img/icon_newlisting_blue.png"
+                src="/icon_newlisting_blue.png"
                 alt="New post icon"
               />
             </li>
@@ -103,7 +107,7 @@
             <li>
               <img
                 class="w-8 h-8"
-                src="./img/icon_profile_blue.png"
+                src="/icon_profile_blue.png"
                 alt="Profile icon"
               />
             </li>

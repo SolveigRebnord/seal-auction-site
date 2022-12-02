@@ -73,8 +73,13 @@ function logIn(event) {
           window.location.replace("/index.html");
         } else {
           console.log("error", data);
+
           errorMessage.classList.replace("invisible", "visible");
-          errorMessage.innerHTML = `! ${data.message} !`;
+          errorMessage.innerHTML = `<div class="flex flex-col justify-center items-center">
+          <img src="/warning.png" class="w-6">
+          <p>No combination found</p>
+          <p>Try again or head to sign up</p>
+          </div>`;
         }
       } catch (error) {
         console.log(error);

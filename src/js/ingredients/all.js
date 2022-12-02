@@ -18,6 +18,16 @@ if (currentURL.includes("index")) {
   );
 }
 
+if (currentURL.includes("id")) {
+  listingsLI.classList.add(
+    "bg-white",
+    "text-blue",
+    "py-10",
+    "px-6",
+    "shadow-xl"
+  );
+}
+
 if (currentURL.includes("myprofile")) {
   myprofileLI.classList.add(
     "bg-white",

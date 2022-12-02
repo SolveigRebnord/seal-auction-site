@@ -127,13 +127,13 @@ function listProfile(data) {
     <section class="h-fit rounded-md font-light font-quickS md:flex md:flex-row-reverse shadow-lg justify-between items-center md:p-6 lg:flex-col lg:shadow-none lg:p-0">
     <div class=" flex flex-col gap-2 justify-center items-center">
       <div class="w-60 h-60 rounded-xl shadow-xl bg-cover flex justify-end items-end p-4" style="background-image: url('${profileImg}')">
-        <button id="edit_img_btn"><img class="w-6 outline outline-1 outline-white rounded-sm outline-offset-1" src="../img/edit_img.png"></button>
+        <button id="edit_img_btn"><img class="w-6 outline outline-1 outline-white rounded-sm outline-offset-1" src="/edit_img.png"></button>
       </div>
         <h1 class="font-fjalla tracking-wide text-4xl">${name}</h1>
         <p class="text-sm">${email}</p>
     </div>
     <div class="flex flex-col items-center md:items-start lg:items-center">
-        <p class="flex flex-row gap-3 py-6 text-lg items-center"><img class="w-6" src="../img/coins.png">${credits}</p>
+        <p class="flex flex-row gap-3 py-6 text-lg items-center"><img class="w-6" src="/coins.png">${credits}</p>
         <p>${wins} wins</p>
         <p>${listings}</p>
     <div>
@@ -248,7 +248,7 @@ function activeSection(data) {
 function showListings(array) {
   let title;
   let endTime;
-  let img;
+  let media = "";
   let created;
   let bids;
   let oneListing;
@@ -257,7 +257,7 @@ function showListings(array) {
   for (let lis of array) {
     title = lis.title;
     endTime = dayjs(lis.endsAt).format("DD/MM/YYYY  | HH:mm");
-    img = lis.media;
+  
     created = dayjs(lis.created).format("DD/MM/YYYY");
 
     bids = lis.bids;
@@ -267,13 +267,23 @@ function showListings(array) {
 
     id = lis.id;
 
+    let oneImg;
+    for (let img of lis.media) {
+      oneImg = `<img class="rounded-full w-24 h-24" src=${img}>`;
+      media += oneImg;
+    }
+ 
+    
+    console.log(media)
+
+
     oneListing = `
   <div class="w-full relative p-4 rounded-md bg-white shadow-lg flex flex-row justify-between text-right font-light font-robotoC">
     <div class="flex flex-col justify-between gap-8">
-      <img class="rounded-full w-24 h-24" src="${img}">
+      <div class="flex flex-row">${media}</div>
       <div class="">
-        <button id="${id}" class="deleteBtn"><img class="w-6" src="../img/trash.png"></button>
-        <img id="change_listing" class="w-6" src="../img/edit.png">
+        <button id="${id}" class="deleteBtn"><img class="w-6" src="/trash.png"></button>
+        <img id="change_listing" class="w-6" src="/edit.png">
       </div>
     </div>
     <div class="flex flex-col gap-2 text-sm">

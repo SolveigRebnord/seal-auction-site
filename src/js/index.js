@@ -1,4 +1,3 @@
-console.log("hei");
 
 import { ALL_LIS_URL } from "./ingredients/endpoints";
 import dayjs from "dayjs";
@@ -14,11 +13,30 @@ const filterBtn = document.getElementById("select_filter");
 const logOutBtn = document.getElementById("log_out");
 const searchBtn = document.getElementById("search_btn");
 const searchInput = document.getElementById("search_input");
+const newListingLi = document.getElementById("newlisting_li")
+const myProfileLi = document.getElementById("myprofile_li")
+const headerProfileIcon = document.getElementById("header_profile");
+const limitedAccessBanner = document.getElementById("limited_access_banner")
+
+
+function deactivateNav() {
+  myProfileLi.href = "javascript:void(0)";
+  myProfileLi.classList.add("disabled-link")
+  newListingLi.href = "javascript:void(0)";
+  newListingLi.classList.add("disabled-link")
+
+}
 
 function checkAccess(key) {
-  if (key === null) {
-    console.log("bad token");
-    window.location.replace("/login.html");
+  if (key) {
+    profileName.innerHTML = getUsername();
+  }
+  else {
+    deactivateNav();
+    logOutBtn.classList.add("hidden");
+    profileName.innerHTML = "Log in for full access";
+    headerProfileIcon.href = "login.html";
+    limitedAccessBanner.classList.remove("hidden")
   }
 }
 
@@ -38,7 +56,8 @@ searchBtn.addEventListener("click", () => {
   searchInput.classList.toggle("hidden");
 });
 
-profileName.innerHTML = getUsername();
+
+
 
 async function allLis() {
   try {
@@ -62,10 +81,12 @@ async function allLis() {
     console.log(error);
   }
 }
-allLis();
+
+allLis()
+
 
 let value = filterBtn.value;
-console.log(value);
+
 filterBtn.addEventListener("change", function () {
   console.log(filterBtn.value);
   let value = filterBtn.value;
@@ -274,11 +295,15 @@ function listLis(data) {
     }
 
     if (lis.media) {
-      media = lis.media;
+      let oneImg;
+    for (let img of lis.media) {
+      oneImg = img;
+      media = oneImg;
+    }
 
       if (media.length == 0) {
         console.log("teit");
-        media = ".././public/no_img.svg";
+        media = "/no_img.svg";
       }
     }
 
@@ -294,7 +319,7 @@ function listLis(data) {
         } else {
           updated = "";
         }*/
-      updated = `<img class="h-4" src="../../img/clock.svg">Last updated ${timeUpdated}`;
+      updated = `<img class="h-4" src="/clock.svg">Last updated ${timeUpdated}`;
     }
 
     if (lis.id) {
@@ -351,3 +376,4 @@ function listLis(data) {
     feed.innerHTML += oneLi;
   }
 }
+

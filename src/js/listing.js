@@ -2,35 +2,46 @@ import { ALL_LIS_URL, ALL_PROFILES_URL } from "./ingredients/endpoints.js";
 import dayjs from "dayjs";
 import { getToken, getUsername } from "./ingredients/storage.js";
 
-function checkAccess(key) {
-  if (key === null) {
-    console.log("bad token");
-    window.location.replace("/login.html");
-  }
-}
-
-checkAccess(getToken());
-
-const logOutBtn = document.getElementById("log_out");
+const newListingLi = document.getElementById("newlisting_li")
+const myProfileLi = document.getElementById("myprofile_li")
+const headerProfileIcon = document.getElementById("header_profile");
 const searchBtn = document.getElementById("search_btn");
 const searchInput = document.getElementById("search_input");
 const profileName = document.getElementById("profile_name");
 const listOutput = document.getElementById("list_listing");
 const bidOverlay = document.getElementById("bid_overlay");
+const limitedAccessBanner = document.getElementById("limited_access_banner")
+
 
 import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
-logOutBtn.addEventListener("click", () => {
-  let doubleCheck = confirm("Are you sure?");
-  if (doubleCheck == false) {
-    return;
-  } else {
-    clearStorage();
-    window.location.reload();
+
+function deactivateNav() {
+  myProfileLi.href = "javascript:void(0)";
+  myProfileLi.classList.add("disabled-link")
+  newListingLi.href = "javascript:void(0)";
+  newListingLi.classList.add("disabled-link")
+
+}
+
+function checkAccess(key) {
+  if (key) {
+    profileName.innerHTML = getUsername();
   }
-});
+  else {
+    deactivateNav();
+    profileName.innerHTML = "Log in for full access";
+    headerProfileIcon.href = "login.html";
+    limitedAccessBanner.classList.remove("hidden")
+  }
+}
+
+checkAccess(getToken());
+
+
+
 
 searchBtn.addEventListener("click", () => {
   searchInput.classList.toggle("hidden");
@@ -46,9 +57,7 @@ async function getLis() {
   try {
     const response = await fetch(`${ONE_LIS_URL}?_bids=true&_seller=true`, {
       method: "GET",
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
+      
     });
     const data = await response.json();
 
@@ -148,7 +157,7 @@ function listListing(lis) {
   id = lis.id;
 
   listing = `
-    <div class=" w-full p-4 rounded-md flex flex-col font-light font-robotoC gap-6">
+    <div class=" w-full p-4 rounded-md flex flex-col font-light font-robotoC gap-6 lg:w-1/2">
       <div class="flex flex-row gap-4 items-center">
         <img class="w-14 h-14 rounded-full" src="${sellerImg}">
         <div class="flex flex-col">
@@ -171,16 +180,33 @@ function listListing(lis) {
             ${newarr}
         </div>
         <div class="flex justify-center">
-            <button class="bid bg-blue rounded-md w-1/2 py-4 text-white" id="bid">Make a bid</button>
-        </div>
+            <button class="bid bg-blue rounded-md w-1/2 py-4 text-white hover:cursor-pointer" id="bid">Make a bid</button>
     </div>
     `;
   listOutput.innerHTML = listing;
 
   let theBid = document.getElementById("bid");
 
-  theBid.addEventListener("click", makeBid, false);
+
+
+  
   theBid.param = lastItem;
+
+function checkAccess(key) {
+  if (key) {
+    theBid.addEventListener("click", makeBid);
+  }
+  else {
+    theBid.innerHTML = "Sign in to get you hands on it!";
+    theBid.classList.add("bg-white", "border-blue", "border-4", "text-black")
+    theBid.classList.remove("bg-blue")
+    theBid.addEventListener("click", (e) => {
+      e.preventDefault()
+      location.replace("login.html")
+      })
+  }
+}
+checkAccess(getToken())
 
   let timing = document.getElementById("time");
   function checkTime() {

@@ -1,9 +1,9 @@
 import path from "path";
 
 export default {
-  root: "src",
+  root: path.resolve(__dirname, 'src'),  
   build: {
-    outDir: path.resolve(__dirname, "dist"),
+    outDir: '../dist',
     rollupOptions: {
       input: {
         index: path.resolve(__dirname, "src/index.html"),
@@ -16,5 +16,5 @@ export default {
       },
     },
   },
-  publicDir: resolve("./public"),
+  publicDir: path.resolve("public"),
 };

@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/small_logo.svg" type="image/x-icon" />
+
     <title>New listing</title>
     <script type="module" src="./js/ingredients/all.js" defer></script>
     <script type="module" src="./js/newlisting.js" defer></script>
@@ -36,7 +38,7 @@
             placeholder="What are you looking for?"
           />
           <img
-            src="./img/icon_search.svg"
+            src="/icon_search.svg"
             id="search_btn"
             alt="Search icon"
             class="hover:cursor-pointer"
@@ -46,14 +48,14 @@
           <div
             class="flex flex-row items-center gap-2 font-robotoC text-sm tracking-wide"
           >
-            <img class="w-6" src="./img/profile.png" alt="Profile icon" />
+            <img class="w-6" src="/profile.png" alt="Profile icon" />
             <p id="profile_name"></p>
           </div>
         </a>
         <div id="log_out" class="hover:cursor-pointer">
           <img
             class="w-4 border border-black rounded-sm"
-            src="./img/close.svg"
+            src="/close.svg"
             alt="x icon"
           />
         </div>
@@ -91,7 +93,7 @@
                 placeholder="Add Tags"
                 name="tags"
                 id="tags"
-                class="text-right w-16"
+                class="text-right w-1/2 p-4 border border-blue"
               />
               <span id="tags_array">
                 <ul id="ul"></ul>
@@ -99,10 +101,15 @@
               <input
                 id="media_input"
                 placeholder="Add Media"
-                class="text-right w-full"
+                class="text-right w-full p-4 border border-blue"
               />
               <button id="media_button">Preview</button>
               <div class="hidden" id="show_img"></div>
+              <div>
+                <ul id="img_prew_ul"> 
+
+                </ul>
+              </div>
             </div>
           </div>
           <div class="flex flex-col gap-12 pt-8 lg:p-0">
@@ -158,7 +165,7 @@
       >
         <a href="index.html">
           <li class="pl-2 pb-10">
-            <img class="w-20" src="./img/small_logo.svg" alt="" />
+            <img class="w-20" src="/small_logo.svg" alt="" />
           </li>
         </a>
         <a href="index.html" class="w-full text-center">

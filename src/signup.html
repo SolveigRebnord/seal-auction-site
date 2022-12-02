@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="shortcut icon" href="./img/small_logo.svg" type="image/x-icon" />
+    <link rel="shortcut icon" href="/small_logo.svg" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign up | Seal</title>
-    <script type="module" src="./js/ingredients/all.js" defer></script>
+
     <script type="module" src="./js/signup.js" defer></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,8 +15,12 @@
       href="https://fonts.googleapis.com/css2?family=Cuprum:wght@400;500&family=Dosis:wght@200;300;400;500;600;700&family=Kaushan+Script&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Londrina+Shadow&family=Quicksand:wght@300;400;500&family=Satisfy&display=swap"
       rel="stylesheet"
     />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+    rel="stylesheet"
+  />
   </head>
-  <body class="py-20 md:py-40">
+  <body class="py-20 md:py-40 lg:py-20">
     <header></header>
     <main class="flex flex-col gap-16 items-center">
       <div class="flex flex-col items-center justify-center gap-8">
@@ -26,7 +30,7 @@
       </div>
       <form
         id="sign-up-form"
-        class="m-auto flex flex-col rounded-md gap-10 w-3/4 md:w-1/2 text-center font-quickS tracking-wide font-light md:px-8 md:py-12 md:text-md lg:gap-12 lg:w-1/3 lg:p-8 lg:m-0 lg:bg-opacity-90"
+        class="m-auto flex flex-col rounded-md gap-10 w-3/4 md:w-1/2 text-center font-quickS tracking-wide font-light md:px-8 md:py-12 md:text-md lg:gap-6 lg:w-1/3 lg:p-8 lg:m-0"
       >
         <label for="username" class="relative">
           <input
@@ -81,7 +85,7 @@
           ></span>
         </label>
         <button
-          class="w-fit m-auto py-3 px-10 md:mt-2 rounded-md tracking-wider font-dosis font-medium text-white bg-blue shadow-md"
+          class="py-4 border px-16  text-sm w-fit m-auto rounded-md tracking-wider font-quickS font-medium text-white bg-blue shadow-md"
           id="sign-up-button"
           type="submit"
         >
@@ -104,7 +108,7 @@
             <li>
               <img
                 class="w-8 h-8"
-                src="./img/icon_home_blue.png"
+                src="/icon_home_blue.png"
                 alt="Home icon"
               />
             </li>
@@ -113,7 +117,7 @@
             <li>
               <img
                 class="w-8 h-8"
-                src="./img/icon_newlisting_blue.png"
+                src="/icon_newlisting_blue.png"
                 alt="New post icon"
               />
             </li>
@@ -122,7 +126,7 @@
             <li>
               <img
                 class="w-8 h-8"
-                src="./img/icon_profile_blue.png"
+                src="/icon_profile_blue.png"
                 alt="Profile icon"
               />
             </li>
