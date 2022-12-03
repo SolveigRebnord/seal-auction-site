@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/small_logo.svg" type="image/x-icon" />
 
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+
     <title>New listing</title>
     <script type="module" src="./js/ingredients/all.js" defer></script>
     <script type="module" src="./js/newlisting.js" defer></script>
@@ -83,27 +87,24 @@
               <textarea
                 name="desc"
                 id="desc"
-                placeholder="description..."
-                class="auto-rows-max auto-cols-auto w-full h-full border-none font-josefine font-light placeholder:text-black focus:outline-none bg-transparent"
+                placeholder="description.."
+                class="auto-rows-max auto-cols-auto w-full h-fit border-none font-josefine font-light placeholder:text-gray-400 placeholder:italic focus:outline-none bg-transparent"
               ></textarea>
             </div>
-            <div class="flex flex-col gap-2">
+            
+            <div class="flex flex-col gap-8">
+              
               <input
-                type="text"
-                placeholder="Add Tags"
-                name="tags"
-                id="tags"
-                class="text-right w-1/2 p-4 border border-blue"
-              />
-              <span id="tags_array">
-                <ul id="ul"></ul>
-              </span>
+              name="tags"
+              autofocus
+              placeholder="Add tags"
+            />
               <input
                 id="media_input"
-                placeholder="Add Media"
-                class="text-right w-full p-4 border border-blue"
+                placeholder="Add image url"
+                class="w-full p-2 border border-blue"
               />
-              <button id="media_button">Preview</button>
+              <button class="border border-blue rounded-md px-4 py-2 w-fit text-sm shadow-md self-end" id="media_button">Preview Image</button>
               <div class="hidden" id="show_img"></div>
               <div>
                 <ul id="img_prew_ul"> 
@@ -124,18 +125,7 @@
                 class="hover:cursor-pointer shadow-md p-2 focus:outline-none"
               />
             </div>
-            <div class="flex justify-between items-center w-full">
-              <label for="price">Starting bid</label>
-              <input
-                type="text"
-                name="price"
-                id="price"
-                min="0"
-                max="1000"
-                class="focus:outline-none w-1/2 text-right text-2xl bg-transparent"
-                placeholder="0 NOK"
-              />
-            </div>
+          
             <button
               id="preview_listing"
               class="tracking-wide bg-white text-xs px-8 py-4 w-full shadow-md md:mt-12 uppercase"
@@ -148,7 +138,7 @@
 
       <section
         id="preview-section"
-        class="hidden modal w-full h-full bg-black bg-opacity-50 fixed left-0 top-0 flex items-center"
+        class="hidden modal w-full h-full bg-black bg-opacity-50 fixed left-0 top-0 flex items-center z-10"
       >
         <!--
   <button

@@ -3,7 +3,6 @@ import "../../style.css";
 const listingsLI = document.getElementById("listings_li");
 const newlistingLi = document.getElementById("newlisting_li");
 const myprofileLI = document.getElementById("myprofile_li");
-const theBody = document.getElementById("body");
 
 const currentURL = window.location.toString();
 console.log(currentURL);
@@ -48,9 +47,3 @@ if (currentURL.includes("newlisting")) {
   );
 }
 
-newlistingLi.addEventListener("click", function () {
-  theBody.classList.add("opacity-0");
-  setTimeout(function () {
-    window.location = "newlisting.html";
-  }, 200);
-});
