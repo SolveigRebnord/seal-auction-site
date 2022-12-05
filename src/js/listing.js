@@ -55,7 +55,6 @@ async function getLis() {
 
     if (response.ok) {
       listListing(data);
-
     } else {
       console.log("error", data);
     }
@@ -124,7 +123,6 @@ function listListing(lis) {
     let lastIndex = lisLength - 1;
     lastItem = lis.bids.slice(lastIndex);
 
-
     for (let bid of lis.bids) {
       let bidderName = bid["bidderName"];
       if (bidderName == getUsername()) {
@@ -140,8 +138,7 @@ function listListing(lis) {
 
       if (allBids.length == 0) {
         newarr = "null";
-      }
-      else {
+      } else {
         newarr = allBids.join(" ");
       }
     }
@@ -206,13 +203,12 @@ function listListing(lis) {
 
 function makeBid(e) {
   bidOverlay.classList.toggle("hidden");
-  let lastAmount
+  let lastAmount;
   let item = e.currentTarget.param;
   if (item.length == 0) {
     lastAmount = 1;
-  }
-  else {
-    lastAmount= item[0]["amount"];
+  } else {
+    lastAmount = item[0]["amount"];
   }
   myCredits(lastAmount);
 }
@@ -238,11 +234,9 @@ async function myCredits(lastAmount) {
 }
 
 function bidBox(data, number) {
-
   let wallet = data.credits;
 
-  bidOverlay.innerHTML = 
-  `<div>
+  bidOverlay.innerHTML = `<div>
     <p>Your credits: ${wallet}</p>
     <p>Min. bid: ${number}</p>
     <input type="number" id="myBid">
@@ -256,7 +250,6 @@ function bidBox(data, number) {
     let wantedBid = myBid.value;
 
     if (wantedBid > number) {
-
       let bidBody = {
         amount: Number(wantedBid),
       };
@@ -268,7 +261,6 @@ function bidBox(data, number) {
   }
 
   async function requestBid(body) {
-
     try {
       const response = await fetch(`${ALL_PROFILES_URL}/${getUsername()}`, {
         method: "GET",
@@ -296,7 +288,6 @@ function bidBox(data, number) {
 }
 
 async function sendBid(body) {
-
   let JSONBody = JSON.stringify(body);
 
   try {
@@ -313,7 +304,6 @@ async function sendBid(body) {
     if (response.ok) {
       bidOverlay.innerHTML = "";
       getLis();
-
     } else {
       console.log("error", data);
     }

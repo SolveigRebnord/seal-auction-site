@@ -384,7 +384,7 @@ async function allLis() {
         let ending = listing.endsAt;
         let diff = dayjs().diff(ending, "minute");
         if (diff < 0) {
-          console.log(listing.bids)
+          console.log(listing.bids);
           for (let bid of listing.bids) {
             let bidsLength = listing.bids.length;
             if (bid["bidderName"] == getUsername()) {

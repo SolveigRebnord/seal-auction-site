@@ -13,65 +13,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Cuprum:wght@400;500&family=Dosis:wght@200;300;400;500;600;700&family=Kaushan+Script&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Londrina+Shadow&family=Quicksand:wght@300;400;500&family=Satisfy&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
   </head>
   <body
     id="body"
-    class="bg-bgGrey mb-32 md:mb-0 transition-all duration-500 ease-out"
-  >
-    <header>
-      <section
-        id="mobile_header"
-        class="flex flex-col p-6 md:p-8 gap-4"
-      >
-      <div class="flex flex-row items-center justify-between">
-        <a href="index.html"><img class="w-16" src="/small_logo.svg" alt="Logo home"></a>
-        <a href="myprofile.html" id="header_profile" class="hover:cursor-pointer">
-          <div
-            class="flex flex-row items-center gap-2 font-robotoC text-sm tracking-wide"
-          >
-          <p class="font-quickS text-xs" id="profile_name"></p>
-            <img class="w-6" src="/profile.png" alt="Profile icon" />
-            
-          </div>
-        </a>
-      </div>
-        <div class="flex flex-row justify-end">
-          <div class=" flex flex-row gap-4 items-center">
-            <input
-              type="text"
-              name="search_input"
-              id="search_input"
-              class="hidden border-b border-gray-400 h-6 w-80 px-4 outline-none bg-transparent text-sm pb-1"
-              placeholder="What are you looking for?"
-            />
-            <img
-              src="/icon_search.svg"
-              id="search_btn"
-              alt="Search icon"
-              class="hover:cursor-pointer"
-            />
-          </div>
-      </section>
-    </header>
+    class="bg-bgGrey mb-32 md:mb-0 transition-all duration-500 ease-out">
+    <header id="header"></header>
     <main class="px-6 md:px-8 md:pl-52 lg:px-32 lg:pl-72">
-     
-
- 
-
-
       <div class="w-full flex flex-row justify-between items-center py-12">
         <h1 class="font-fjalla text-3xl">Listings</h1>
         <select
           name="filter"
           id="select_filter"
-          class="p-4 bg-white shadow-md cursor-pointer font-robotoC font-light"
-        >
+          class="p-4 bg-white shadow-md cursor-pointer font-robotoC font-light">
           <option value="newest">Newest</option>
           <option value="oldest">Oldest</option>
           <option value="a-aa">A - Å</option>
@@ -83,11 +40,9 @@
 
       <section
         id="feed"
-        class="w-full shadow-md gap-x-8 gap-y-20 pt-12 flex flex-wrap flex-row items-center justify-center lg:justify-between"
-      >
+        class="w-full shadow-md gap-x-8 gap-y-20 pt-12 flex flex-wrap flex-row items-center justify-center lg:justify-between">
         <div
-          class="m-auto flex flex-col text-sm font-robotoC font-light justify-center items-center gap-8"
-        >
+          class="m-auto flex flex-col text-sm font-robotoC font-light justify-center items-center gap-8">
           <img src="/Auction.svg" alt="" class="animate-spin w-14" />
           <p>Getting the latest deals..</p>
         </div>
@@ -97,74 +52,21 @@
         <img
           class="w-4 border border-black rounded-sm"
           src="/close.svg"
-          alt="x icon"
-        />
+          alt="x icon" />
       </div>
     </main>
 
-    <section id="bigScreen_nav" class="hidden md:inline">
-      <ul
-        class="flex flex-col pt-20 justify-start text-center items-center gap-20  py-6 fixed top-0 left-0 h-full text-sm tracking-wider text-white font-fjalla bg-blue uppercase md:w-40 lg:w-44"
-      >
-        <a href="index.html">
-          <li class="pl-2 pb-10">
-            <img class="w-20" src="/seal.svg" alt="" />
-          </li>
-        </a>
-        <a href="index.html" class="w-full text-center">
-          <li id="listings_li" class="w-full">Listings</li>
-        </a>
-        <a href="newlisting.html" id="newlisting_li">
-          <li>New listing</li>
-        </a>
-        <a href="myprofile.html" id="myprofile_li">
-          <li>My profile</li>
-        </a>
-      </ul>
-    </section>
-
-    <section id="mobile_nav" class="md:hidden">
-      <ul
-        class="flex flex-row align-middle justify-between px-12 py-4 pb-6 fixed bottom-0 left-0 w-full border-t border-gray-200 bg-white"
-      >
-        <a href="index.html">
-          <li class="p-2">
-            <img
-              class="w-6 h-6"
-              src="/icon_home_blue.png"
-              alt="Home icon"
-            />
-          </li>
-        </a>
-        <a href="newlisting.html">
-          <li class="p-2">
-            <img
-              class="w-6 h-6"
-              src="/icon_newlisting_blue.png"
-              alt="New post icon"
-            />
-          </li>
-        </a>
-        <a href="myprofile.html">
-          <li class="p-2">
-            <img
-              class="w-6 h-6"
-              src="/icon_profile_blue.png"
-              alt="Profile icon"
-            />
-          </li>
-        </a>
-          <li class="p-2 pl-6">
-            <img
-              class="w-6 h-6"
-              src="/log_out.png"
-              alt="Log out icon"
-            />
-          </li>
-      </ul>
-    </section>
-    <section id="limited_access_banner" class="hidden fixed bottom-0 w-full bg-darkerBlue text-white text-center py-4 font-quickS">
-      <a class="flex flex-row gap-2 items-center justify-center" href="login.html">Sign in to bid on your favorite listings <img src="/arrow_corner_white.png" class="w-6" alt=""></a>
+    <section id="bigScreen_nav" class="hidden md:inline"></section>
+    <section id="mobile_nav" class="md:hidden"></section>
+    <section
+      id="limited_access_banner"
+      class="hidden fixed bottom-0 w-full bg-darkerBlue text-white text-center py-4 font-quickS">
+      <a
+        class="flex flex-row gap-2 items-center justify-center"
+        href="login.html"
+        >Sign in to bid on your favorite listings
+        <img src="/arrow_corner_white.png" class="w-6" alt=""
+      /></a>
     </section>
   </body>
 </html>
@@ -176,4 +78,3 @@
 
      
 -->
-
