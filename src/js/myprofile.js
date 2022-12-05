@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-
+import Tagify from "@yaireo/tagify";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
@@ -14,8 +14,14 @@ const activeFeed = document.getElementById("show_active");
 const activeBidsBtn = document.getElementById("active_bids_button");
 const activeLisBtn = document.getElementById("active_listings_button");
 const editImgOverlay = document.getElementById("edit_img_overlay");
+const myListings = document.getElementById("my_listings_div");
+const editListingOverlay = document.getElementById("edit_listing_overlay");
+const previewImg = document.getElementById("prew_img")
 
 profileName.innerHTML = getUsername();
+
+
+
 
 async function myProfile() {
   try {
@@ -70,7 +76,9 @@ async function myLis() {
     if (response.ok) {
       console.log("myLis", data);
       activeSection(data);
+      allMyListings(data);
     } else {
+      activeSection(data)
       console.log("error", data);
     }
   } catch (error) {
@@ -78,7 +86,7 @@ async function myLis() {
   }
 }
 
-myLis();
+
 
 function listProfile(data) {
   let myProfile;
@@ -246,66 +254,98 @@ function activeSection(data) {
 }
 
 function showListings(array) {
+  
   let title;
   let endTime;
   let media = "";
   let created;
   let bids;
+  let desc;
   let oneListing;
   let id;
+  let amountOfBids;
+  let bidder;
+  let tags = "";
+  let bidNumber;
+
 
   for (let lis of array) {
+
     title = lis.title;
-    endTime = dayjs(lis.endsAt).format("DD/MM/YYYY  | HH:mm");
-  
+
+    endTime = `Ends at `+ dayjs(lis.endsAt).format("DD/MM/YYYY  | HH:mm");
+
     created = dayjs(lis.created).format("DD/MM/YYYY");
 
-    bids = lis.bids;
-    if (lis.bids == "") {
-      bids = 0;
+    if (lis.description) {
+      desc = lis.description
+    }
+
+    if (lis.bids) {
+      amountOfBids = lis.bids.length;
+
+      bidNumber = `${amountOfBids} bids`;
+
+      if (amountOfBids == 1) {
+        `${amountOfBids} bid`;
+      }
+
+      for (let bid of lis.bids) {
+        bidder = bid["bidderName"];
+        bids = `
+        <p class="">${bidder}</p>
+          <p class=""><span class="text-xs">Current bid </span>${bid["amount"]} -,</p>`;
+      }
+
+      if (amountOfBids == 0) {
+        bids = `<p class="flex text-base font-dosisgap-1 font-semibold flex-row items-center">No bids</p>`;
+        bidder = "";
+      } 
     }
 
     id = lis.id;
 
     let oneImg;
     for (let img of lis.media) {
-      oneImg = `<img class="rounded-full w-24 h-24" src=${img}>`;
+      oneImg = `<img class="rounded-lg w-fit " src=${img}>`;
       media += oneImg;
     }
- 
+
+    if (lis.tags) {
+      let oneTag;
+      for (let tag of lis.tags) {
+        oneTag = `<p class="px-2 py-1 rounded-sm bg-blue w-fit h-fit text-white">${tag}</p>`;
+        tags += oneTag;
+      } 
+    }
     
-    console.log(media)
 
 
     oneListing = `
-  <div class="w-full relative p-4 rounded-md bg-white shadow-lg flex flex-row justify-between text-right font-light font-robotoC">
-    <div class="flex flex-col justify-between gap-8">
-      <div class="flex flex-row">${media}</div>
-      <div class="">
-        <button id="${id}" class="deleteBtn"><img class="w-6" src="/trash.png"></button>
-        <img id="change_listing" class="w-6" src="/edit.png">
-      </div>
-    </div>
-    <div class="flex flex-col gap-2 text-sm">
+  <div class="w-full p-4 rounded-md bg-white shadow-lg text-sm font-light flex flex-col gap-4">
+    <div class="flex flex-col justify-between gap-4">
       <h2 class="text-xl">${title}</h2>
-      <p>Ends at ${endTime}</p>
+      <p class="">${desc}</p>
+      <div class="flex flex-row gap-2">${tags}</div>
+      <div class="flex flex-row flex-wrap gap-4">${media}</div>
+    </div>
+    <hr>
+    <div class="flex flex-col gap-4">
+    
+      <p>${endTime}</p>
       <p>Created ${created}</p>
-      <p>${bids} bids</p>
+      <p>${bidNumber}</p>
+      <div class="flex flex-row justify-between items-baseline border border-blue rounded-md p-2">
+        ${bids}
+      </div>
     </div>
   </div>
 
   `;
     activeFeed.innerHTML += oneListing;
 
-    const deleteButtons = document.getElementsByClassName("deleteBtn");
-
-    for (let button of deleteButtons) {
-      button.addEventListener("click", function (event) {
-        event.preventDefault();
-        deleteListing(button.id);
-      });
-    }
   }
+
 }
 
 async function deleteListing(id) {
@@ -445,5 +485,308 @@ function showActiveBids(array) {
 
   `;
     activeFeed.innerHTML += oneListing;
+  }
+}
+
+
+function allMyListings(array) {
+
+  myListings.innerHTML = "";
+  let title;
+  let endTime;
+  let media = "";
+  let created;
+  let bids;
+  let desc;
+  let oneListing;
+  let id;
+  let amountOfBids;
+  let bidder;
+  let tags = "";
+  let bidNumber;
+
+
+  for (let lis of array) {
+    let nowTime = dayjs().isAfter(dayjs(lis.endsAt));
+
+    title = lis.title;
+    endTime = `Ends at `+ dayjs(lis.endsAt).format("DD/MM/YYYY  | HH:mm");
+
+    if (nowTime == true) {
+      endTime = `Ended at `+ dayjs(lis.endsAt).format("DD/MM/YYYY  | HH:mm");
+    }
+  
+    created = dayjs(lis.created).format("DD/MM/YYYY");
+
+    if (lis.description) {
+      desc = lis.description
+    }
+
+    if (lis.bids) {
+      amountOfBids = lis.bids.length;
+
+      bidNumber = `${amountOfBids} bids in total`;
+
+      if (amountOfBids == 1) {
+        `${amountOfBids} bid in total`;
+      }
+
+      for (let bid of lis.bids) {
+        bidder = bid["bidderName"];
+        bids = `
+        <p class="">${bidder}</p>
+          <p class=""><span class="text-xs">Current bid </span>${bid["amount"]} -,</p>`;
+          
+          if (nowTime == true) {
+            bids =
+              `<p class="">${bidder}</p>
+              <p class="text-xl font-robotoC"><span class="text-xs">Winning bid </span> ${bid["amount"]} -,</p>`;
+          }
+
+
+      }
+      if (amountOfBids == 0) {
+        bids = `<p class="flex flex-row items-center text-gray-400 italic">We'll show the latest bid, stay strong!</p>`;
+        bidder = "";
+      } 
+    }
+
+    id = lis.id;
+
+    let oneImg;
+    for (let img of lis.media) {
+      oneImg = `<img class="rounded-lg w-fit " src=${img}>`;
+      media += oneImg;
+    }
+
+    if (lis.tags) {
+      let oneTag;
+      for (let tag of lis.tags) {
+        oneTag = `<p class="px-2 py-1 rounded-sm bg-blue w-fit h-fit text-white">${tag}</p>`;
+        tags += oneTag;
+      } 
+    }
+    
+
+
+    oneListing = `
+  <div class="w-full p-4 rounded-md bg-white shadow-lg text-sm font-light flex flex-col gap-4">
+    <div class="flex flex-col justify-between gap-4">
+      <h2 class="text-xl">${title}</h2>
+      <p class="">${desc}</p>
+      <div class="flex flex-row gap-2">${tags}</div>
+      <div class="flex flex-row flex-wrap gap-4">${media}</div>
+    </div>
+    <hr>
+    <div class="flex flex-col gap-4">
+    
+      <p>${endTime}</p>
+      <p>Created ${created}</p>
+      <p>${bidNumber}</p>
+      <div class="flex flex-row justify-between items-baseline border-b border-b-blue p-2">
+        ${bids}
+      </div>
+    </div>
+   
+    <div class="flex wrap flex-row justify-center gap-8 mt-6">
+    <button id="${id}" class="deleteBtn outline outline-1 outline-black outline-offset-4 p-1 rounded-sm"><img class="w-6" src="/trash.png"></button>
+    <button id="${id}" class="editBtn outline outline-1 outline-black outline-offset-4 p-1 rounded-sm"><img class="w-6" src="/edit.png"></button>
+  </div>
+  </div>
+
+  `;
+    myListings.innerHTML += oneListing;
+
+    const deleteButtons = document.getElementsByClassName("deleteBtn");
+    const editButtons = document.getElementsByClassName("editBtn");
+
+
+    for (let button of deleteButtons) {
+      button.addEventListener("click", function (event) {
+        event.preventDefault();
+        let doubleCheck = confirm("Are you sure you want to delete this listing?");
+        if (doubleCheck == false) {
+          return;
+        } else {
+          deleteListing(button.id);
+        }
+      });
+    }
+
+    for (let button of editButtons) {
+      button.addEventListener("click", function (event) {
+        event.preventDefault();
+        button.classList.add("outline-2")
+        editListing(button.id, title, desc, lis.tags, lis.media)
+      });
+    }
+  }
+}
+
+function editListing(id, title, desc, tags, media) {
+  editListingOverlay.classList.toggle("hidden");
+
+ 
+  let onePrew = "";
+  console.log(id, title, desc, tags, media)
+
+  function testImg () {
+    previewImg.innerHTML = "";
+    for (let img of media) {
+      onePrew = `<li class="li list-none cursor-pointer relative hover:after:content-['X'] hover:after:font-quickS after:text-sm after:flex after:justify-center after:items-center after:p-2 after:absolute after:-top-2 after:-right-2 after:w-6 after:h-6 hover:after:bg-blue  after:text-white after:rounded-full"><img class="w-20 h-20" src=${img}></li>`;
+      previewImg.innerHTML += onePrew;
+    }
+
+    let allLis = document.querySelectorAll(".li")
+
+for (var i = 0; i < allLis.length; i++) {
+  var img = allLis[i]
+  img.addEventListener("click", removeImg)
+  img.param = (i)
+}
+  }
+
+  testImg()
+
+
+  editListingOverlay.innerHTML = 
+  `<form
+  class="p-6 md:shadow-none flex flex-col w-full gap-8 md:gap-8 font-quickS font-light lg:flex-row lg:justify-between lg:gap-32 lg:items-stretch"
+>
+  <div
+    class="flex flex-col w-full gap-4 lg:w-1/2 lg:justify-between lg:gap-8"
+  >
+    <div>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        placeholder="title"
+        required
+        value="${title}"
+        class="italic font-quickS pl-4 tracking-wide font-light placeholder:text-black text-2xl focus:outline-none bg-transparent"
+      />
+      <hr class="bg-black mb-4 mt-2 lg:mb-12" />
+      <textarea
+        name="desc"
+        id="desc"
+        placeholder="description.."
+        class="auto-rows-max auto-cols-auto w-full h-fit border-none font-josefine font-light placeholder:text-gray-400 placeholder:italic focus:outline-none bg-transparent"
+      >${desc}</textarea>
+    </div>
+    
+    <div class="flex flex-col gap-8">
+      
+      <input
+      name="tags"
+      autofocus
+      placeholder="Add tags"
+      value="${tags}"
+    />
+      <input
+        id="media_input"
+        placeholder="Add image url"
+        class="w-full p-2 border border-blue"
+      />
+      <button class="addImg">Add image</button>
+    </div>
+  </div>
+  <button class="submitChangeBtn">Submit changes</button>
+</form>
+  `
+;
+
+var input = document.querySelector('input[name=tags]');
+new Tagify(input, {
+  originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')
+})
+
+input.addEventListener('change', onChange)
+
+
+function onChange(e){
+  let stringList = e.target.value;
+  tags = stringList.split(",")
+}
+
+let addImgBtns = document.getElementsByClassName('addImg');
+for (let btn of addImgBtns) {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    let imgURL = media_input.value;
+    media.push(imgURL)
+    media_input.value = "";
+    testImg()
+  })
+}
+
+
+function removeImg(e) {
+let index = e.currentTarget.param;
+console.log(index)
+media.splice(index,1)
+testImg();
+}
+
+let titleValue;
+let titleInput = document.getElementById("title")
+titleInput.addEventListener("change", (e) => {
+  e.preventDefault();
+  titleValue = titleInput.value;
+})
+
+let descValue;
+let descInput = document.getElementById("desc")
+descInput.addEventListener("change", (e) => {
+  e.preventDefault();
+  descValue = descInput.value;
+})
+
+let submitChangeBtns = document.getElementsByClassName('submitChangeBtn');
+for (let btn of submitChangeBtns) {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault()
+    editBody(id, titleValue, descValue, tags, media)
+  })
+}
+
+
+}
+
+function editBody(id, title, desc, tags, media) {
+  //console.log(id, title, desc, tags, media)
+
+  let finalBody = {
+    title: title,
+    description: desc,
+    tags: tags,
+    media: media
+  }
+
+  let JSONbody = JSON.stringify(finalBody)
+  requestEdit(id, JSONbody)
+
+}
+
+async function requestEdit(id, body) {
+  try {
+    const response = await fetch(`${ALL_LIS_URL}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${getToken()}`,
+      },
+      body: body,
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      console.log(data);
+    } else {
+      console.log("oh no" + data);
+    }
+  } catch (error) {
+    console.log(error);
   }
 }

@@ -8,6 +8,9 @@
     <title>My profile</title>
     <script type="module" src="./js/ingredients/all.js" defer></script>
     <script type="module" src="./js/myprofile.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -91,12 +94,19 @@
         </section>
 
         <section class="flex flex-col gap-4 pt-6 w-full">
-          <button
-            id="my_listings_button"
-            class="w-full shadow-lg h-14 border border-gray-100 font-quickS text-blue"
+          <div
+            
+            class="w-full shadow-lg h-14 border border-gray-100 font-quickS text-white bg-blue flex items-center justify-center"
           >
             My listings
-          </button>
+        </div>
+        <div id="my_listings_div"></div>
+        <div
+        id="edit_listing_overlay"
+        class="hidden flex items-center"
+      >
+    </div>
+    <ul class="flex flex-row flex-wrap gap-4 justify-center" id="prew_img"></ul>
         </section>
       </section>
     </main>

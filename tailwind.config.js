@@ -25,6 +25,7 @@ module.exports = {
       ringWidth: {
         10: "10px",
       },
+  
     },
   },
 };

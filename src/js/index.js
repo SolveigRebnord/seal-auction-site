@@ -294,12 +294,21 @@ function listLis(data) {
       sellerImg = `<img class="rounded-full w-20 h-20 object-cover" src="${lis.seller["avatar"]}">`;
     }
 
+
+
+
     if (lis.media) {
       let oneImg;
-    for (let img of lis.media) {
-      oneImg = img;
-      media = oneImg;
-    }
+
+  
+      for (let img of lis.media) {
+        oneImg = img;
+        media = oneImg;
+      }
+
+      
+
+    
 
       if (media.length == 0) {
         console.log("teit");
@@ -307,9 +316,14 @@ function listLis(data) {
       }
     }
 
+
+
+
+
+
     if (lis.created) {
       let time = dayjs().to(dayjs(lis.created));
-      created = time;
+      created = `<img class="h-4" src="/clock.svg">${time}`
     }
 
     if (lis.updated) {
@@ -333,10 +347,10 @@ function listLis(data) {
         bidder = bid["bidderName"];
         bids =
           //`<p class="bg-white p-1 px-2 rounded-full border border-black">${bidder}</p>
-          `<p class="flex text-3xl font-extralight font-robotoC gap-2 flex-row items-center">${bid["amount"]} -,</p>`;
+          `<p class="flex text-2xl font-normal text-blue font-robotoC gap-2 flex-row items-center justify-end"><span class="text-xs">Current bid </span>${bid["amount"]} -,</p>`;
       }
       if (amountOfBids == 0) {
-        bids = `<p class="flex text-lg pt-2 font-robotoC text-black gap-2 flex-row items-center">Be nr. 1</p>`;
+        bids = `<p class="flex text-base font-dosis text-blue gap-1 font-semibold flex-row items-center">- Be the first -</p>`;
         bidder = "";
       }
     }
@@ -353,27 +367,30 @@ function listLis(data) {
 
       let noe = dayjs().isAfter(dayjs(lis.endsAt));
       if (noe == true) {
-        endsAt = "Ups, over";
+        endsAt = "Listing finished";
       }
     }
 
-    oneLi = `<a href="listing.html?id=${id}" class="max-w-xxs w-full font-quickS font-light text-xs">
-                <div class="h-96 rounded-lg bg-cover bg-center" style="background-image: url('${media}')">
-                  <div class="w-full h-full flex items-end">
-                    <div class="w-full bg-white flex flex-col shadow-lg rounded-b-lg p-4">
-                      <h2 class="text-base max-h-12 font-extralight font-sans tracking-wide overflow-hidden">${title}</h2>
-                      <div class="flex flex-row justify-between items-baseline pt-2">
-                        <p class="text-xs text-blue"> ${endsAt}</p>
+    oneLi = `<a href="listing.html?id=${id}" class="w-full font-quickS font-light text-xs  max-w-xxs">
+                <div class="h-96 w-full relative rounded-lg bg-cover bg-center flex flex-col justify-end" style="background-image: url('${media}')">
+                  <div class="w-full h-32 max-h-32 flex items-end">
+                    <div class="w-full bg-white flex flex-col shadow-lg rounded-b-lg p-4 gap-4">
+                      <h2 class="text-base max-h-6 font-extralight font-sans tracking-wide overflow-hidden">${title}</h2>
+          
+                      <div class="flex flex-row justify-between items-center">
+                    
+                        <p class="text-xs text-blue flex flex-row gap-1">
+                        <img class="h-4" src="/clock.png">${endsAt}</p>
                         ${bids}
                       </div>
                     </div>
                   </div>
                 </div>  
-      
-            </a>
+                </a>
                 `;
 
     feed.innerHTML += oneLi;
+   
   }
 }
 

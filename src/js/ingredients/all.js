@@ -11,7 +11,7 @@ if (currentURL.includes("index")) {
   listingsLI.classList.add(
     "bg-white",
     "text-blue",
-    "py-10",
+    "py-8",
     "px-6",
     "shadow-xl"
   );
@@ -21,7 +21,7 @@ if (currentURL.includes("id")) {
   listingsLI.classList.add(
     "bg-white",
     "text-blue",
-    "py-10",
+    "py-8",
     "px-6",
     "shadow-xl"
   );
@@ -31,7 +31,7 @@ if (currentURL.includes("myprofile")) {
   myprofileLI.classList.add(
     "bg-white",
     "text-blue",
-    "py-10",
+    "py-8",
     "px-6",
     "shadow-xl"
   );
@@ -41,7 +41,7 @@ if (currentURL.includes("newlisting")) {
   newlistingLi.classList.add(
     "bg-white",
     "text-blue",
-    "py-10",
+    "py-8",
     "px-6",
     "shadow-xl"
   );
