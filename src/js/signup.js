@@ -1,7 +1,6 @@
-import '../style.css'
+import "../style.css";
 
 import { SIGN_UP_URL } from "./ingredients/endpoints";
-
 
 const signUpForm = document.getElementById("sign-up-form");
 const username = document.getElementById("username");
@@ -22,31 +21,30 @@ signUpForm.addEventListener("submit", function (event) {
 });
 
 function validateEmail(email) {
-    const regEx = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(stud.noroff.no|noroff.no)$/;
-    return email.match(regEx) ? true : false;
+  const regEx = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(stud.noroff.no|noroff.no)$/;
+  return email.match(regEx) ? true : false;
+}
+
+function validatePassword(password) {
+  if (password.length >= 3) {
+    return true;
   }
-  
-  function validatePassword(password) {
-    if (password.length >= 3) {
-      return true;
-    }
+}
+
+function confirmingPassword(password, confirmPassword) {
+  if (!password) {
+    return false;
   }
-  
-  function confirmingPassword(password, confirmPassword) {
-    if (!password) {
-      return false;
-    }
-  
-    if (!confirmPassword) {
-      return false;
-    }
-  
-    if (password === confirmPassword) {
-      return true;
-    }
+
+  if (!confirmPassword) {
+    return false;
   }
-  
- 
+
+  if (password === confirmPassword) {
+    return true;
+  }
+}
+
 function signUp(e) {
   e.preventDefault();
   let validForm = false;

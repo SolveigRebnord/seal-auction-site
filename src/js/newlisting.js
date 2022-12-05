@@ -1,7 +1,7 @@
 import { getUsername, getToken } from "./ingredients/storage";
 import dayjs from "dayjs";
 import { ALL_LIS_URL } from "./ingredients/endpoints";
-import Tagify from '@yaireo/tagify'
+import Tagify from "@yaireo/tagify";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
@@ -15,7 +15,7 @@ const mediaBtn = document.getElementById("media_button");
 const prew = document.getElementById("show_img");
 const newListing = document.getElementById("preview-section");
 const previewBtn = document.getElementById("preview_listing");
-const prewImgUL = document.getElementById("img_prew_ul")
+const prewImgUL = document.getElementById("img_prew_ul");
 
 const title = document.getElementById("title");
 const desc = document.getElementById("desc");
@@ -26,25 +26,20 @@ profileName.innerHTML = getUsername();
 let tagArray = [];
 let mediaArray = [];
 
-
-
-var input = document.querySelector('input[name=tags]');
+var input = document.querySelector("input[name=tags]");
 
 new Tagify(input, {
-  originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')
-})
+  originalInputValueFormat: (valuesArr) =>
+    valuesArr.map((item) => item.value).join(","),
+});
 
-input.addEventListener('change', onChange)
+input.addEventListener("change", onChange);
 
-
-function onChange(e){
+function onChange(e) {
   let stringList = e.target.value;
-  tagArray = stringList.split(",")
-  console.log(tagArray)
+  tagArray = stringList.split(",");
+  console.log(tagArray);
 }
-
-
-    
 
 let prewiew;
 let onePrew;
@@ -54,12 +49,11 @@ mediaBtn.addEventListener("click", (e) => {
   console.log(mediaInput.value);
   if (mediaInput.value == "") {
     return;
-  }
-  else {
-  prewiew = `<img src="${mediaInput.value}">
+  } else {
+    prewiew = `<img src="${mediaInput.value}">
   <button id="approve_img_btn">Add image</button>`;
-  prew.innerHTML = prewiew;
-  prew.classList.toggle("hidden");
+    prew.innerHTML = prewiew;
+    prew.classList.toggle("hidden");
   }
 
   let addImg = document.getElementById("approve_img_btn");
@@ -68,79 +62,61 @@ mediaBtn.addEventListener("click", (e) => {
     let currentImg = mediaInput.value;
     mediaArray.push(currentImg);
     imgRe();
-  })
-
-
+  });
 });
 
-
 function imgRe() {
-
   prew.innerHTML = "";
   prewImgUL.innerHTML = "";
 
   if (mediaArray === []) {
-    prewImgUL.innerHTML = "zero"
+    prewImgUL.innerHTML = "zero";
   }
 
   for (let img of mediaArray) {
     onePrew = `<li class="li"><img class="w-20 h-20" src=${img}></li>`;
     prewImgUL.innerHTML += onePrew;
   }
- 
 
-  
-
-  let allLis = document.querySelectorAll(".li")
+  let allLis = document.querySelectorAll(".li");
 
   for (var i = 0; i < allLis.length; i++) {
-    var img = allLis[i]
-    img.addEventListener("click", removeImg)
-    img.param = (i)
+    var img = allLis[i];
+    img.addEventListener("click", removeImg);
+    img.param = i;
   }
 
   prew.classList.toggle("hidden");
   mediaInput.value = "";
 }
 
-
-
 function removeImg(e) {
   let index = e.currentTarget.param;
-  console.log(index)
-  mediaArray.splice(index)
-  console.log(mediaArray)
-  imgRe()
+  console.log(index);
+  mediaArray.splice(index);
+  console.log(mediaArray);
+  imgRe();
 }
-
-
-
 
 previewBtn.addEventListener("click", (e) => {
   e.preventDefault();
   newListing.classList.toggle("hidden");
 
-  input.removeAttribute("autofocus")
-  showPreview(
-    title.value,
-    desc.value,
-    tagArray,
-    mediaArray,
-    endingTime.value
-  );
+  input.removeAttribute("autofocus");
+  showPreview(title.value, desc.value, tagArray, mediaArray, endingTime.value);
 });
 
 //  <h2 class="text-3xl font-lobster2 pb-8 self-center">Preview<h2>
 function showPreview(title, desc, tags, media, endTime) {
   let showTime = dayjs(endTime).format("DD/MM/YYYY HH:mm:ss");
   let fromNow = dayjs(endTime).fromNow();
-  console.log(tagArray)
+  console.log(tagArray);
 
   let oneImg;
   let allImgs;
 
   for (let img of media) {
-    oneImg = `<img class="w-20 h-20" src=${img}>`
+    oneImg = `<img class="w-20 h-20" src=${img}>`;
   }
   allImgs += oneImg;
 
@@ -151,8 +127,6 @@ function showPreview(title, desc, tags, media, endTime) {
     oneTag = `<p>${tag}</p>`;
     allTags += oneTag;
   }
-
-
 
   let fullPreview = `<div class="thingy bg-bgGrey rounded-md px-4 py-8 shadow-lg m-auto md:w-2/3 md:mr-12 md:mt-1/2 md:p-14 lg:m-auto lg:w-1/3 h-fit font-robotoC font-light">
       

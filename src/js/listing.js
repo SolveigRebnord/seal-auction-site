@@ -2,46 +2,39 @@ import { ALL_LIS_URL, ALL_PROFILES_URL } from "./ingredients/endpoints.js";
 import dayjs from "dayjs";
 import { getToken, getUsername } from "./ingredients/storage.js";
 
-const newListingLi = document.getElementById("newlisting_li")
-const myProfileLi = document.getElementById("myprofile_li")
+const newListingLi = document.getElementById("newlisting_li");
+const myProfileLi = document.getElementById("myprofile_li");
 const headerProfileIcon = document.getElementById("header_profile");
 const searchBtn = document.getElementById("search_btn");
 const searchInput = document.getElementById("search_input");
 const profileName = document.getElementById("profile_name");
 const listOutput = document.getElementById("list_listing");
 const bidOverlay = document.getElementById("bid_overlay");
-const limitedAccessBanner = document.getElementById("limited_access_banner")
-
+const limitedAccessBanner = document.getElementById("limited_access_banner");
 
 import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
-
 function deactivateNav() {
   myProfileLi.href = "javascript:void(0)";
-  myProfileLi.classList.add("disabled-link")
+  myProfileLi.classList.add("disabled-link");
   newListingLi.href = "javascript:void(0)";
-  newListingLi.classList.add("disabled-link")
-
+  newListingLi.classList.add("disabled-link");
 }
 
 function checkAccess(key) {
   if (key) {
     profileName.innerHTML = getUsername();
-  }
-  else {
+  } else {
     deactivateNav();
     profileName.innerHTML = "Log in for full access";
     headerProfileIcon.href = "login.html";
-    limitedAccessBanner.classList.remove("hidden")
+    limitedAccessBanner.classList.remove("hidden");
   }
 }
 
 checkAccess(getToken());
-
-
-
 
 searchBtn.addEventListener("click", () => {
   searchInput.classList.toggle("hidden");
@@ -57,14 +50,12 @@ async function getLis() {
   try {
     const response = await fetch(`${ONE_LIS_URL}?_bids=true&_seller=true`, {
       method: "GET",
-      
     });
     const data = await response.json();
 
     if (response.ok) {
-      console.log("success");
-      console.log(data);
       listListing(data);
+
     } else {
       console.log("error", data);
     }
@@ -72,7 +63,6 @@ async function getLis() {
     console.log(error);
   }
 }
-
 getLis();
 
 function listListing(lis) {
@@ -90,7 +80,7 @@ function listListing(lis) {
   let amountOfBids;
   let bidder;
   let allBids = [];
-  let newarr;
+  let newarr = "";
   let endTime;
   let lastItem;
 
@@ -112,8 +102,8 @@ function listListing(lis) {
     let seconds = Math.floor((diff % (1000 * 60)) / 1000);
     endsAt = `${days}d ${hours}h ${minutes}m ${seconds}s`; //enten få til at de går nedover, eller ta vekk sekunder
 
-    let noe = dayjs().isAfter(dayjs(lis.endsAt));
-    if (noe == true) {
+    let nowTime = dayjs().isAfter(dayjs(lis.endsAt));
+    if (nowTime == true) {
       endsAt = "Ups, over";
     }
   }
@@ -129,12 +119,11 @@ function listListing(lis) {
   if (lis.bids !== "") {
     let oneBid;
 
-    let lengde = lis.bids.length;
-    console.log(lengde);
+    let lisLength = lis.bids.length;
 
-    let lastIndex = lengde - 1;
+    let lastIndex = lisLength - 1;
     lastItem = lis.bids.slice(lastIndex);
-    console.log(lastItem);
+
 
     for (let bid of lis.bids) {
       let bidderName = bid["bidderName"];
@@ -148,9 +137,13 @@ function listListing(lis) {
             </div>
             `;
       allBids.push(oneBid);
-      console.log(allBids);
 
-      newarr = allBids.join(" ");
+      if (allBids.length == 0) {
+        newarr = "null";
+      }
+      else {
+        newarr = allBids.join(" ");
+      }
     }
   }
 
@@ -166,62 +159,61 @@ function listListing(lis) {
         </div>
       </div>
       <div class="flex flex-col gap-2 text-sm">
-      <p class="font-quickS text-2xl font-normal">${title}</p>
-      <p>${desc}</p>
- 
+        <p class="font-quickS text-2xl font-normal">${title}</p>
+        <p>${desc}</p>
         <p>${bids} bids</p>
         <img class="w-full max-h-96 object-cover rounded-xl shadow-lg" src="${media}">
       </div>
-      <div  class="flex flex-row items-baseline justify-between">
-            <p>Ends in</p>
-            <p id="time"></p>
-        </div>
-        <div class="flex flex-col gap-4">
-            ${newarr}
-        </div>
-        <div class="flex justify-center">
-            <button class="bid bg-blue rounded-md w-1/2 py-4 text-white hover:cursor-pointer" id="bid">Make a bid</button>
+      <div class="flex flex-row items-baseline justify-between">
+        <p>Ends in</p>
+        <p id="time"></p>
+      </div>
+      <div class="flex flex-col gap-4">
+        ${newarr}
+      </div>
+      <div class="flex justify-center">
+        <button class="bid bg-blue rounded-md w-1/2 py-4 text-white hover:cursor-pointer" id="bid">Make a bid</button>
+      </div>
     </div>
     `;
   listOutput.innerHTML = listing;
 
   let theBid = document.getElementById("bid");
 
-
-
-  
   theBid.param = lastItem;
 
-function checkAccess(key) {
-  if (key) {
-    theBid.addEventListener("click", makeBid);
+  function checkAccess(key) {
+    if (key) {
+      theBid.addEventListener("click", makeBid);
+    } else {
+      theBid.innerHTML = "Sign in to get you hands on it!";
+      theBid.classList.add("bg-white", "border-blue", "border-4", "text-black");
+      theBid.classList.remove("bg-blue");
+      theBid.addEventListener("click", (e) => {
+        e.preventDefault();
+        location.replace("login.html");
+      });
+    }
   }
-  else {
-    theBid.innerHTML = "Sign in to get you hands on it!";
-    theBid.classList.add("bg-white", "border-blue", "border-4", "text-black")
-    theBid.classList.remove("bg-blue")
-    theBid.addEventListener("click", (e) => {
-      e.preventDefault()
-      location.replace("login.html")
-      })
-  }
-}
-checkAccess(getToken())
+  checkAccess(getToken());
 
   let timing = document.getElementById("time");
   function checkTime() {
     timing.innerHTML = `${endsAt}`;
   }
-
   setInterval(checkTime, 1000);
 }
 
 function makeBid(e) {
   bidOverlay.classList.toggle("hidden");
-  //console.log(e.currentTarget.param);
+  let lastAmount
   let item = e.currentTarget.param;
-  let lastAmount = item[0]["amount"];
-  //console.log(lastAmount)
+  if (item.length == 0) {
+    lastAmount = 1;
+  }
+  else {
+    lastAmount= item[0]["amount"];
+  }
   myCredits(lastAmount);
 }
 
@@ -236,7 +228,6 @@ async function myCredits(lastAmount) {
     const data = await response.json();
 
     if (response.ok) {
-      //console.log(data);
       bidBox(data, lastAmount);
     } else {
       console.log("error", data);
@@ -247,12 +238,11 @@ async function myCredits(lastAmount) {
 }
 
 function bidBox(data, number) {
-  console.log(number);
 
   let wallet = data.credits;
-  console.log(wallet);
 
-  bidOverlay.innerHTML = `<div>
+  bidOverlay.innerHTML = 
+  `<div>
     <p>Your credits: ${wallet}</p>
     <p>Min. bid: ${number}</p>
     <input type="number" id="myBid">
@@ -264,21 +254,20 @@ function bidBox(data, number) {
 
   function checkBid() {
     let wantedBid = myBid.value;
-    console.log(wantedBid);
 
     if (wantedBid > number) {
+
       let bidBody = {
-        amount: wantedBid,
+        amount: Number(wantedBid),
       };
 
       requestBid(bidBody);
     } else {
-      console.log("nono");
+      console.log("Fail to request");
     }
   }
 
   async function requestBid(body) {
-    console.log(body);
 
     try {
       const response = await fetch(`${ALL_PROFILES_URL}/${getUsername()}`, {
@@ -290,7 +279,6 @@ function bidBox(data, number) {
       const data = await response.json();
 
       if (response.ok) {
-        console.log(data);
         enoughCredits(data, body);
       } else {
         console.log("error", data);
@@ -301,7 +289,6 @@ function bidBox(data, number) {
   }
 
   function enoughCredits(data, body) {
-    //console.log(data.credits + body.amount)
     if (data.credits > body.amount) {
       sendBid(body);
     }
@@ -309,9 +296,8 @@ function bidBox(data, number) {
 }
 
 async function sendBid(body) {
-  console.log(body);
+
   let JSONBody = JSON.stringify(body);
-  console.log(JSONBody);
 
   try {
     const response = await fetch(`${ONE_LIS_URL}/bids`, {
@@ -325,8 +311,9 @@ async function sendBid(body) {
     const data = await response.json();
 
     if (response.ok) {
-      console.log(data);
+      bidOverlay.innerHTML = "";
       getLis();
+
     } else {
       console.log("error", data);
     }

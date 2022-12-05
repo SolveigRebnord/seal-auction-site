@@ -1,4 +1,3 @@
-
 import { ALL_LIS_URL } from "./ingredients/endpoints";
 import dayjs from "dayjs";
 import { getUsername, clearStorage, getToken } from "./ingredients/storage";
@@ -13,30 +12,27 @@ const filterBtn = document.getElementById("select_filter");
 const logOutBtn = document.getElementById("log_out");
 const searchBtn = document.getElementById("search_btn");
 const searchInput = document.getElementById("search_input");
-const newListingLi = document.getElementById("newlisting_li")
-const myProfileLi = document.getElementById("myprofile_li")
+const newListingLi = document.getElementById("newlisting_li");
+const myProfileLi = document.getElementById("myprofile_li");
 const headerProfileIcon = document.getElementById("header_profile");
-const limitedAccessBanner = document.getElementById("limited_access_banner")
-
+const limitedAccessBanner = document.getElementById("limited_access_banner");
 
 function deactivateNav() {
   myProfileLi.href = "javascript:void(0)";
-  myProfileLi.classList.add("disabled-link")
+  myProfileLi.classList.add("disabled-link");
   newListingLi.href = "javascript:void(0)";
-  newListingLi.classList.add("disabled-link")
-
+  newListingLi.classList.add("disabled-link");
 }
 
 function checkAccess(key) {
   if (key) {
     profileName.innerHTML = getUsername();
-  }
-  else {
+  } else {
     deactivateNav();
     logOutBtn.classList.add("hidden");
     profileName.innerHTML = "Log in for full access";
     headerProfileIcon.href = "login.html";
-    limitedAccessBanner.classList.remove("hidden")
+    limitedAccessBanner.classList.remove("hidden");
   }
 }
 
@@ -55,9 +51,6 @@ logOutBtn.addEventListener("click", () => {
 searchBtn.addEventListener("click", () => {
   searchInput.classList.toggle("hidden");
 });
-
-
-
 
 async function allLis() {
   try {
@@ -82,8 +75,7 @@ async function allLis() {
   }
 }
 
-allLis()
-
+allLis();
 
 let value = filterBtn.value;
 
@@ -294,21 +286,13 @@ function listLis(data) {
       sellerImg = `<img class="rounded-full w-20 h-20 object-cover" src="${lis.seller["avatar"]}">`;
     }
 
-
-
-
     if (lis.media) {
       let oneImg;
 
-  
       for (let img of lis.media) {
         oneImg = img;
         media = oneImg;
       }
-
-      
-
-    
 
       if (media.length == 0) {
         console.log("teit");
@@ -316,14 +300,9 @@ function listLis(data) {
       }
     }
 
-
-
-
-
-
     if (lis.created) {
       let time = dayjs().to(dayjs(lis.created));
-      created = `<img class="h-4" src="/clock.svg">${time}`
+      created = `<img class="h-4" src="/clock.svg">${time}`;
     }
 
     if (lis.updated) {
@@ -390,7 +369,5 @@ function listLis(data) {
                 `;
 
     feed.innerHTML += oneLi;
-   
   }
 }
-

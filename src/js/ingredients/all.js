@@ -46,4 +46,3 @@ if (currentURL.includes("newlisting")) {
     "shadow-xl"
   );
 }
-
