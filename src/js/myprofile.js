@@ -127,9 +127,9 @@ function listProfile(data) {
   }
 
   myProfile = `
-    <section class="h-fit rounded-md font-light font-quickS md:flex md:flex-row-reverse shadow-lg justify-between items-center md:p-6 lg:flex-col lg:shadow-none lg:p-0">
-    <div class=" flex flex-col gap-2 justify-center items-center">
-      <div class="w-60 h-60 rounded-xl shadow-xl bg-cover flex justify-end items-end p-4" style="background-image: url('${profileImg}')">
+    <section class="h-fit w-2/3 rounded-md font-light font-quickS md:flex md:flex-row-reverse shadow-lg justify-between items-center md:p-6 lg:py-12 lg:flex-col">
+    <div class=" w-fit flex flex-col gap-2 justify-center items-center">
+      <div class="w-72 h-72 rounded-xl shadow-xl bg-cover flex justify-end items-end p-4" style="background-image: url('${profileImg}')">
         <button id="edit_img_btn"><img class="w-6 outline outline-1 outline-white rounded-sm outline-offset-1" src="/edit_img.png"></button>
       </div>
         <h1 class="font-fjalla tracking-wide text-4xl">${name}</h1>
@@ -299,7 +299,7 @@ function showListings(array) {
 
     let oneImg;
     for (let img of lis.media) {
-      oneImg = `<img class="rounded-lg w-fit " src=${img}>`;
+      oneImg = `<img class="rounded-lg w-fit max-w-sm object-cover" src=${img}>`;
       media += oneImg;
     }
 
@@ -312,12 +312,12 @@ function showListings(array) {
     }
 
     oneListing = `
-  <div class="w-full p-4 rounded-md bg-white shadow-lg text-sm font-light flex flex-col gap-4">
+  <div class="w-full p-4 rounded-md bg-white shadow-lg text-base font-light flex flex-col gap-4">
     <div class="flex flex-col justify-between gap-4">
       <h2 class="text-xl">${title}</h2>
       <p class="">${desc}</p>
       <div class="flex flex-row gap-2">${tags}</div>
-      <div class="flex flex-row flex-wrap gap-4">${media}</div>
+      <div class="flex flex-row overflow-scroll gap-4">${media}</div>
     </div>
     <hr>
     <div class="flex flex-col gap-4">

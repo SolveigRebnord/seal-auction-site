@@ -9,7 +9,6 @@ dayjs.extend(relativeTime);
 const feed = document.getElementById("feed");
 const profileName = document.getElementById("profile_name");
 const filterBtn = document.getElementById("select_filter");
-const logOutBtn = document.getElementById("log_out");
 const searchBtn = document.getElementById("search_btn");
 const searchInput = document.getElementById("search_input");
 const newListingLi = document.getElementById("newlisting_li");
@@ -38,15 +37,7 @@ function checkAccess(key) {
 
 checkAccess(getToken());
 
-logOutBtn.addEventListener("click", () => {
-  let doubleCheck = confirm("Are you sure?");
-  if (doubleCheck == false) {
-    return;
-  } else {
-    clearStorage();
-    window.location.reload();
-  }
-});
+
 
 searchBtn.addEventListener("click", () => {
   searchInput.classList.toggle("hidden");
@@ -350,8 +341,8 @@ function listLis(data) {
       }
     }
 
-    oneLi = `<a href="listing.html?id=${id}" class="w-full font-quickS font-light text-xs  max-w-xxs">
-                <div class="h-96 w-full relative rounded-lg bg-cover bg-center flex flex-col justify-end" style="background-image: url('${media}')">
+    oneLi = `<a href="listing.html?id=${id}" class="w-full font-quickS font-light text-xs max-w-xxs md:max-w-xxsM lg:max-w-xxs">
+                <div class="h-listingH w-full relative rounded-lg bg-cover bg-center flex flex-col justify-end" style="background-image: url('${media}')">
                   <div class="w-full h-32 max-h-32 flex items-end">
                     <div class="w-full bg-white flex flex-col shadow-lg rounded-b-lg p-4 gap-4">
                       <h2 class="text-base max-h-6 font-extralight font-sans tracking-wide overflow-hidden">${title}</h2>
