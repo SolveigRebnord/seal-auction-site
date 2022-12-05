@@ -48,7 +48,7 @@ class="flex flex-row align-middle justify-between px-12 py-4 pb-6 fixed bottom-0
 <a href="newlisting.html">
   <li class="p-2">
     <img
-      class="w-6 h-6"
+      class="w-7 h-7"
       src="/icon_newlisting_blue.png"
       alt="New post icon" />
   </li>
