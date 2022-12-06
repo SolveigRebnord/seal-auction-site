@@ -54,7 +54,7 @@ async function getLis() {
 
     if (response.ok) {
       listListing(data);
-      console.log(data)
+      console.log(data);
     } else {
       console.log("error", data);
     }
@@ -127,8 +127,7 @@ function listListing(lis) {
     for (let tag of lis.tags) {
       if (tag == "") {
         oneTag = "";
-      }
-      else {
+      } else {
         oneTag = `<p class="px-2 py-1 rounded-sm bg-blue w-fit h-fit text-white">${tag}</p>`;
       }
       tags += oneTag;
@@ -208,7 +207,6 @@ function listListing(lis) {
   listOutput.innerHTML = listing;
 
   let theBid = document.getElementById("bid");
- 
 
   theBid.param = lastItem;
 
@@ -233,8 +231,6 @@ function listListing(lis) {
   }
   setInterval(checkTime, 1000);
 }
-
-
 
 function makeBid(e) {
   let lastAmount;
@@ -267,10 +263,8 @@ async function myCredits(lastAmount) {
   }
 }
 
-
 function bidBox(data, number) {
-
-  let bidOverlay = document.querySelector(".bid_overlay")
+  let bidOverlay = document.querySelector(".bid_overlay");
   bidOverlay.classList.toggle("hidden");
   let wallet = data.credits;
 
@@ -286,9 +280,8 @@ function bidBox(data, number) {
   </div>`;
 
   let bidReq = document.getElementById("request-bid");
-  let bidValueInput = document.getElementById("myBid")
+  let bidValueInput = document.getElementById("myBid");
   bidReq.addEventListener("click", checkBid);
-
 
   function checkBid() {
     let wantedBid = bidValueInput.value;

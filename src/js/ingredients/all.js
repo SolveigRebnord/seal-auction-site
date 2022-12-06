@@ -5,7 +5,6 @@ const mobileHeader = document.getElementById("header");
 const mobileNav = document.getElementById("mobile_nav");
 const bigScreenNav = document.getElementById("bigScreen_nav");
 
-
 mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 md:p-8 gap-4">
 <div class="flex flex-row items-center justify-between">
   <a href="index.html"
@@ -28,7 +27,7 @@ mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 
       type="text"
       name="search_input"
       id="search_input"
-      class="hidden border-b border-gray-400 h-6 w-80 px-4 outline-none bg-transparent text-sm pb-1"
+      class="hidden border-b border-gray-400 h-6 w-80 px-4 outline-none bg-transparent text-sm pb-1 appearance-none"
       placeholder="What are you looking for?" />
     <img
       src="/icon_search.svg"
@@ -94,7 +93,6 @@ class="flex flex-col pt-20 justify-start text-center items-center gap-20 py-6 fi
 const currentURL = window.location.toString();
 const logOutBtn = document.getElementById("log_out");
 
-
 if (currentURL.includes("index")) {
   const listingsLI = document.getElementById("listings_li");
 
@@ -113,7 +111,7 @@ if (currentURL.includes("id")) {
   listingsLI.classList.add(
     "bg-white",
     "text-blue",
-    "py-10",    
+    "py-10",
     "px-6",
     "shadow-xl"
   );

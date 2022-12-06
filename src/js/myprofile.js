@@ -17,9 +17,7 @@ const editImgOverlay = document.getElementById("edit_img_overlay");
 const myListings = document.getElementById("my_listings_div");
 const editListingOverlay = document.getElementById("edit_listing_overlay");
 
-
 profileName.innerHTML = getUsername();
-
 async function myProfile() {
   try {
     const response = await fetch(
@@ -190,8 +188,7 @@ function editImg(e) {
 
   function showImg() {
     let imgValue = imgInput.value;
-    imgPrew.innerHTML = 
-    `<img class="w-32 h-32 object-cover rounded-md outline outline-1 outline-blue outline-offset-2" src='${imgValue}'>
+    imgPrew.innerHTML = `<img class="w-32 h-32 object-cover rounded-md outline outline-1 outline-blue outline-offset-2" src='${imgValue}'>
     <div class="flex flex-row justify-between gap-6 mt-8">
       <button class="clean-button flex flex-row items-center gap-2 rounded-sm shadow-md" id="reject_img_btn"><img class="w-4" src="/x_blue.png">Discard image</button>
       <button class="clean-button flex flex-row items-center gap-2 bg-blue text-white rounded-sm shadow-md" id="approve_img_btn"><img class="w-4" src="/check_white.png">Replace</button>
@@ -286,11 +283,10 @@ function showListings(array) {
     if (lis.bids) {
       amountOfBids = lis.bids.length;
 
-
       bidNumber = `<span class="text-xl">${amountOfBids}</span> bids`;
 
       if (amountOfBids == 1) {
-        bidNumber = `${amountOfBids} bid`
+        bidNumber = `${amountOfBids} bid`;
       }
 
       for (let bid of lis.bids) {
@@ -381,12 +377,15 @@ async function allLis() {
   activeBidsBtn.classList.add("active-button");
 
   try {
-    const response = await fetch(`${ALL_LIS_URL}?_seller=true&_bids=true&sort=created`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    });
+    const response = await fetch(
+      `${ALL_LIS_URL}?_seller=true&_bids=true&sort=created`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      }
+    );
 
     const data = await response.json();
 
@@ -405,7 +404,7 @@ async function allLis() {
               //let last = listing.bids.pop();
               //console.log(last);
               //if (last["bidderName"] == getUsername()) {
-                activeLisArr.push(listing);
+              activeLisArr.push(listing);
               //}
             }
           }
@@ -440,7 +439,7 @@ function showActiveBids(array) {
 
   for (let lis of array) {
     title = lis.title;
-    
+
     if (lis.endsAt) {
       let endingTime = new Date(lis.endsAt).getTime();
       let now = dayjs();
@@ -460,7 +459,6 @@ function showActiveBids(array) {
     if (lis.media) {
       img = lis.media[0];
     }
-
 
     if (lis.bids !== "") {
       let oneBid;
@@ -484,15 +482,12 @@ function showActiveBids(array) {
         allBids.push(oneBid);
 
         newarr = allBids.join(" ");
-
-
       }
     }
 
     id = lis.id;
 
-    oneListing = 
-    `<a href="listing.html?id=${id}" class="hover:drop-shadow-lg transition duration-800 ease-in-out hover:after:bg-white after:opacity-20">
+    oneListing = `<a href="listing.html?id=${id}" class="hover:drop-shadow-lg transition duration-800 ease-in-out hover:after:bg-white after:opacity-20">
     <div class="w-full rounded-md bg-white shadow-lg text-right font-light font-robotoC flex flex-row">
   
     <div class="w-1/2 md:w-1/2 rounded-l-lg bg-cover bg-center" style="background-image: url('${img}')"></div>
@@ -547,11 +542,10 @@ function allMyListings(array) {
     if (lis.bids) {
       amountOfBids = lis.bids.length;
 
-
       bidNumber = `<span class="text-xl">${amountOfBids}</span> bids`;
 
       if (amountOfBids == 1) {
-        bidNumber = `${amountOfBids} bid`
+        bidNumber = `${amountOfBids} bid`;
       }
 
       for (let bid of lis.bids) {
@@ -642,18 +636,17 @@ function allMyListings(array) {
 
 function editListing(id, title, desc, tags, media) {
   editListingOverlay.classList.toggle("hidden");
-  editListingOverlay.scrollIntoView()
+  editListingOverlay.scrollIntoView();
 
-  function leaveEdit () {
+  function leaveEdit() {
     if (editListingOverlay.classList.contains("hidden")) {
       let doubleCheck = confirm("You sure? Your edits will be lost");
       if (doubleCheck == true) {
         return;
       }
-    };
+    }
   }
   leaveEdit();
-
 
   editListingOverlay.innerHTML = `
   <form
@@ -694,7 +687,7 @@ function editListing(id, title, desc, tags, media) {
       <span id="img_error_message" class="hidden m-auto w-fit">Insert a image url!</span>
       <button class="addImg clean-button w-28 text-sm ml-auto -mt-6">Add image</button>
     </div>
-  </div>
+  </div>  
   <ul
   class="flex flex-row flex-wrap gap-4 justify-center"
   id="prew_img"></ul>
@@ -753,7 +746,7 @@ function editListing(id, title, desc, tags, media) {
       let imgURL = media_input.value;
       if (media_input.value == "") {
         document.getElementById("img_error_message").classList.toggle("hidden");
-        return
+        return;
       }
       media.push(imgURL);
       media_input.value = "";
@@ -799,7 +792,6 @@ function editListing(id, title, desc, tags, media) {
       editBody(id, titleValue, descValue, tags, media);
     });
   }
-
 }
 
 function editBody(id, title, desc, tags, media) {
@@ -830,7 +822,6 @@ async function requestEdit(id, body) {
     const data = await response.json();
 
     if (response.ok) {
-
       window.location.reload();
     } else {
       console.log("oh no" + data);

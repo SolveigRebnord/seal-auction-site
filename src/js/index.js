@@ -1,6 +1,6 @@
 import { ALL_LIS_URL } from "./ingredients/endpoints";
 import dayjs from "dayjs";
-import { getUsername, clearStorage, getToken } from "./ingredients/storage";
+import { getUsername, getToken } from "./ingredients/storage";
 
 import relativeTime from "dayjs/plugin/relativeTime";
 
@@ -18,9 +18,9 @@ const limitedAccessBanner = document.getElementById("limited_access_banner");
 
 function deactivateNav() {
   myProfileLi.href = "javascript:void(0)";
-  myProfileLi.classList.add("disabled-link");
+  myProfileLi.classList.add("disabled-link", "cursor-auto");
   newListingLi.href = "javascript:void(0)";
-  newListingLi.classList.add("disabled-link");
+  newListingLi.classList.add("disabled-link", "cursor-auto");
 }
 
 function checkAccess(key) {
@@ -35,8 +35,6 @@ function checkAccess(key) {
 }
 
 checkAccess(getToken());
-
-
 
 searchBtn.addEventListener("click", () => {
   searchInput.classList.toggle("hidden");
