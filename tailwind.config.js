@@ -20,11 +20,10 @@ module.exports = {
         fjalla: "Fjalla One",
       },
       maxWidth: {
-        xxs: "300px",
-        xxsM: "270px"
+        xxs: "270px"
       },
       height: {
-        'listingH': '380px',
+        'listingH': '340px',
       },
       ringWidth: {
         10: "10px",

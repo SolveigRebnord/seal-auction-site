@@ -28,7 +28,6 @@ function checkAccess(key) {
     profileName.innerHTML = getUsername();
   } else {
     deactivateNav();
-    logOutBtn.classList.add("hidden");
     profileName.innerHTML = "Log in for full access";
     headerProfileIcon.href = "login.html";
     limitedAccessBanner.classList.remove("hidden");
@@ -341,7 +340,7 @@ function listLis(data) {
       }
     }
 
-    oneLi = `<a href="listing.html?id=${id}" class="w-full font-quickS font-light text-xs max-w-xxs md:max-w-xxsM lg:max-w-xxs">
+    oneLi = `<a href="listing.html?id=${id}" class="w-full font-quickS font-light text-xs max-w-xxs">
                 <div class="h-listingH w-full relative rounded-lg bg-cover bg-center flex flex-col justify-end" style="background-image: url('${media}')">
                   <div class="w-full h-32 max-h-32 flex items-end">
                     <div class="w-full bg-white flex flex-col shadow-lg rounded-b-lg p-4 gap-4">

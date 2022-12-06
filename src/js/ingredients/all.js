@@ -9,7 +9,7 @@ const bigScreenNav = document.getElementById("bigScreen_nav");
 mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 md:p-8 gap-4">
 <div class="flex flex-row items-center justify-between">
   <a href="index.html"
-    ><img class="w-16" src="/small_logo.svg" alt="Logo home"
+    ><img class="w-10 ml-2 mt-2" src="/seal_logo_black.svg" alt="Logo home"
   /></a>
   <a
     href="myprofile.html"
@@ -17,8 +17,8 @@ mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 
     class="hover:cursor-pointer">
     <div
       class="flex flex-row items-center gap-4 font-robotoC tracking-wide">
-      <p class="font-quickS text-xs lg:text-base" id="profile_name"></p>
-      <img class="w-6 lg:w-8" src="/profile.png" alt="Profile icon" />
+      <p class="font-quickS text-xs lg:text-sm" id="profile_name"></p>
+      <img class="w-6" src="/profile.png" alt="Profile icon" />
     </div>
   </a>
 </div>
@@ -34,7 +34,7 @@ mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 
       src="/icon_search.svg"
       id="search_btn"
       alt="Search icon"
-      class="hover:cursor-pointer lg:w-7" />
+      class="hover:cursor-pointer" />
   </div>
 </div>
 </section>
@@ -73,7 +73,7 @@ bigScreenNav.innerHTML = `  <ul
 class="flex flex-col pt-20 justify-start text-center items-center gap-20 py-6 fixed top-0 left-0 h-full text-base tracking-wider text-white font-fjalla bg-blue uppercase md:w-40 lg:w-44">
 <a href="index.html">
   <li class="pl-2 pb-10">
-    <img class="w-20" src="/seal.svg" alt="" />
+    <img class="w-18" src="/seal_logo_white.svg" alt="" />
   </li>
 </a>
 <a href="index.html" class="w-full text-center">

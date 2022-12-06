@@ -9,7 +9,6 @@ const searchBtn = document.getElementById("search_btn");
 const searchInput = document.getElementById("search_input");
 const profileName = document.getElementById("profile_name");
 const listOutput = document.getElementById("list_listing");
-const bidOverlay = document.getElementById("bid_overlay");
 const limitedAccessBanner = document.getElementById("limited_access_banner");
 
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -55,6 +54,7 @@ async function getLis() {
 
     if (response.ok) {
       listListing(data);
+      console.log(data)
     } else {
       console.log("error", data);
     }
@@ -68,7 +68,7 @@ function listListing(lis) {
   let listing;
   let title;
   let desc;
-  let tags = [];
+  let tags = "";
   let media = [];
   let created;
   let endsAt;
@@ -107,12 +107,32 @@ function listListing(lis) {
     }
   }
 
-  media = lis.media;
+  let oneImg;
+  for (let img of lis.media) {
+    oneImg = `<img class="rounded-lg w-fit max-w-sm object-cover" src=${img}>`;
+    media += oneImg;
+  }
   created = dayjs(lis.created).format("DD/MM/YYYY");
 
-  bids = lis.bids.length;
+  bids = `<p><span class="text-2xl">${lis.bids.length} </span> bids</p>`;
   if (lis.bids == "") {
-    bids = 0;
+    bids = `<p><span class="text-2xl">0 </span> bids</p>`;
+  }
+  if (lis.bids.length == 1) {
+    bids = `<p><span class="text-2xl">${lis.bids.length} </span> bid</p>`;
+  }
+
+  if (lis.tags) {
+    let oneTag;
+    for (let tag of lis.tags) {
+      if (tag == "") {
+        oneTag = "";
+      }
+      else {
+        oneTag = `<p class="px-2 py-1 rounded-sm bg-blue w-fit h-fit text-white">${tag}</p>`;
+      }
+      tags += oneTag;
+    }
   }
 
   if (lis.bids !== "") {
@@ -131,7 +151,7 @@ function listListing(lis) {
 
       oneBid = `<div class="flex flex-row justify-between items-center gap-2 bg-gray-100 text-gray-400 rounded-lg shadow-lg p-4 last-of-type:bg-white last-of-type:text-black last-of-type:outline-2 last-of-type:outline last-of-type:outline-blue">
                 <p>${bidderName}</p>
-                <p>${bid["amount"]}</p>
+                <p class="text-xl">${bid["amount"]} -,</p>
             </div>
             `;
       allBids.push(oneBid);
@@ -147,35 +167,48 @@ function listListing(lis) {
   id = lis.id;
 
   listing = `
-    <div class=" w-full p-4 rounded-md flex flex-col font-light font-robotoC gap-6 lg:w-1/2">
-      <div class="flex flex-row gap-4 items-center">
-        <img class="w-14 h-14 rounded-full" src="${sellerImg}">
-        <div class="flex flex-col">
-            <p class="text-normal font-fjalla">${seller}</p>
-            <p class="text-gray-500">${created}</p>
+    <div class="w-full p-4 rounded-md flex flex-col font-light font-robotoC gap-20 lg:w-2/3 lg:p-20  shadow-lg">
+   
+      <div class="flex flex-col gap-2 text-base lg:flex-row lg:gap-8">
+        <div class="lg:w-1/2 flex flex-col gap-6">
+          <div class="flex flex-row gap-4 items-center">
+            <img class="w-14 h-14 lg:w-20 lg:h-20 object-cover rounded-full" src="${sellerImg}">
+            <div class="flex flex-col gap-1">
+              <p class="text-normal font-fjalla">${seller}</p>
+              <p class="text-gray-500">${created}</p>
+            </div>
+          </div>
+          <div class="flex flex-col gap-6">
+            <p class="font-quickS text-2xl font-normal">${title}</p>
+            <p class="max-w-xs whitespace-normal">${desc}</p>
+            <div class="flex flex-row gap-4">${tags}</div>
+          </div>
         </div>
-      </div>
-      <div class="flex flex-col gap-2 text-sm">
-        <p class="font-quickS text-2xl font-normal">${title}</p>
-        <p>${desc}</p>
-        <p>${bids} bids</p>
-        <img class="w-full max-h-96 object-cover rounded-xl shadow-lg" src="${media}">
-      </div>
-      <div class="flex flex-row items-baseline justify-between">
-        <p>Ends in</p>
-        <p id="time"></p>
-      </div>
-      <div class="flex flex-col gap-4">
-        ${newarr}
-      </div>
-      <div class="flex justify-center">
-        <button class="bid bg-blue rounded-md w-1/2 py-4 text-white hover:cursor-pointer" id="bid">Make a bid</button>
-      </div>
+        <div class="flex flex-row overflow-scroll gap-4 lg:h-80 lg:w-1/2 outline outline-1 outline-blue rounded-lg outline-offset-4">${media}</div>
+        </div>
+      <section class="lg:w-1/2 m-auto flex flex-col gap-6 p-12 shadow-md">
+        <div class="flex flex-row items-baseline justify-between">
+          <p>Ends in</p>
+          <p class="text-xl" id="time"></p>
+        </div>
+        <hr>
+        <div class="w-full text-center">
+          ${bids}
+        </div>
+        <div class="flex flex-col gap-4">
+          ${newarr}
+        </div>
+        <div class="flex justify-center">
+          <button class="bid bg-blue shadow-md rounded-md w-1/2 mt-8 py-4 text-sm text-white hover:cursor-pointer" id="bid">Make a bid</button>
+        </div>
+        <div class="hidden bid_overlay"></div>
+      </section>
     </div>
     `;
   listOutput.innerHTML = listing;
 
   let theBid = document.getElementById("bid");
+ 
 
   theBid.param = lastItem;
 
@@ -201,8 +234,9 @@ function listListing(lis) {
   setInterval(checkTime, 1000);
 }
 
+
+
 function makeBid(e) {
-  bidOverlay.classList.toggle("hidden");
   let lastAmount;
   let item = e.currentTarget.param;
   if (item.length == 0) {
@@ -233,21 +267,31 @@ async function myCredits(lastAmount) {
   }
 }
 
+
 function bidBox(data, number) {
+
+  let bidOverlay = document.querySelector(".bid_overlay")
+  bidOverlay.classList.toggle("hidden");
   let wallet = data.credits;
 
-  bidOverlay.innerHTML = `<div>
-    <p>Your credits: ${wallet}</p>
-    <p>Min. bid: ${number}</p>
-    <input type="number" id="myBid">
-    <button id="request-bid">Bid</button>
+  bidOverlay.innerHTML = `<div class="flex flex-col gap-8 pt-6">
+    <div class="flex flex-row justify-between">
+      <p>Minimum bid: <span class="text-xl">${number} -,</span></p>
+      <p class="flex flex-row justify-between items-center gap-2 text-xl">${wallet}<img class="h-4" src="/coins.png"></p>
+    </div> 
+    <div class="w-fit m-auto flex flex-row gap-4 items-center">
+      <input required class="h-12 w-24 shadow-md p-2 rounded-md" type="number" id="myBid">
+      <button class="px-3 py-2 border h-fit text-darkerBlue border-darkerBlue rounded-md  font-cool" id="request-bid">Bid</button>
+    </div>
   </div>`;
 
   let bidReq = document.getElementById("request-bid");
+  let bidValueInput = document.getElementById("myBid")
   bidReq.addEventListener("click", checkBid);
 
+
   function checkBid() {
-    let wantedBid = myBid.value;
+    let wantedBid = bidValueInput.value;
 
     if (wantedBid > number) {
       let bidBody = {
@@ -302,7 +346,7 @@ async function sendBid(body) {
     const data = await response.json();
 
     if (response.ok) {
-      bidOverlay.innerHTML = "";
+      document.querySelector(".bid_overlay").innerHTML = "";
       getLis();
     } else {
       console.log("error", data);
