@@ -104,8 +104,8 @@ const logOutBtn = document.getElementById("log_out");
 
 logOutBtn.addEventListener("click", (e) => {
   let doubleCheck = confirm("Leaving already? :-(");
-  if (doubleCheck == false) {
-    return;
+  if (doubleCheck === false) {
+    return 0 ;
   } else {
     clearStorage();
     window.location.reload();
