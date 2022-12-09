@@ -1,5 +1,7 @@
 import "../../style.css";
-import { clearStorage } from "./storage";
+import { clearStorage, getStoredData } from "./storage";
+import { ALL_PROFILES_URL } from "./endpoints";
+import { getUsername, getToken,  } from "./storage";
 
 const mobileHeader = document.getElementById("header");
 const mobileNav = document.getElementById("mobile_nav");
@@ -9,6 +11,9 @@ mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 
 <div class="flex flex-row items-center justify-between">
   <a href="index.html"
     ><img class="w-10 ml-2 mt-2" src="/seal_logo_black.svg" alt="Logo home"
+  /></a>
+  <a href="" id="notification_icon"
+  ><img class="w-10 ml-2 mt-2" src="/coins.png" alt="Logo home"
   /></a>
   <a
     href="myprofile.html"
@@ -22,7 +27,7 @@ mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 
   </a>
 </div>
 <div class="flex flex-row justify-end">
-  <div class="flex flex-row gap-4 items-center">
+  <div class="flex flex-row gap-4 items-center relative">
     <input
       type="text"
       name="search_input"
@@ -34,6 +39,9 @@ mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 
       id="search_btn"
       alt="Search icon"
       class="hover:cursor-pointer" />
+    <ul
+      id="showSearch"
+      class="absolute h-96 overflow-scroll top-8 right-0 z-20 flex-col hidden gap-1 text-black"></ul>
   </div>
 </div>
 </section>
@@ -68,8 +76,8 @@ class="flex flex-row align-middle justify-between px-12 py-4 pb-6 fixed bottom-0
 </ul>
 `;
 
-bigScreenNav.innerHTML = `  <ul
-class="flex flex-col pt-20 justify-start text-center items-center gap-20 py-6 fixed top-0 left-0 h-full text-base tracking-wider text-white font-fjalla bg-blue uppercase md:w-40 lg:w-44">
+bigScreenNav.innerHTML = 
+`<ul class="flex flex-col pt-20 justify-start text-center items-center gap-20 py-6 fixed top-0 left-0 h-full text-base tracking-wider text-white font-fjalla bg-blue uppercase md:w-40 lg:w-44">
 <a href="index.html">
   <li class="pl-2 pb-10">
     <img class="w-18" src="/seal_logo_white.svg" alt="" />
@@ -92,6 +100,18 @@ class="flex flex-col pt-20 justify-start text-center items-center gap-20 py-6 fi
 
 const currentURL = window.location.toString();
 const logOutBtn = document.getElementById("log_out");
+
+
+logOutBtn.addEventListener("click", (e) => {
+  let doubleCheck = confirm("Leaving already? :-(");
+  if (doubleCheck == false) {
+    return;
+  } else {
+    clearStorage();
+    window.location.reload();
+  }
+});
+
 
 if (currentURL.includes("index")) {
   const listingsLI = document.getElementById("listings_li");
@@ -141,12 +161,50 @@ if (currentURL.includes("newlisting")) {
   );
 }
 
-logOutBtn.addEventListener("click", () => {
-  let doubleCheck = confirm("Leaving already? :-(");
-  if (doubleCheck == false) {
-    return;
-  } else {
-    clearStorage();
-    window.location.reload();
+
+
+async function getMyLis() {
+  try {
+    const response = await fetch(
+      `${ALL_PROFILES_URL}/${getUsername()}?_listings=true`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    );
+    const data = await response.json();
+    if (response.ok) {
+      console.log(data)
+      let newArray = [];
+      for (let listing of data.listings) {
+        newArray.push(listing.id)
+      }
+      let savedArray = getStoredData("wins"); //Will have wins, but is listings now, as this is something I could change quickly when testing
+
+      let savedNewArray = [];
+      for (let lis of savedArray) {
+        savedNewArray.push(lis.id)
+      }
+      let missingItem = newArray.filter(u => !savedNewArray.includes(u));
+      notify(missingItem)
+      // Add this item to the saved array in locale storage, but then see comment on notify()
+
+    } else {
+      console.log("error", data);
+    }
+  } catch (error) {
+    console.log(error);
   }
-});
+}
+
+getMyLis()
+
+function notify(id) {
+    const notifyIcon = document.getElementById("notification_icon")
+    notifyIcon.classList.add("after:content-['*']", "after:bg-red-500")
+    // Would have a html element or link insted of this, but example of something visible
+    //Need to figure out code that would make it stay until it is clicked once, so it doesnt disappear when the page is reloaded, and the array element has been saved
+}

@@ -1,7 +1,6 @@
 import "../style.css";
-
-import { LOG_IN_URL } from "./ingredients/endpoints";
-import { saveToken, saveUser } from "./ingredients/storage";
+import { LOG_IN_URL, ALL_PROFILES_URL } from "./ingredients/endpoints";
+import { saveToken, saveUser, saveToStorage, getUsername, getToken } from "./ingredients/storage";
 
 const logInForm = document.getElementById("login-form");
 const emailInput = document.getElementById("email");
@@ -65,20 +64,60 @@ function logIn(event) {
         });
         const data = await response.json();
         if (response.ok) {
-          console.log("success log in");
           accessToken = data.accessToken;
           username = data.name;
           saveToken(accessToken);
           saveUser(username);
+
+          async function getMyLis() {
+            try {
+              const response = await fetch(
+                `${ALL_PROFILES_URL}/${getUsername()}?_listings=true`,
+                {
+                  method: "GET",
+                  headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                    "Content-type": "application/json; charset=UTF-8",
+                  },
+                }
+              );
+              const data = await response.json();
+              if (response.ok) {
+                console.log(data)
+                getWins(data.listings)
+              } else {
+                console.log("error", data);
+              }
+            } catch (error) {
+              console.log(error);
+            }
+          }
+          
+          getMyLis()
+          
+          const myWins = [];
+          function getWins(array) {
+            for (let win of array) {
+              myWins.push(win);
+            }
+          
+            saveToStorage("wins", myWins)
+          
+            console.log(myWins)
+            return myWins;
+          }
+          
+
+
           window.location.replace("/index.html");
         } else {
           console.log("error", data);
-
           errorMessage.classList.replace("invisible", "visible");
-          errorMessage.innerHTML = `<div class="flex flex-col justify-center items-center">
-          <img src="/warning.png" class="w-6">
-          <p>No combination found</p>
-          <p>Try again or head to sign up</p>
+          errorMessage.innerHTML = 
+          `<div class="flex flex-col justify-center items-center">
+            <img src="/warning.png" class="w-6">
+            <p>No combination found</p>
+            <p>Try again or head to sign up</p>
           </div>`;
         }
       } catch (error) {

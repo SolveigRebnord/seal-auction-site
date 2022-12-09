@@ -1,5 +1,4 @@
 import "../style.css";
-
 import { SIGN_UP_URL } from "./ingredients/endpoints";
 
 const signUpForm = document.getElementById("sign-up-form");
@@ -11,9 +10,7 @@ const signUpButton = document.getElementById("sign-up-button");
 const usernameMessage = document.getElementById("username-message");
 const emailMessage = document.getElementById("email-message");
 const passwordMessage = document.getElementById("password-message");
-const confirmPasswordMessage = document.getElementById(
-  "confirm-password-message"
-);
+const confirmPasswordMessage = document.getElementById("confirm-password-message");
 const errorMessage = document.getElementById("error-message");
 
 signUpForm.addEventListener("submit", function (event) {
@@ -133,7 +130,6 @@ function signUp(e) {
     validForm = true;
   } else {
     validForm = false;
-    console.log("Not valid form");
   }
 
   const signUpBody = {
@@ -162,7 +158,6 @@ async function register(body) {
     const data = await response.json();
 
     if (response.ok) {
-      console.log("success");
       window.location.replace("/index.html");
     } else {
       console.log("error", data);
