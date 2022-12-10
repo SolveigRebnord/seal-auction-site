@@ -1,6 +1,7 @@
 import "../style.css";
 import { LOG_IN_URL, ALL_PROFILES_URL } from "./ingredients/endpoints";
 import { saveToken, saveUser, saveToStorage, getUsername, getToken } from "./ingredients/storage";
+import {toaster} from "./ingredients/components";
 
 const logInForm = document.getElementById("login-form");
 const emailInput = document.getElementById("email");
@@ -68,7 +69,7 @@ function logIn(event) {
           username = data.name;
           saveToken(accessToken);
           saveUser(username);
-
+          toaster("success", "Successfully logged in", "Enjoy");
           async function getMyLis() {
             try {
               const response = await fetch(
@@ -106,10 +107,11 @@ function logIn(event) {
             console.log(myWins)
             return myWins;
           }
-          
 
-
-          window.location.replace("/index.html");
+          // redirect to google after 5 seconds.
+          window.setTimeout(function () {
+            window.location.replace("/index.html");
+          }, 5000);
         } else {
           console.log("error", data);
           errorMessage.classList.replace("invisible", "visible");
