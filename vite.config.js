@@ -11,7 +11,7 @@ export default {
         logIn: path.resolve(__dirname, "src/login.html"),
         myProfile: path.resolve(__dirname, "src/myprofile.html"),
         newListing: path.resolve(__dirname, "src/newlisting.html"),
-        profile: path.resolve(__dirname, "src/profile.html"),
+        activity: path.resolve(__dirname, "src/notifications.html"),
         signUp: path.resolve(__dirname, "src/signup.html"),
       },
     },

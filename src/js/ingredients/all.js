@@ -1,30 +1,32 @@
 import "../../style.css";
-import { clearStorage, getStoredData } from "./storage";
+import { clearStorage, getStoredData, saveToStorage } from "./storage";
 import { ALL_PROFILES_URL } from "./endpoints";
 import { getUsername, getToken,  } from "./storage";
+import { toaster } from "./components";
 
 const mobileHeader = document.getElementById("header");
 const mobileNav = document.getElementById("mobile_nav");
 const bigScreenNav = document.getElementById("bigScreen_nav");
+
+
+
+
 
 mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 md:p-8 gap-4">
 <div class="flex flex-row items-center justify-between">
   <a href="index.html"
     ><img class="w-10 ml-2 mt-2" src="/seal_logo_black.svg" alt="Logo home"
   /></a>
-  <a href="" id="notification_icon"
-  ><img class="w-10 ml-2 mt-2" src="/coins.png" alt="Logo home"
-  /></a>
-  <a
-    href="myprofile.html"
-    id="header_profile"
-    class="hover:cursor-pointer">
-    <div
-      class="flex flex-row items-center gap-4 font-robotoC tracking-wide">
-      <p class="font-quickS text-xs lg:text-sm" id="profile_name"></p>
-      <img class="w-6" src="/profile.png" alt="Profile icon" />
-    </div>
-  </a>
+    <a
+      href="myprofile.html"
+      id="header_profile"
+      class="hover:cursor-pointer">
+      <div
+        class="flex flex-row items-center gap-4 font-robotoC tracking-wide">
+        <p class="font-quickS text-xs lg:text-sm" id="profile_name"></p>
+        <img class="w-6" src="/profile.png" alt="Profile icon" />
+      </div>
+    </a>
 </div>
 <div class="flex flex-row justify-end">
   <div class="flex flex-row gap-4 items-center relative">
@@ -76,12 +78,18 @@ class="flex flex-row align-middle justify-between px-12 py-4 pb-6 fixed bottom-0
 </ul>
 `;
 
+// <div id="notification_list" class="hidden absolute bg-blue h-32 w-32 -right-12">
 bigScreenNav.innerHTML = 
 `<ul class="flex flex-col pt-20 justify-start text-center items-center gap-20 py-6 fixed top-0 left-0 h-full text-base tracking-wider text-white font-fjalla bg-blue uppercase md:w-40 lg:w-44">
 <a href="index.html">
   <li class="pl-2 pb-10">
     <img class="w-18" src="/seal_logo_white.svg" alt="" />
   </li>
+</a>
+<a href="notifications.html" class="relative" id="notification_icon">
+  <li id="notify_li" class="w-full text-center">
+    <img class="w-8 h-8" src="/bell.png" alt="Notification bell">
+   </li>
 </a>
 <a href="index.html" class="w-full text-center">
   <li id="listings_li" class="w-full">Listings</li>
@@ -100,6 +108,10 @@ bigScreenNav.innerHTML =
 
 const currentURL = window.location.toString();
 const logOutBtn = document.getElementById("log_out");
+const profileName = document.getElementById("profile_name");
+
+
+profileName.innerHTML = getUsername();
 
 
 logOutBtn.addEventListener("click", (e) => {
@@ -161,9 +173,21 @@ if (currentURL.includes("newlisting")) {
   );
 }
 
+if (currentURL.includes("notifications")) {
+  const notifyLI = document.getElementById("notify_li");
+
+  notifyLI.classList.add(
+
+    "py-10",
+    "px-6",
+    "shadow-xl"
+  );
+}
 
 
-async function getMyLis() {
+
+
+async function checkListings() {
   try {
     const response = await fetch(
       `${ALL_PROFILES_URL}/${getUsername()}?_listings=true`,
@@ -182,15 +206,22 @@ async function getMyLis() {
       for (let listing of data.listings) {
         newArray.push(listing.id)
       }
-      let savedArray = getStoredData("wins"); //Will have wins, but is listings now, as this is something I could change quickly when testing
+      let savedArray = getStoredData("wins");
 
       let savedNewArray = [];
       for (let lis of savedArray) {
         savedNewArray.push(lis.id)
       }
       let missingItem = newArray.filter(u => !savedNewArray.includes(u));
-      notify(missingItem)
-      // Add this item to the saved array in locale storage, but then see comment on notify()
+      console.log(missingItem)
+      if (missingItem.length !== 0) {
+        toaster("success", "You have a new listing", "Click to see more")
+        let notifyArray = getStoredData("allNotifies")
+        notifyArray.push(missingItem[0])
+        saveToStorage("allNotifies", notifyArray)
+        console.log(notifyArray)
+      }
+   
 
     } else {
       console.log("error", data);
@@ -200,11 +231,4 @@ async function getMyLis() {
   }
 }
 
-getMyLis()
-
-function notify(id) {
-    const notifyIcon = document.getElementById("notification_icon")
-    notifyIcon.classList.add("after:content-['*']", "after:bg-red-500")
-    // Would have a html element or link insted of this, but example of something visible
-    //Need to figure out code that would make it stay until it is clicked once, so it doesnt disappear when the page is reloaded, and the array element has been saved
-}
+checkListings()

@@ -108,6 +108,12 @@ function logIn(event) {
             return myWins;
           }
 
+          function makeNotificationList () {
+            let allNotifications = [];
+            saveToStorage("allNotifies", allNotifications)
+          }
+          makeNotificationList();
+
           // redirect to google after 5 seconds.
           window.setTimeout(function () {
             window.location.replace("/index.html");

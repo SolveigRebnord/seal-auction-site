@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import Tagify from "@yaireo/tagify";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { ALL_PROFILES_URL, ALL_LIS_URL } from "./ingredients/endpoints";
-import { getUsername, getToken } from "./ingredients/storage";
+import { getUsername, getToken, getStoredData } from "./ingredients/storage";
 
 const profileInfo = document.getElementById("profile_info");
 const profileName = document.getElementById("profile_name");
@@ -129,17 +129,23 @@ function listProfile(data) {
   myProfile = 
   `<section class="h-fit w-full rounded-md font-light font-quickS md:flex md:flex-col justify-between items-center md:px-6 lg:flex-col lg:w-fit">
       <div class="flex flex-col gap-4 justify-center items-center md:w-1/2">
-        <div class="w-2/3 md:w-full h-60 lg:w-72 lg:h-72 rounded-xl shadow-xl bg-cover flex justify-end items-end p-4" style="background-image: url('${profileImg}')">
+        <div class="w-2/3 md:w-full h-60 lg:w-64 lg:h-64 rounded-xl shadow-xl bg-cover flex justify-end items-end p-4" style="background-image: url('${profileImg}')">
           <button id="edit_img_btn"><img class="w-6 outline outline-1 outline-white rounded-sm outline-offset-1 hover:outline-2 transition-all ease-in-out duration-100 hover:scale-105" src="/edit_img.png"></button>
         </div>
         <h1 class="font-fjalla tracking-wide text-4xl">${name}</h1>
         <p class="text-sm">${email}</p>
       </div>
-      <div class="flex flex-col items-center md:flex-row md:justify-evenly w-full lg:items-center lg:flex-col">
+      <div class="flex flex-col items-center md:flex-row md:justify-evenly w-full lg:items-center lg:flex-row">
         <p class="flex flex-row gap-3 py-6 text-lg items-center"><img class="w-6" src="/coins.png">${credits}</p>
         <p>${wins}</p>
         <p>${listings}</p>
       </div>
+      <section class="w-full">
+        <h3 class="text-xl font-semibold italic pl-2">activity</h3>
+        <div id="notification_list" class="h-80 w-full rounded-md shadow-lg"> 
+          <p>Hei</p>
+        </div>
+      </section>
     </section>`;
 
   profileInfo.innerHTML = myProfile;
@@ -147,6 +153,23 @@ function listProfile(data) {
   let editImgBtn = document.getElementById("edit_img_btn");
   editImgBtn.addEventListener("click", editImg);
   editImgBtn.param = profileImg;
+
+
+(function notify() {
+  let notiyDiv = document.getElementById("notification_list");
+
+  let array = getStoredData("allNotifies")
+  console.log(array)
+  let message = array;
+  
+  
+    //notifyIcon.classList.add("after:content-['!']", "after:bg-green-600", "after:rounded-full", "after:absolute", "after:top-0", "after:left-4", "after:w-4","after:h-4", "after:border", "after:border-white", "animate-bounce", "after:flex", "after:justify-center", "after:items-center", "after:text-white", "after:text-xs");
+
+
+    notiyDiv.innerHTML = message;
+  })();
+
+
 }
 
 document.addEventListener(
@@ -850,6 +873,19 @@ async function requestEdit(id, body) {
     console.log(error);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //Kode for eventuell lsiting av bids
