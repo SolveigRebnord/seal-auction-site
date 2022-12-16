@@ -2,6 +2,7 @@ import { ALL_LIS_URL } from "./ingredients/endpoints";
 import dayjs from "dayjs";
 import { getUsername, getToken } from "./ingredients/storage";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { searching, sendposts } from "./ingredients/components";
 
 dayjs.extend(relativeTime);
 
@@ -19,61 +20,7 @@ const showSearch = document.getElementById("showSearch");
 
 searchInput.addEventListener("keyup", searching);
 
-const theArr = [];
-function sendposts(posts) {
-  for (let post of posts) {
-    theArr.push(post);
-  }
-  return theArr;
-}
-
-function searching() {
-let input, filter, ul, one, txtValue, id ,img;
-input = searchInput;
-filter = input.value.toUpperCase();
-ul = theArr;
-let showList = [];
-
-for (let item of ul) {
-  one = item.title;
-  id = item.id;
-  img = item.media[0]
-  
-  txtValue = one;
-  if (txtValue.toUpperCase().indexOf(filter) > -1) {
-    let element = 
-    `<a href="post.html?id=${id}">
-      <li class="list-none bg-white p-2 w-full">
-        ${one}
-        <img class="w-24 h-24" src="${img}">
-      </li>
-    </a>`;
-
-    showList.push(element);
-    showSearch.classList.replace("hidden", "flex");
-    let newarr = showList.join(" ");
-    showSearch.innerHTML = newarr;
-  } else {
-    console.log("fail");
-  }
-}
-
-if (input.value == "") {
-  showSearch.innerHTML = "";
-  showSearch.classList.replace("flex", "hidden");
-}
-}
-searching()
-
-
-
-
-
-
-
-
-
-
+searching();
 
 function deactivateNav() {
   myProfileLi.href = "javascript:void(0)";
@@ -108,7 +55,7 @@ async function allLis() {
     );
     const data = await response.json();
     if (response.ok) {
-      sendposts(data)
+      sendposts(data);
       listLis(data);
     } else {
       console.log("error", data);
@@ -212,7 +159,6 @@ async function allLisActive() {
     );
     const data = await response.json();
     if (response.ok) {
-
       let activeListings = [];
 
       for (let lis of data) {
@@ -242,7 +188,6 @@ async function allLisBidded() {
     );
     const data = await response.json();
     if (response.ok) {
-
       let activeListings = [];
       let amountOfBids;
       let diffTime;
@@ -265,7 +210,6 @@ async function allLisBidded() {
 }
 
 function listLis(data) {
-
   feed.innerHTML = "";
 
   for (let lis of data) {
@@ -283,7 +227,7 @@ function listLis(data) {
     let bids = [];
     let amountOfBids;
     let bidder;
-  
+
     if (lis.title) {
       title = lis.title;
     }
@@ -343,11 +287,10 @@ function listLis(data) {
 
       for (let bid of lis.bids) {
         bidder = bid["bidderName"];
-        bids =
-          `<p class="flex text-2xl font-normal text-blue font-robotoC gap-2 flex-row items-center justify-end"><span class="text-xs">Current bid </span>${bid["amount"]} -,</p>`;
+        bids = `<p class="text-sm rounded-b-md h-10 flex justify-center items-center bids border-t border-blue">${bid["amount"]} -,</p>`;
       }
       if (amountOfBids == 0) {
-        bids = `<p class="flex text-base font-dosis text-blue gap-1 font-semibold flex-row items-center">- Be the first -</p>`;
+        bids = `<p class="bids border-t border-blue rounded-b-md h-10 flex justify-center items-center text-sm">Be nr. 1</p>`;
         bidder = "";
       }
     }
@@ -359,8 +302,7 @@ function listLis(data) {
       let days = Math.floor(diff / (1000 * 60 * 60 * 24));
       let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      let seconds = Math.floor((diff % (1000 * 60)) / 1000);
-      endsAt = `${days}d ${hours}h ${minutes}m ${seconds}s`; //enten få til at de går nedover, eller ta vekk sekunder
+      endsAt = `${days}d ${hours}h ${minutes}m`; //enten få til at de går nedover, eller ta vekk sekunder
 
       let nowTime = dayjs().isAfter(dayjs(lis.endsAt));
       if (nowTime == true) {
@@ -368,23 +310,52 @@ function listLis(data) {
       }
     }
 
-    oneLi = 
-    `<a href="listing.html?id=${id}" class="w-full font-quickS font-light text-xs max-w-xxs">
+    oneLi = `<a href="listing.html?id=${id}" class="w-full font-quickS font-light text-xs max-w-xs md:max-w-xxs hover:drop-shadow-lg">
       <div class="h-listingH w-full relative rounded-lg bg-cover bg-center flex flex-col justify-end" style="background-image: url('${media}')">
-        <div class="w-full h-32 max-h-32 flex items-end">
-          <div class="w-full bg-white flex flex-col shadow-lg rounded-b-lg p-4 gap-4">
-            <h2 class="text-base max-h-6 font-extralight font-sans tracking-wide overflow-hidden">${title}
+        <div class="w-full h-72 max-h-72 md:h-32 flex items-end">
+          <div class="w-full bg-white flex flex-col shadow-lg rounded-b-lg gap-2 pt-4">
+            <h2 class="text-base max-h-6 px-2 font-extralight font-sans tracking-wide overflow-hidden">${title}
             </h2>
-            <div class="flex flex-row justify-between items-center">
+            <div class="flex flex-row justify-between items-center px-2">
               <p class="text-xs text-blue flex flex-row gap-1">
                 <img class="h-4" src="/clock.png">${endsAt}
               </p>
-              ${bids}
             </div>
+            <span class="">${bids}</span>
           </div>
         </div>
       </div>  
     </a>`;
     feed.innerHTML += oneLi;
+  }
+
+  let spans = document.querySelectorAll(".bids");
+  for (let span of spans) {
+    let og = span.innerHTML;
+    span.addEventListener("mouseenter", (e) => {
+      e.preventDefault();
+      span.classList.add(
+        "bg-blue",
+        "text-white",
+        "uppercase",
+        "font-light",
+        "font-cuprum",
+        "tracking-widest"
+      );
+      span.innerHTML = "Make a bid";
+      span.addEventListener("mouseleave", (e) => {
+        e.preventDefault();
+        span.classList.remove(
+          "bg-blue",
+          "text-white",
+          "uppercase",
+          "font-light",
+          "font-cuprum",
+          "tracking-widest"
+        );
+
+        span.innerHTML = og;
+      });
+    });
   }
 }

@@ -2,6 +2,7 @@ import { ALL_LIS_URL, ALL_PROFILES_URL } from "./ingredients/endpoints.js";
 import dayjs from "dayjs";
 import { getToken, getUsername } from "./ingredients/storage.js";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { searching, sendposts } from "./ingredients/components";
 
 const newListingLi = document.getElementById("newlisting_li");
 const myProfileLi = document.getElementById("myprofile_li");
@@ -14,8 +15,6 @@ const limitedAccessBanner = document.getElementById("limited_access_banner");
 const queryString = window.location.search;
 const postId = new URLSearchParams(queryString).get("id");
 const ONE_LIS_URL = `${ALL_LIS_URL}/${postId}`;
-
-
 
 dayjs.extend(relativeTime);
 
@@ -93,8 +92,7 @@ function listListing(lis) {
     let days = Math.floor(diff / (1000 * 60 * 60 * 24));
     let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    let seconds = Math.floor((diff % (1000 * 60)) / 1000);
-    endsAt = `${days}d ${hours}h ${minutes}m ${seconds}s`; //enten få til at de går nedover, eller ta vekk sekunder
+    endsAt = `${days}d ${hours}h ${minutes}m`;
 
     let nowTime = dayjs().isAfter(dayjs(lis.endsAt));
     if (nowTime == true) {
@@ -104,7 +102,9 @@ function listListing(lis) {
 
   let oneImg;
   for (let img of lis.media) {
-    oneImg = `<img class="rounded-lg w-fit max-w-sm object-cover" src=${img}>`;
+    oneImg = `<li>
+      <img class="rounded-lg  object-cover" src=${img}>
+    </li>`;
     media += oneImg;
   }
 
@@ -144,8 +144,7 @@ function listListing(lis) {
         bidderName = "Me";
       }
 
-      oneBid = 
-      `<div class="flex flex-row justify-between items-center gap-2 bg-gray-100 text-gray-400 rounded-lg shadow-lg p-4 last-of-type:bg-white last-of-type:text-black last-of-type:outline-2 last-of-type:outline last-of-type:outline-blue">
+      oneBid = `<div class="flex flex-row justify-between items-center gap-2 bg-gray-100 text-gray-400 rounded-lg shadow-lg p-4 last-of-type:bg-white last-of-type:text-black last-of-type:outline-2 last-of-type:outline last-of-type:outline-blue">
         <p>${bidderName}</p>
         <p class="text-xl">${bid["amount"]} -,</p>
       </div>`;
@@ -162,9 +161,8 @@ function listListing(lis) {
 
   id = lis.id;
 
-  listing = 
-  `<div class="w-full p-4 rounded-md flex flex-col font-light font-robotoC gap-20 lg:w-2/3 lg:p-20 shadow-lg">
-    <div class="flex flex-col gap-2 text-base lg:flex-row lg:gap-8">
+  listing = `<div class="w-full p-4 rounded-md flex flex-col font-light font-robotoC md:mx-8 md:p-8 md:ml-48 gap-20 justify-center items-center  lg:p-14 shadow-lg">
+    <div class="w-full flex flex-col gap-2 text-base lg:flex-row lg:gap-20">
       <div class="lg:w-1/2 flex flex-col gap-6">
         <div class="flex flex-row gap-4 items-center">
           <img class="w-14 h-14 lg:w-20 lg:h-20 object-cover rounded-full" src="${sellerImg}">
@@ -180,18 +178,18 @@ function listListing(lis) {
           </div>
         </div>
       </div>
-      <div class="flex flex-row overflow-scroll gap-4 lg:h-80 lg:w-1/2 outline outline-1 outline-blue rounded-lg outline-offset-4">${media}</div>
+      <ul class="flex flex-row overflow-scroll m-auto w-full max-w-lg gap-4 lg:h-80 l:w-1/2 outline outline-1 outline-blue rounded-lg outline-offset-4">${media}</ul>
     </div>
-    <section class="lg:w-1/2 m-auto flex flex-col gap-6 p-12 shadow-md">
-      <div class="flex flex-row items-baseline justify-between">
+    <section class="lg:w-1/2 w-full  m-auto flex flex-col gap-6 p-6 shadow-md bg-white">
+      <div class="flex flex-col items-center justify-between gap-4">
         <p>Ends in</p>
-        <p class="text-xl" id="time"></p>
+        <p class="text-xl">${endsAt}</p>
       </div>
       <hr>
       <div class="w-full text-center">
         ${bids}
       </div>
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-4 md:w-1/2 m-auto">
         ${newarr}
       </div>
       <div class="flex justify-center">
@@ -222,13 +220,6 @@ function listListing(lis) {
     }
   }
   checkLogin(getToken());
-
-  let timing = document.getElementById("time");
-
-  function checkTime() {
-    timing.innerHTML = `${endsAt}`;
-  }
-  setInterval(checkTime, 1000);
 }
 
 function makeBid(e) {
@@ -266,32 +257,35 @@ function bidBox(data, number) {
   bidOverlay.classList.toggle("hidden");
   let wallet = data.credits;
 
-  bidOverlay.innerHTML = 
-  `<div class="flex flex-col gap-8 pt-6">
+  bidOverlay.innerHTML = `<div class="flex flex-col gap-8 pt-6">
     <div class="flex flex-row justify-between">
       <p>Minimum bid: <span class="text-xl">${number} -,</span></p>
       <p class="flex flex-row justify-between items-center gap-2 text-xl">${wallet}<img class="h-4" src="/coins.png"></p>
     </div> 
-    <div class="w-fit m-auto flex flex-row gap-4 items-center">
+    <div class="w-fit m-auto flex flex-row gap-4 items-center relative">
       <input required class="h-12 w-24 shadow-md p-2 rounded-md" type="number" id="myBid">
-      <button class="px-3 py-2 border h-fit text-darkerBlue border-darkerBlue rounded-md  font-cool" id="request-bid">Bid</button>
+      <button class="px-3 py-2 border h-fit text-darkerBlue border-darkerBlue rounded-md uppercase tracking-wide font-fjalla" id="request-bid">Bid</button>
+      <span class="hidden absolute -bottom-20 left-4 lg:-bottom-16 text-red-800" id="error-bid">Double check your bid</span>
     </div>
   </div>`;
 
   let bidReq = document.getElementById("request-bid");
   let bidValueInput = document.getElementById("myBid");
+  let bidError = document.getElementById("error-bid");
+
   bidReq.addEventListener("click", checkBid);
 
   function checkBid() {
     let wantedBid = bidValueInput.value;
 
     if (wantedBid > number) {
+      bidError.classList.add("hidden");
       let bidBody = {
         amount: Number(wantedBid),
       };
-
       requestBid(bidBody);
     } else {
+      bidError.classList.remove("hidden");
       console.log("Fail to request");
     }
   }

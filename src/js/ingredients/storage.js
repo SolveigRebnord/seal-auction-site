@@ -35,4 +35,12 @@ function clearStorage() {
   localStorage.clear();
 }
 
-export { saveToken, saveUser, getToken, getUsername, clearStorage, saveToStorage, getStoredData };
+export {
+  saveToken,
+  saveUser,
+  getToken,
+  getUsername,
+  clearStorage,
+  saveToStorage,
+  getStoredData,
+};

@@ -1,26 +1,52 @@
-const toasterContainer = document.getElementById("toaster");
-const toasterMessage = document.getElementById("toaster-message");
-const toasterExit = document.getElementById("close_notification")
+const searchInput = document.getElementById("search_input");
 
+const theArr = [];
 
-function toaster(status, header, message) {
-    toasterContainer.classList.remove("translate-y-2", "opacity-0", "sm:translate-y-0", "sm:translate-x-2");
-    toasterContainer.classList.add("transform", "ease-out", "duration-300", "transition", "translate-y-0", "opacity-100", "sm:translate-x-0");
-
-
-    toasterMessage.innerHTML = `
-                <p class="
-                text-sm font-medium text-gray-900
-                ${status === "success" ? "text-green-500" : ""}
-                ${status === "error" ? "text-red-500" : ""}
-                ">${header}!</p>
-                <p class="mt-1 text-sm text-gray-500">${message}</p>
-            `;
-
-    toasterExit.addEventListener("click", (e) => {
-        toasterContainer.classList.add("translate-y-2", "opacity-0", "sm:translate-y-0", "sm:translate-x-2");
-        toasterContainer.classList.remove("transform", "ease-out", "duration-300", "transition", "translate-y-0", "opacity-100", "sm:translate-x-0");
-    })
+function sendposts(posts) {
+  for (let post of posts) {
+    theArr.push(post);
+  }
+  return theArr;
 }
 
-export {toaster};
+function searching() {
+  let input, filter, ul, title, txtValue, id, img;
+  input = searchInput;
+  filter = input.value.toUpperCase();
+  ul = theArr;
+  let showList = [];
+
+  for (let item of ul) {
+    title = item.title;
+    id = item.id;
+    if (item.media.length == 0) {
+      img = "/no_img.svg";
+    } else {
+      img = item.media[0];
+    }
+
+    txtValue = title;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      let element = `<a href="post.html?id=${id}">
+          <li class="list-none bg-white p-2 w-full flex flex-row gap-6 justify-between items-center text-light font-quickS text-sm border border-gray-300 rounded-md hover:shadow-lg">
+            <p class="">${title}</p>
+            <img class="w-24 h-24 rounded-md object-cover" src="${img}">
+          </li>
+        </a>`;
+
+      showList.push(element);
+      showSearch.classList.replace("hidden", "flex");
+      let newarr = showList.join(" ");
+      showSearch.innerHTML = newarr;
+    } else {
+      console.log("fail");
+    }
+  }
+
+  if (input.value == "") {
+    showSearch.innerHTML = "";
+    showSearch.classList.replace("flex", "hidden");
+  }
+}
+
+export { searching, sendposts };

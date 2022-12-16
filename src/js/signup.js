@@ -10,7 +10,9 @@ const signUpButton = document.getElementById("sign-up-button");
 const usernameMessage = document.getElementById("username-message");
 const emailMessage = document.getElementById("email-message");
 const passwordMessage = document.getElementById("password-message");
-const confirmPasswordMessage = document.getElementById("confirm-password-message");
+const confirmPasswordMessage = document.getElementById(
+  "confirm-password-message"
+);
 const errorMessage = document.getElementById("error-message");
 
 signUpForm.addEventListener("submit", function (event) {

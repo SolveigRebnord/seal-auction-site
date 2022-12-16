@@ -21,7 +21,7 @@ function checkAccess(access) {
     window.location.replace("/login.html");
   }
 }
-checkAccess(getToken())
+checkAccess(getToken());
 
 activeLisBtn.addEventListener("click", myLis);
 
@@ -126,8 +126,7 @@ function listProfile(data) {
     }
   }
 
-  myProfile = 
-  `<section class="h-fit w-full rounded-md font-light font-quickS md:flex md:flex-col justify-between items-center md:px-6 lg:flex-col lg:w-fit">
+  myProfile = `<section class="h-fit w-full rounded-md font-light font-quickS md:flex md:flex-col justify-between items-center md:px-6 lg:flex-col lg:w-fit">
       <div class="flex flex-col gap-4 justify-center items-center md:w-1/2">
         <div class="w-2/3 md:w-full h-60 lg:w-64 lg:h-64 rounded-xl shadow-xl bg-cover flex justify-end items-end p-4" style="background-image: url('${profileImg}')">
           <button id="edit_img_btn"><img class="w-6 outline outline-1 outline-white rounded-sm outline-offset-1 hover:outline-2 transition-all ease-in-out duration-100 hover:scale-105" src="/edit_img.png"></button>
@@ -135,17 +134,11 @@ function listProfile(data) {
         <h1 class="font-fjalla tracking-wide text-4xl">${name}</h1>
         <p class="text-sm">${email}</p>
       </div>
-      <div class="flex flex-col items-center md:flex-row md:justify-evenly w-full lg:items-center lg:flex-row">
+      <div class="flex flex-col items-center md:flex-row md:justify-evenly w-full lg:items-center lg:flex-col">
         <p class="flex flex-row gap-3 py-6 text-lg items-center"><img class="w-6" src="/coins.png">${credits}</p>
         <p>${wins}</p>
         <p>${listings}</p>
       </div>
-      <section class="w-full">
-        <h3 class="text-xl font-semibold italic pl-2">activity</h3>
-        <div id="notification_list" class="h-80 w-full rounded-md shadow-lg"> 
-          <p>Hei</p>
-        </div>
-      </section>
     </section>`;
 
   profileInfo.innerHTML = myProfile;
@@ -153,23 +146,6 @@ function listProfile(data) {
   let editImgBtn = document.getElementById("edit_img_btn");
   editImgBtn.addEventListener("click", editImg);
   editImgBtn.param = profileImg;
-
-
-(function notify() {
-  let notiyDiv = document.getElementById("notification_list");
-
-  let array = getStoredData("allNotifies")
-  console.log(array)
-  let message = array;
-  
-  
-    //notifyIcon.classList.add("after:content-['!']", "after:bg-green-600", "after:rounded-full", "after:absolute", "after:top-0", "after:left-4", "after:w-4","after:h-4", "after:border", "after:border-white", "animate-bounce", "after:flex", "after:justify-center", "after:items-center", "after:text-white", "after:text-xs");
-
-
-    notiyDiv.innerHTML = message;
-  })();
-
-
 }
 
 document.addEventListener(
@@ -198,8 +174,7 @@ function editImg(e) {
 
   let imgUrl = e.currentTarget.param;
 
-  editImgOverlay.innerHTML = 
-  `<div class="main w-full md:w-1/2 md:ml-32 bg-white md:rounded-lg p-6 flex flex-col items-center shadow-md gap-6 font-quickS lg:w-1/3">
+  editImgOverlay.innerHTML = `<div class="main w-full md:w-1/2 md:ml-32 bg-white md:rounded-lg p-6 flex flex-col items-center shadow-md gap-6 font-quickS lg:w-1/3">
     <p class="text-xl">Current profile image</p>
     <img class="w-32 h-32 object-cover rounded-md outline outline-1 outline-blue outline-offset-2" src='${imgUrl}'>
     <p>Change URL:</p>
@@ -216,8 +191,7 @@ function editImg(e) {
 
   function showImg() {
     let imgValue = imgInput.value;
-    imgPrew.innerHTML = 
-    `<img class="w-32 h-32 object-cover rounded-md outline outline-1 outline-blue outline-offset-2" src='${imgValue}'>
+    imgPrew.innerHTML = `<img class="w-32 h-32 object-cover rounded-md outline outline-1 outline-blue outline-offset-2" src='${imgValue}'>
     <div class="flex flex-row justify-between gap-6 mt-8">
       <button class="clean-button flex flex-row items-center gap-2 rounded-sm shadow-md" id="reject_img_btn">
         <img class="w-4" src="/x_blue.png">
@@ -242,7 +216,6 @@ function editImg(e) {
 }
 
 async function requestImg(e) {
-
   let imgUrl = e.currentTarget.param;
   let body = {
     avatar: imgUrl,
@@ -281,8 +254,7 @@ function activeSection(data) {
   }
 
   if (activeListings.length == 0) {
-    activeFeed.innerHTML = 
-    `<p class="w-full text-center text-sm font-quickS font-light py-4 italic text-gray-700">
+    activeFeed.innerHTML = `<p class="w-full text-center text-sm font-quickS font-light py-4 italic text-gray-700">
       You have no active listings at the moment
     </p>`;
   } else {
@@ -293,7 +265,7 @@ function activeSection(data) {
 function showListings(array) {
   let title;
   let endTime;
-  let media = "";
+
   let created;
   let bids;
   let desc;
@@ -305,6 +277,8 @@ function showListings(array) {
   let bidNumber;
 
   for (let lis of array) {
+    let media = "";
+
     title = lis.title;
 
     endTime = `Ends at ` + dayjs(lis.endsAt).format("DD/MM/YYYY  | HH:mm");
@@ -325,8 +299,7 @@ function showListings(array) {
 
       for (let bid of lis.bids) {
         bidder = bid["bidderName"];
-        bids = 
-        `<p class="text-3xl">${bid["amount"]} -,</p>    <p class="font-normal">// ${bidder}</p>`;
+        bids = `<p class="text-3xl">${bid["amount"]} -,</p>    <p class="font-normal">// ${bidder}</p>`;
       }
 
       if (amountOfBids == 0) {
@@ -351,8 +324,7 @@ function showListings(array) {
       }
     }
 
-    oneListing = 
-    `<div class="w-full p-6 rounded-md bg-white shadow-lg text-sm font-light flex flex-col gap-4 font-quickS">
+    oneListing = `<div class="w-full p-6 rounded-md bg-white shadow-lg text-sm font-light flex flex-col gap-4 font-quickS">
       <div class="flex flex-col justify-between gap-6">
         <h2 class="text-2xl font-normal">${title}</h2>
         <p class="">${desc}</p>
@@ -394,7 +366,7 @@ async function deleteListing(id) {
     myLis();
     const data = await response.json();
     if (response.ok) {
-//noe?
+      //noe?
     } else {
       console.log("error", data);
     }
@@ -423,25 +395,23 @@ async function allLis() {
     );
     const data = await response.json();
     if (response.ok) {
-      console.log(data)
+      console.log(data);
       let activeLisArr = [];
       for (let bid of data) {
         let ending = bid.listing["endsAt"];
-        console.log(ending)
-      
+        console.log(ending);
+
         let diff = dayjs().diff(ending, "minute");
-        if (diff < 0) { 
-          console.log(diff)
-          activeLisArr.push(bid)
-          console.log(activeLisArr)
+        if (diff < 0) {
+          console.log(diff);
+          activeLisArr.push(bid);
+          console.log(activeLisArr);
         }
       }
       if (activeLisArr.length == 0) {
-        activeFeed.innerHTML = 
-        `<p class="w-full text-center text-sm font-quickS font-light py-4 italic text-gray-700">
+        activeFeed.innerHTML = `<p class="w-full text-center text-sm font-quickS font-light py-4 italic text-gray-700">
           You have no active bids at the moment
         </p>`;
-
       } else {
         showActiveBids(activeLisArr);
       }
@@ -492,8 +462,7 @@ function showActiveBids(array) {
 
     id = lis.listing.id;
 
-    oneListing = 
-    `<a href="listing.html?id=${id}" class="hover:drop-shadow-lg transition duration-800 ease-in-out hover:after:bg-white after:opacity-20">
+    oneListing = `<a href="listing.html?id=${id}" class="hover:drop-shadow-lg transition duration-800 ease-in-out hover:after:bg-white after:opacity-20">
       <div class="w-full rounded-md bg-white shadow-lg text-right font-light font-robotoC flex flex-row">
         <div class="w-1/2 md:w-1/2 rounded-l-lg bg-cover bg-center" style="background-image: url('${img}')">
         </div>
@@ -526,7 +495,6 @@ function allMyListings(array) {
   let bidType;
 
   for (let lis of array) {
-
     media = "";
 
     let nowTime = dayjs().isAfter(dayjs(lis.endsAt));
@@ -556,12 +524,11 @@ function allMyListings(array) {
 
       for (let bid of lis.bids) {
         bidder = bid["bidderName"];
-        bids = 
-        `<p class="text-3xl">${bid["amount"]} -,</p>
+        bids = `<p class="text-3xl">${bid["amount"]} -,</p>
         <p class="font-normal">// ${bidder}</p>`;
       }
 
-      bidType= "Current bid:";
+      bidType = "Current bid:";
       if (nowTime == true) {
         bidType = "Winning bid";
       }
@@ -587,8 +554,7 @@ function allMyListings(array) {
       }
     }
 
-    oneListing = 
-    `<div class="w-full p-6 rounded-md bg-white shadow-lg text-sm font-light flex flex-col gap-4 font-quickS">
+    oneListing = `<div class="w-full p-6 rounded-md bg-white shadow-lg text-sm font-light flex flex-col gap-4 font-quickS">
       <div class="flex flex-col justify-between gap-6">
         <h2 class="text-2xl font-normal">${title}</h2>
         <p class="">${desc}</p>
@@ -632,11 +598,11 @@ function allMyListings(array) {
     for (let button of editButtons) {
       button.addEventListener("click", (event) => {
         event.preventDefault();
-        editListingOverlay.classList.toggle("hidden")
-        getListing(button.id)
+        editListingOverlay.classList.toggle("hidden");
+        getListing(button.id);
       });
     }
-   
+
     for (let button of deleteButtons) {
       button.addEventListener("click", function (event) {
         event.preventDefault();
@@ -653,37 +619,34 @@ function allMyListings(array) {
   }
 }
 
-  async function getListing(id) {
-    try {
-      const response = await fetch(
-        `${ALL_LIS_URL}/${id}?_seller=true&_bids=true`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${getToken()}`,
-          },
-        }
-      );
-      const data = await response.json();
-      if (response.ok) {
-       let editTitle = data.title;
-       let editDesc = data.description;
-       let editTags = data.tags;
-       let editMedia = data.media;
-       console.log("ok")
-       editListing(id, editTitle, editDesc, editTags, editMedia) 
-
-      } else {
-        console.log("error", data);
+async function getListing(id) {
+  try {
+    const response = await fetch(
+      `${ALL_LIS_URL}/${id}?_seller=true&_bids=true`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
       }
-    } catch (error) {
-      console.log(error);
+    );
+    const data = await response.json();
+    if (response.ok) {
+      let editTitle = data.title;
+      let editDesc = data.description;
+      let editTags = data.tags;
+      let editMedia = data.media;
+      console.log("ok");
+      editListing(id, editTitle, editDesc, editTags, editMedia);
+    } else {
+      console.log("error", data);
     }
+  } catch (error) {
+    console.log(error);
   }
+}
 
 function editListing(id, title, desc, tags, media) {
-
-
   function leaveEdit() {
     if (editListingOverlay.classList.contains("hidden")) {
       let doubleCheck = confirm("You sure? Your edits will be lost");
@@ -694,8 +657,7 @@ function editListing(id, title, desc, tags, media) {
   }
   leaveEdit();
 
-  editListingOverlay.innerHTML = 
-  `<form
+  editListingOverlay.innerHTML = `<form
   class="editOverlay p-6 py-8 md:shadow-none flex flex-col w-1/2 bg-white gap-8 md:gap-8 font-quickS font-light lg:justify-center lg:items-center lg:ml-20">
   <div class="flex flex-col w-full gap-4 lg:w-2/3 lg:justify-between lg:gap-8">
     <div>
@@ -766,8 +728,7 @@ function editListing(id, title, desc, tags, media) {
   function testImg() {
     previewImg.innerHTML = "";
     for (let img of media) {
-      onePrew = 
-      `<li class="li list-none cursor-pointer relative sm:after:content-['X'] after:content-['X'] after:font-quickS after:text-sm after:flex after:justify-center after:items-center after:p-2 after:absolute after:-top-2 after:-right-2 after:w-6 after:h-6 after:bg-blue after:text-white after:drop-shadow-md after:rounded-full hover:drop-shadow-lg transition-all duration-100 ease-in md:after:content-none md:hover:after:content-['X']">
+      onePrew = `<li class="li list-none cursor-pointer relative sm:after:content-['X'] after:content-['X'] after:font-quickS after:text-sm after:flex after:justify-center after:items-center after:p-2 after:absolute after:-top-2 after:-right-2 after:w-6 after:h-6 after:bg-blue after:text-white after:drop-shadow-md after:rounded-full hover:drop-shadow-lg transition-all duration-100 ease-in md:after:content-none md:hover:after:content-['X']">
         <img class="w-40 h-40 object-cover rounded-md" src=${img}>
       </li>`;
 
@@ -839,7 +800,6 @@ function editListing(id, title, desc, tags, media) {
 }
 
 function editBody(id, title, desc, tags, media) {
-
   let finalBody = {
     title: title,
     description: desc,
@@ -874,22 +834,8 @@ async function requestEdit(id, body) {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //Kode for eventuell lsiting av bids
-   /*
+/*
     if (lis.listing.bids !== "") {
       let oneBid;
       let lengde = lis.listing.bids.length;

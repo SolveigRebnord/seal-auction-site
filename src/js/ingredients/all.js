@@ -1,40 +1,37 @@
 import "../../style.css";
 import { clearStorage, getStoredData, saveToStorage } from "./storage";
 import { ALL_PROFILES_URL } from "./endpoints";
-import { getUsername, getToken,  } from "./storage";
-import { toaster } from "./components";
+import { getUsername, getToken } from "./storage";
 
 const mobileHeader = document.getElementById("header");
 const mobileNav = document.getElementById("mobile_nav");
 const bigScreenNav = document.getElementById("bigScreen_nav");
+const logOut = document.getElementById("logout_div");
 
-
-
-
-
+//<img class="w-10 ml-2 mt-2" src="/seal_logo_black.svg" alt="Logo home"
 mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 md:p-8 gap-4">
 <div class="flex flex-row items-center justify-between">
-  <a href="index.html"
-    ><img class="w-10 ml-2 mt-2" src="/seal_logo_black.svg" alt="Logo home"
-  /></a>
+  <a href="index.html" class="font-shadow text-4xl">
+  seal
+</a>
     <a
       href="myprofile.html"
       id="header_profile"
       class="hover:cursor-pointer">
       <div
-        class="flex flex-row items-center gap-4 font-robotoC tracking-wide">
+        class="flex flex-row items-end gap-2 font-robotoC tracking-wide">
         <p class="font-quickS text-xs lg:text-sm" id="profile_name"></p>
         <img class="w-6" src="/profile.png" alt="Profile icon" />
       </div>
     </a>
 </div>
 <div class="flex flex-row justify-end">
-  <div class="flex flex-row gap-4 items-center relative">
+  <div class="mt-4 md:m-0 flex flex-row gap-4 items-center relative">
     <input
       type="text"
       name="search_input"
       id="search_input"
-      class="hidden border-b border-gray-400 h-6 w-80 px-4 outline-none bg-transparent text-sm pb-1 appearance-none"
+      class="hidden border-b border-gray-400 h-6 w-72 px-4 outline-none bg-transparent text-sm font-quickS pb-1 appearance-none transition-all ease-in duration-200"
       placeholder="What are you looking for?" />
     <img
       src="/icon_search.svg"
@@ -43,7 +40,7 @@ mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 
       class="hover:cursor-pointer" />
     <ul
       id="showSearch"
-      class="absolute h-96 overflow-scroll top-8 right-0 z-20 flex-col hidden gap-1 text-black"></ul>
+      class="absolute h-96 overflow-scroll top-8 right-0 z-20 hidden text-black p-4 rounded-md bg-white shadow-lg flex flex-col gap-6"></ul>
   </div>
 </div>
 </section>
@@ -53,7 +50,7 @@ mobileNav.innerHTML = `<ul
 class="flex flex-row align-middle justify-between px-12 py-4 pb-6 fixed bottom-0 left-0 w-full border-t border-gray-200 bg-white">
 <a href="index.html">
   <li class="p-2">
-    <img class="w-6 h-6" src="/icon_home_blue.png" alt="Home icon" />
+    <img class="w-6 h-6" src="/icon_home_blue.png" alt="Home icon" />  
   </li>
 </a>
 <a href="newlisting.html">
@@ -72,24 +69,18 @@ class="flex flex-row align-middle justify-between px-12 py-4 pb-6 fixed bottom-0
       alt="Profile icon" />
   </li>
 </a>
-<li class="p-2 cursor-pointer" id="log_out">
+<li class="p-2 cursor-pointer" id="logout_small">
   <img class="w-6 h-6" src="/log_out.png" alt="Log out icon" />
 </li>
 </ul>
 `;
 
 // <div id="notification_list" class="hidden absolute bg-blue h-32 w-32 -right-12">
-bigScreenNav.innerHTML = 
-`<ul class="flex flex-col pt-20 justify-start text-center items-center gap-20 py-6 fixed top-0 left-0 h-full text-base tracking-wider text-white font-fjalla bg-blue uppercase md:w-40 lg:w-44">
-<a href="index.html">
-  <li class="pl-2 pb-10">
-    <img class="w-18" src="/seal_logo_white.svg" alt="" />
+bigScreenNav.innerHTML = `<ul class="flex flex-col pt-16 justify-start text-center items-center gap-20 py-6 fixed top-0 left-0 h-full text-base tracking-wider text-white font-fjalla bg-blue uppercase md:w-40 lg:w-44">
+<a id="logo" href="index.html">
+  <li class=" pb-10">
+    <img class="w-24" src="/seal.svg" alt="" />
   </li>
-</a>
-<a href="notifications.html" class="relative" id="notification_icon">
-  <li id="notify_li" class="w-full text-center">
-    <img class="w-8 h-8" src="/bell.png" alt="Notification bell">
-   </li>
 </a>
 <a href="index.html" class="w-full text-center">
   <li id="listings_li" class="w-full">Listings</li>
@@ -100,30 +91,42 @@ bigScreenNav.innerHTML =
 <a href="myprofile.html" class="w-full text-center">
   <li id="myprofile_li" class="w-full">My profile</li>
 </a>
-<li class="pt-12 cursor-pointer" id="log_out">
-  <img class="w-6" src="/logout_white.png" alt="Log out icon" />
-</li>
 </ul>
 `;
 
+let logOutMobile = document.getElementById("logout_small");
+
+logOut.innerHTML = `<div class="p-4 pr-7 rounded-md cursor-pointer bg-blue fixed bottom-4 -right-4 hover:shadow-lg hover:shadow-slate-500 transition-all duration-100 ease-in hover:scale-105" id="log_out">
+<img class="w-6" src="/logout_white.png" alt="Log out icon" />
+</div>`;
+
 const currentURL = window.location.toString();
-const logOutBtn = document.getElementById("log_out");
+
 const profileName = document.getElementById("profile_name");
 
+const searchIcon = document.getElementById("search_btn");
 
 profileName.innerHTML = getUsername();
 
-
-logOutBtn.addEventListener("click", (e) => {
+logOut.addEventListener("click", (e) => {
   let doubleCheck = confirm("Leaving already? :-(");
   if (doubleCheck === false) {
-    return 0 ;
+    return 0;
   } else {
     clearStorage();
     window.location.reload();
   }
 });
 
+logOutMobile.addEventListener("click", (e) => {
+  let doubleCheck = confirm("Leaving already? :-(");
+  if (doubleCheck === false) {
+    return 0;
+  } else {
+    clearStorage();
+    window.location.reload();
+  }
+});
 
 if (currentURL.includes("index")) {
   const listingsLI = document.getElementById("listings_li");
@@ -147,6 +150,8 @@ if (currentURL.includes("id")) {
     "px-6",
     "shadow-xl"
   );
+
+  searchIcon.classList.add("hidden");
 }
 
 if (currentURL.includes("myprofile")) {
@@ -159,6 +164,8 @@ if (currentURL.includes("myprofile")) {
     "px-6",
     "shadow-xl"
   );
+
+  searchIcon.classList.add("hidden");
 }
 
 if (currentURL.includes("newlisting")) {
@@ -171,64 +178,6 @@ if (currentURL.includes("newlisting")) {
     "px-6",
     "shadow-xl"
   );
+
+  searchIcon.classList.add("hidden");
 }
-
-if (currentURL.includes("notifications")) {
-  const notifyLI = document.getElementById("notify_li");
-
-  notifyLI.classList.add(
-
-    "py-10",
-    "px-6",
-    "shadow-xl"
-  );
-}
-
-
-
-
-async function checkListings() {
-  try {
-    const response = await fetch(
-      `${ALL_PROFILES_URL}/${getUsername()}?_listings=true`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      }
-    );
-    const data = await response.json();
-    if (response.ok) {
-      console.log(data)
-      let newArray = [];
-      for (let listing of data.listings) {
-        newArray.push(listing.id)
-      }
-      let savedArray = getStoredData("wins");
-
-      let savedNewArray = [];
-      for (let lis of savedArray) {
-        savedNewArray.push(lis.id)
-      }
-      let missingItem = newArray.filter(u => !savedNewArray.includes(u));
-      console.log(missingItem)
-      if (missingItem.length !== 0) {
-        toaster("success", "You have a new listing", "Click to see more")
-        let notifyArray = getStoredData("allNotifies")
-        notifyArray.push(missingItem[0])
-        saveToStorage("allNotifies", notifyArray)
-        console.log(notifyArray)
-      }
-   
-
-    } else {
-      console.log("error", data);
-    }
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-checkListings()

@@ -27,7 +27,7 @@
   <body class="bg-bgGrey transition-all duration-500 ease-out">
     <header id="header"></header>
     <main
-      class="mb-24 p-4 md:pl-52 gap-6 md:px-12 lg:pt-0 lg:px-8 lg:pl-36 lg:w-4/5 lg:m-auto">
+      class="mb-24 p-4 md:pl-52 gap-6 md:px-12 lg:pt-0 lg:px-8 lg:pl-36 lg:w-4/5 lg:m-auto lg:mb-24">
       <div
         id="edit_img_overlay"
         class="hidden modal w-full h-full bg-black bg-opacity-70 fixed left-0 top-0 flex items-center justify-center"></div>
@@ -35,8 +35,7 @@
         class="flex flex-col lg:flex-row-reverse lg:justify-evenly lg:gap-12">
         <section
           class="lg:w-1/2 flex justify-end mb-12 lg:mb-0"
-          id="profile_info">
-        </section>
+          id="profile_info"></section>
         <section class="lg:w-2/3">
           <section
             id="active"
@@ -57,62 +56,22 @@
             </div>
             <div id="show_active" class="flex flex-col gap-6"></div>
           </section>
-          
         </section>
       </section>
 
       <section class="flex flex-col gap-4 pt-6 lg:w-2/3 m-auto">
         <div
-          class="w-full font-cool text-blue text-4xl pt-20 pb-1 mb-10 border-b border-blue px-2">
+          class="w-full font-shadow tracking-wide text-blue text-4xl pt-20 pb-1 mb-10 uppercase text-center border-b border-blue px-2">
           My listings
         </div>
         <div class="flex flex-col gap-8" id="my_listings_div"></div>
-        <div id="edit_listing_overlay" class="hidden edit w-full h-full bg-black bg-opacity-70 fixed left-0 top-0 flex items-center justify-center"></div>
+        <div
+          id="edit_listing_overlay"
+          class="hidden edit w-full h-full bg-black bg-opacity-70 fixed left-0 top-0 flex items-center justify-center"></div>
       </section>
     </main>
+    <div id="logout_div"></div>
     <section id="bigScreen_nav" class="hidden md:inline"></section>
     <section id="mobile_nav" class="md:hidden"></section>
-   
-    <div>
-      <!-- Global notification live region, render this permanently at the end of the document -->
-      <div aria-live="assertive" class="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6">
-        <div id="toaster" class="flex w-full flex-col items-center space-y-4 sm:items-end translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2">
-          <!--
-            Notification panel, dynamically insert this into the live region when it needs to be displayed
-  
-            Entering: "transform ease-out duration-300 transition"
-              From: "translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
-              To: "translate-y-0 opacity-100 sm:translate-x-0"
-            Leaving: "transition ease-in duration-100"
-              From: "opacity-100"
-              To: "opacity-0"
-          -->
-          <div class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
-            <div class="p-4">
-              <div class="flex items-start">
-                <div class="flex-shrink-0">
-                  <!-- Heroicon name: outline/check-circle -->
-                  <svg class="h-6 w-6 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div id="toaster-message" class="ml-3 w-0 flex-1 pt-0.5">
-  
-                </div>
-                <div class="ml-4 flex flex-shrink-0">
-                  <button id="close_notification" type="button" class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                    <span class="sr-only">Close</span>
-                    <!-- Heroicon name: mini/x-mark -->
-                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </body>
 </html>

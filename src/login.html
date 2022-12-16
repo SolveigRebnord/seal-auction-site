@@ -17,14 +17,14 @@
       href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
       rel="stylesheet" />
   </head>
-  <body class="py-20 md:py-40 lg:pt-24 lg:pb-4">
+  <body class="py-20 md:py-40 lg:pt-16 lg:pb-4">
     <header></header>
     <main class="flex flex-col gap-8 items-center">
       <div class="flex flex-col items-center justify-center gap-8">
         <h1 class="text-5xl font-cool font-light tracking-wide text-blue">
           Log in
         </h1>
-        <h2 class="pb-8 text-md md:pb-6">Welcome back!</h2>
+        <h2 class="pb-8 text-md md:pb-6 font-quickS">Welcome back!</h2>
       </div>
       <section
         class="flex flex-col items-center font-quickS gap-8 w-2/3 md:gap-8 lg:gap-6">
@@ -61,84 +61,16 @@
           </button>
         </form>
         <span
-          class="flex justify-center items-center text-sm invisible h-20"
+          class="flex justify-center items-center text-sm invisible h-20 text-red-800 text-center"
           id="error-message"></span>
         <div
-          class="border-y py-4 border-blue flex flex-col gap-1 items-center mt-6 md:mt-12 lg:mt-6">
+          class="border-y py-4 border-blue flex flex-col gap-1 items-center mt-6 md:mt-12 lg:mt-0">
           <p>Don't have an account yet?</p>
           <a class="underline" href="signup.html">
             <p class="text-darkerBlue font-quickS">Sign up</p>
           </a>
         </div>
       </section>
-
-      <section id="mobile_nav" class="md:hidden">
-        <ul
-          class="flex flex-row align-middle justify-between px-12 py-6 fixed bottom-0 left-0 w-full border-t border-gray-200 bg-white">
-          <a href="index.html">
-            <li>
-              <img class="w-8 h-8" src="/icon_home_blue.png" alt="Home icon" />
-            </li>
-          </a>
-          <a href="newlisting.html">
-            <li>
-              <img
-                class="w-8 h-8"
-                src="/icon_newlisting_blue.png"
-                alt="New post icon" />
-            </li>
-          </a>
-          <a href="myprofile.html">
-            <li>
-              <img
-                class="w-8 h-8"
-                src="/icon_profile_blue.png"
-                alt="Profile icon" />
-            </li>
-          </a>
-        </ul>
-      </section>
     </main>
-  <div>
-    <!-- Global notification live region, render this permanently at the end of the document -->
-    <div aria-live="assertive" class="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6">
-      <div id="toaster" class="flex w-full flex-col items-center space-y-4 sm:items-end translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2">
-        <!--
-          Notification panel, dynamically insert this into the live region when it needs to be displayed
-
-          Entering: "transform ease-out duration-300 transition"
-            From: "translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
-            To: "translate-y-0 opacity-100 sm:translate-x-0"
-          Leaving: "transition ease-in duration-100"
-            From: "opacity-100"
-            To: "opacity-0"
-        -->
-        <div class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
-          <div class="p-4">
-            <div class="flex items-start">
-              <div class="flex-shrink-0">
-                <!-- Heroicon name: outline/check-circle -->
-                <svg class="h-6 w-6 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div id="toaster-message" class="ml-3 w-0 flex-1 pt-0.5">
-
-              </div>
-              <div class="ml-4 flex flex-shrink-0">
-                <button type="button" id="close_notification" class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                  <span class="sr-only">Close</span>
-                  <!-- Heroicon name: mini/x-mark -->
-                  <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   </body>
 </html>
