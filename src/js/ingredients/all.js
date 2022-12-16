@@ -100,7 +100,6 @@ logOut.innerHTML = `<div class="p-4 pr-7 rounded-md cursor-pointer bg-blue fixed
 <img class="w-6" src="/logout_white.png" alt="Log out icon" />
 </div>`;
 
-
 logOut.addEventListener("click", (e) => {
   let doubleCheck = confirm("Leaving already? :-(");
   if (doubleCheck === false) {

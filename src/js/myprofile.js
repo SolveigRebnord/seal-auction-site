@@ -433,7 +433,6 @@ function showActiveBids(array) {
   let id;
   let amount;
 
-
   for (let lis of array) {
     title = lis.listing.title;
 

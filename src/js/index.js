@@ -2,7 +2,7 @@ import { ALL_LIS_URL } from "./ingredients/endpoints";
 import dayjs from "dayjs";
 import { getUsername, getToken } from "./ingredients/storage";
 import relativeTime from "dayjs/plugin/relativeTime";
-import {searching, sendposts} from "./ingredients/components";
+import { searching, sendposts } from "./ingredients/components";
 
 const feed = document.getElementById("feed");
 const profileName = document.getElementById("profile_name");
@@ -16,10 +16,9 @@ const searchInput = document.getElementById("search_input");
 const showSearch = document.getElementById("showSearch");
 
 searchInput.addEventListener("keyup", searching);
-searching()
+searching();
 
 dayjs.extend(relativeTime);
-
 
 function deactivateNav() {
   myProfileLi.href = "javascript:void(0)";
@@ -54,7 +53,7 @@ async function allLis() {
     );
     const data = await response.json();
     if (response.ok) {
-      sendposts(data)
+      sendposts(data);
       listLis(data);
     } else {
       console.log("error", data);
@@ -158,7 +157,6 @@ async function allLisActive() {
     );
     const data = await response.json();
     if (response.ok) {
-
       let activeListings = [];
 
       for (let lis of data) {
@@ -188,7 +186,6 @@ async function allLisBidded() {
     );
     const data = await response.json();
     if (response.ok) {
-
       let activeListings = [];
       let amountOfBids;
       let diffTime;
@@ -211,7 +208,6 @@ async function allLisBidded() {
 }
 
 function listLis(data) {
-
   feed.innerHTML = "";
 
   for (let lis of data) {
@@ -229,7 +225,7 @@ function listLis(data) {
     let bids = [];
     let amountOfBids;
     let bidder;
-  
+
     if (lis.title) {
       title = lis.title;
     }
@@ -289,8 +285,7 @@ function listLis(data) {
 
       for (let bid of lis.bids) {
         bidder = bid["bidderName"];
-        bids =
-          `<p class="text-sm rounded-b-md h-10 flex justify-center items-center bids border-t border-blue">${bid["amount"]} -,</p>`;
+        bids = `<p class="text-sm rounded-b-md h-10 flex justify-center items-center bids border-t border-blue">${bid["amount"]} -,</p>`;
       }
       if (amountOfBids == 0) {
         bids = `<p class="bids border-t border-blue rounded-b-md h-10 flex justify-center items-center text-sm">Be nr. 1</p>`;
@@ -313,8 +308,7 @@ function listLis(data) {
       }
     }
 
-    oneLi = 
-    `<a href="listing.html?id=${id}" class="w-full font-quickS font-light text-xs max-w-xs md:max-w-xxs hover:drop-shadow-lg">
+    oneLi = `<a href="listing.html?id=${id}" class="w-full font-quickS font-light text-xs max-w-xs md:max-w-xxs hover:drop-shadow-lg">
       <div class="h-listingH w-full relative rounded-lg bg-cover bg-center flex flex-col justify-end" style="background-image: url('${media}')">
         <div class="w-full h-72 max-h-72 md:h-32 flex items-end">
           <div class="w-full bg-white flex flex-col shadow-lg rounded-b-lg gap-2 pt-4">
@@ -333,21 +327,33 @@ function listLis(data) {
     feed.innerHTML += oneLi;
   }
 
-  let spans = document.querySelectorAll(".bids")
+  let spans = document.querySelectorAll(".bids");
   for (let span of spans) {
-    let og = span.innerHTML
+    let og = span.innerHTML;
     span.addEventListener("mouseenter", (e) => {
       e.preventDefault();
-      span.classList.add("bg-blue", "text-white", "uppercase", "font-light", "font-cuprum", "tracking-widest");
-      span.innerHTML = "Make a bid"
+      span.classList.add(
+        "bg-blue",
+        "text-white",
+        "uppercase",
+        "font-light",
+        "font-cuprum",
+        "tracking-widest"
+      );
+      span.innerHTML = "Make a bid";
       span.addEventListener("mouseleave", (e) => {
         e.preventDefault();
-        span.classList.remove("bg-blue", "text-white", "uppercase", "font-light", "font-cuprum", "tracking-widest")
-   
-        span.innerHTML = og;
+        span.classList.remove(
+          "bg-blue",
+          "text-white",
+          "uppercase",
+          "font-light",
+          "font-cuprum",
+          "tracking-widest"
+        );
 
-      })
-    })
+        span.innerHTML = og;
+      });
+    });
   }
-  
 }

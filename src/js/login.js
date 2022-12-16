@@ -1,9 +1,6 @@
 import "../style.css";
 import { LOG_IN_URL } from "./ingredients/endpoints";
-import {
-  saveToken,
-  saveUser,
-} from "./ingredients/storage";
+import { saveToken, saveUser } from "./ingredients/storage";
 
 const logInForm = document.getElementById("login-form");
 const emailInput = document.getElementById("email");

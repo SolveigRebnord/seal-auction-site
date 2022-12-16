@@ -36,7 +36,6 @@ function checkAccess(key) {
 }
 checkAccess(getToken());
 
-
 async function getLis() {
   try {
     const response = await fetch(`${ONE_LIS_URL}?_bids=true&_seller=true`, {
