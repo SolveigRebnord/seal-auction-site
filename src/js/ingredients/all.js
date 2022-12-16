@@ -7,9 +7,6 @@ const mobileNav = document.getElementById("mobile_nav");
 const bigScreenNav = document.getElementById("bigScreen_nav");
 const logOut = document.getElementById("logout_div");
 const currentURL = window.location.toString();
-const profileName = document.getElementById("profile_name");
-const searchIcon = document.getElementById("search_btn");
-profileName.innerHTML = getUsername();
 
 mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 md:p-8 gap-4">
 <div class="flex flex-row items-center justify-between">
@@ -47,6 +44,10 @@ mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 
 </div>
 </section>
 `;
+
+const profileName = document.getElementById("profile_name");
+const searchIcon = document.getElementById("search_btn");
+profileName.innerHTML = getUsername();
 
 mobileNav.innerHTML = `<ul
 class="flex flex-row align-middle justify-between px-12 py-4 pb-6 fixed bottom-0 left-0 w-full border-t border-gray-200 bg-white">
