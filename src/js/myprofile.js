@@ -81,6 +81,8 @@ async function myLis() {
 }
 
 function listProfile(data) {
+  document.title = `${data.name} | Seal`;
+
   let myProfile;
   let name;
   let email;
@@ -366,7 +368,6 @@ async function deleteListing(id) {
     myLis();
     const data = await response.json();
     if (response.ok) {
-      //noe?
     } else {
       console.log("error", data);
     }
@@ -428,12 +429,10 @@ function showActiveBids(array) {
   let title;
   let endTime;
   let img;
-  let created;
   let oneListing;
   let id;
   let amount;
-  let allBids = [];
-  let newarr;
+
 
   for (let lis of array) {
     title = lis.listing.title;
@@ -636,7 +635,6 @@ async function getListing(id) {
       let editDesc = data.description;
       let editTags = data.tags;
       let editMedia = data.media;
-      console.log("ok");
       editListing(id, editTitle, editDesc, editTags, editMedia);
     } else {
       console.log("error", data);
@@ -833,33 +831,3 @@ async function requestEdit(id, body) {
     console.log(error);
   }
 }
-
-//Kode for eventuell lsiting av bids
-/*
-    if (lis.listing.bids !== "") {
-      let oneBid;
-      let lengde = lis.listing.bids.length;
-      let lastIndex = lengde - 1;
-      lastItem = lis.listing.bids.slice(lastIndex);
-
-      for (let bid of lis.listing.bids) {
-        let bidderName = bid["bidderName"];
-        if (bidderName == getUsername()) {
-          bidderName = "Me";
-        }
-        oneBid = 
-        `<div class="flex flex-row justify-between items-center gap-2 text-gray-400 last-of-type:bg-white last-of-type:text-black last-of-type:outline-2 last-of-type:outline last-of-type:outline-blue last-of-type:p-2 last-of-type:px-3">
-          <p>${bidderName}</p>
-          <p>${bid["amount"]}</p>
-        </div>`;
-
-        allBids.push(oneBid);
-        newarr = allBids.join(" ");
-      }
-    }
-
-         <div class="flex flex-col gap-2">
-            ${newarr}
-          </div>
-    
-    */

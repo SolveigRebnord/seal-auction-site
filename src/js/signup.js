@@ -6,7 +6,6 @@ const username = document.getElementById("username");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirm-password");
-const signUpButton = document.getElementById("sign-up-button");
 const usernameMessage = document.getElementById("username-message");
 const emailMessage = document.getElementById("email-message");
 const passwordMessage = document.getElementById("password-message");
@@ -114,7 +113,6 @@ function signUp(e) {
 
     if (matchingPasswords) {
       validConfirmPassword = true;
-      console.log("yey password matching");
       confirmPasswordMessage.innerHTML = "";
       confirmPassword.classList.add("border-green-600");
     } else {

@@ -1,14 +1,16 @@
 import "../../style.css";
-import { clearStorage, getStoredData, saveToStorage } from "./storage";
-import { ALL_PROFILES_URL } from "./endpoints";
-import { getUsername, getToken } from "./storage";
+import { clearStorage } from "./storage";
+import { getUsername } from "./storage";
 
 const mobileHeader = document.getElementById("header");
 const mobileNav = document.getElementById("mobile_nav");
 const bigScreenNav = document.getElementById("bigScreen_nav");
 const logOut = document.getElementById("logout_div");
+const currentURL = window.location.toString();
+const profileName = document.getElementById("profile_name");
+const searchIcon = document.getElementById("search_btn");
+profileName.innerHTML = getUsername();
 
-//<img class="w-10 ml-2 mt-2" src="/seal_logo_black.svg" alt="Logo home"
 mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 md:p-8 gap-4">
 <div class="flex flex-row items-center justify-between">
   <a href="index.html" class="font-shadow text-4xl">
@@ -74,8 +76,8 @@ class="flex flex-row align-middle justify-between px-12 py-4 pb-6 fixed bottom-0
 </li>
 </ul>
 `;
+const logOutMobile = document.getElementById("logout_small");
 
-// <div id="notification_list" class="hidden absolute bg-blue h-32 w-32 -right-12">
 bigScreenNav.innerHTML = `<ul class="flex flex-col pt-16 justify-start text-center items-center gap-20 py-6 fixed top-0 left-0 h-full text-base tracking-wider text-white font-fjalla bg-blue uppercase md:w-40 lg:w-44">
 <a id="logo" href="index.html">
   <li class=" pb-10">
@@ -94,19 +96,10 @@ bigScreenNav.innerHTML = `<ul class="flex flex-col pt-16 justify-start text-cent
 </ul>
 `;
 
-let logOutMobile = document.getElementById("logout_small");
-
 logOut.innerHTML = `<div class="p-4 pr-7 rounded-md cursor-pointer bg-blue fixed bottom-4 -right-4 hover:shadow-lg hover:shadow-slate-500 transition-all duration-100 ease-in hover:scale-105" id="log_out">
 <img class="w-6" src="/logout_white.png" alt="Log out icon" />
 </div>`;
 
-const currentURL = window.location.toString();
-
-const profileName = document.getElementById("profile_name");
-
-const searchIcon = document.getElementById("search_btn");
-
-profileName.innerHTML = getUsername();
 
 logOut.addEventListener("click", (e) => {
   let doubleCheck = confirm("Leaving already? :-(");
@@ -130,7 +123,6 @@ logOutMobile.addEventListener("click", (e) => {
 
 if (currentURL.includes("index")) {
   const listingsLI = document.getElementById("listings_li");
-
   listingsLI.classList.add(
     "bg-white",
     "text-blue",
@@ -142,7 +134,6 @@ if (currentURL.includes("index")) {
 
 if (currentURL.includes("id")) {
   const listingsLI = document.getElementById("listings_li");
-
   listingsLI.classList.add(
     "bg-white",
     "text-blue",
@@ -156,7 +147,6 @@ if (currentURL.includes("id")) {
 
 if (currentURL.includes("myprofile")) {
   let myprofileLI = document.getElementById("myprofile_li");
-
   myprofileLI.classList.add(
     "bg-white",
     "text-blue",
@@ -170,7 +160,6 @@ if (currentURL.includes("myprofile")) {
 
 if (currentURL.includes("newlisting")) {
   const newlistingLi = document.getElementById("newlisting_li");
-
   newlistingLi.classList.add(
     "bg-white",
     "text-blue",
@@ -178,6 +167,5 @@ if (currentURL.includes("newlisting")) {
     "px-6",
     "shadow-xl"
   );
-
   searchIcon.classList.add("hidden");
 }

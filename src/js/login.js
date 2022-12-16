@@ -1,11 +1,8 @@
 import "../style.css";
-import { LOG_IN_URL, ALL_PROFILES_URL } from "./ingredients/endpoints";
+import { LOG_IN_URL } from "./ingredients/endpoints";
 import {
   saveToken,
   saveUser,
-  saveToStorage,
-  getUsername,
-  getToken,
 } from "./ingredients/storage";
 
 const logInForm = document.getElementById("login-form");

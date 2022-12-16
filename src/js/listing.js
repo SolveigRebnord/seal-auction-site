@@ -2,7 +2,6 @@ import { ALL_LIS_URL, ALL_PROFILES_URL } from "./ingredients/endpoints.js";
 import dayjs from "dayjs";
 import { getToken, getUsername } from "./ingredients/storage.js";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { searching, sendposts } from "./ingredients/components";
 
 const newListingLi = document.getElementById("newlisting_li");
 const myProfileLi = document.getElementById("myprofile_li");
@@ -37,9 +36,6 @@ function checkAccess(key) {
 }
 checkAccess(getToken());
 
-searchBtn.addEventListener("click", () => {
-  searchInput.classList.toggle("hidden");
-});
 
 async function getLis() {
   try {
@@ -59,6 +55,8 @@ async function getLis() {
 getLis();
 
 function listListing(lis) {
+  document.title = `${lis.title} | Seal`;
+
   let listing;
   let title;
   let desc;

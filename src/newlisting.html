@@ -5,15 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/small_logo.svg" type="image/x-icon" />
-
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css"
       rel="stylesheet"
       type="text/css" />
-
-    <title>New listing</title>
+    <title>New listing | Seal</title>
     <script type="module" src="./js/ingredients/all.js" defer></script>
     <script type="module" src="./js/newlisting.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -47,9 +45,9 @@
                 class="pl-4 tracking-wide font-light placeholder:text-black text-2xl focus:outline-none bg-transparent" />
               <span
                 class="hidden absolute text-xs text-red-800 tracking-wide top-0 right-0 whitespace-nowrap lg:text-sm"
-                id="title-message"
-                >Missing title</span
-              >
+                id="title-message">
+                Missing title
+              </span>
               <hr class="bg-black mb-4 mt-2 lg:mb-12" />
               <textarea
                 name="desc"
@@ -62,7 +60,6 @@
                 >Missing description</span
               >
             </div>
-
             <div class="flex flex-col gap-8">
               <input
                 name="tags"
@@ -109,13 +106,11 @@
           Preview
         </button>
       </div>
-
       <section
         id="preview-section"
         class="hidden modal w-full h-full bg-black bg-opacity-50 fixed left-0 top-0 flex items-center z-10"></section>
     </main>
     <div id="logout_div" class=""></div>
-
     <section id="bigScreen_nav" class="hidden md:inline"></section>
     <section id="mobile_nav" class="md:hidden"></section>
   </body>
