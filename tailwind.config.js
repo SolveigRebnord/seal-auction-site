@@ -7,7 +7,7 @@ module.exports = {
         blue: "#4B6676",
         bgGrey: "#FCFCFC",
         darkerBlue: "#4B6676",
-        mustardYellow: "#F2D792"
+        mustardYellow: "#F2D792",
       },
       fontFamily: {
         cuprum: "Cuprum",
@@ -30,9 +30,9 @@ module.exports = {
         10: "10px",
       },
       boxShadow: {
-        'rightShadow': '8px 3px 8px 0px rgb(204,204,204)',
-        'smallShadow': '2px 2px 8px 0 rgba(0, 0, 0, 0.4)',
-      }
+        rightShadow: "8px 3px 8px 0px rgb(204,204,204)",
+        smallShadow: "2px 2px 8px 0 rgba(0, 0, 0, 0.4)",
+      },
     },
   },
 };
