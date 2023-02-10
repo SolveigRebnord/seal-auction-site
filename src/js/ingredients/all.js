@@ -13,24 +13,13 @@ mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 
   <a href="index.html" class="font-shadow text-4xl">
   seal
 </a>
-    <a
-      href="myprofile.html"
-      id="header_profile"
-      class="hover:cursor-pointer">
-      <div
-        class="flex flex-row items-end gap-2 font-robotoC tracking-wide">
-        <p class="font-quickS text-xs lg:text-sm" id="profile_name"></p>
-        <img class="w-6" src="/profile.png" alt="Profile icon" />
-      </div>
-    </a>
-</div>
 <div class="flex flex-row justify-end">
-  <div class="mt-4 md:m-0 flex flex-row gap-4 items-center relative">
+  <div class="mt-4 md:m-0 flex flex-row gap-4 relative">
     <input
       type="text"
       name="search_input"
       id="search_input"
-      class="hidden border-b border-gray-400 h-6 w-72 px-4 outline-none bg-transparent text-sm font-quickS pb-1 appearance-none transition-all ease-in duration-200"
+      class=" border-b border-gray-400 h-6 w-72 px-4 outline-none bg-transparent text-sm font-quickS pb-1 appearance-none transition-all ease-in duration-200"
       placeholder="What are you looking for?" />
     <img
       src="/icon_search.svg"
@@ -42,6 +31,18 @@ mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 
       class="absolute h-96 overflow-scroll top-8 right-0 z-20 hidden text-black p-4 rounded-md bg-white shadow-lg flex flex-col gap-6"></ul>
   </div>
 </div>
+    <a
+      href="myprofile.html"
+      id="header_profile"
+      class="hover:cursor-pointer py-2 px-4">
+      <div
+        class="flex flex-row items-center justify-center gap-2 font-robotoC tracking-wide px-4 py-2 shadow-rightShadow rounded-md">
+        <p class="font-robotoC text-gray-800 text-xs" id="profile_name"></p>
+        <img class="w-8" src="/profile_icon.svg" alt="Profile icon" />
+      </div>
+    </a>
+</div>
+
 </section>
 `;
 
@@ -79,10 +80,10 @@ class="flex flex-row align-middle justify-between px-12 py-4 pb-6 fixed bottom-0
 `;
 const logOutMobile = document.getElementById("logout_small");
 
-bigScreenNav.innerHTML = `<ul class="flex flex-col pt-16 justify-start text-center items-center gap-20 py-6 fixed top-0 left-0 h-full text-base tracking-wider text-white font-fjalla bg-blue uppercase md:w-40 lg:w-44">
+bigScreenNav.innerHTML = `<ul class="flex flex-col pt-16 justify-start text-center items-center gap-20 py-6 fixed top-0 left-0 h-full text-base tracking-wider text-white font-fjalla bg-blue uppercase shadow-rightShadow md:w-40 lg:w-44">
 <a id="logo" href="index.html">
   <li class=" pb-10">
-    <img class="w-24" src="/seal.svg" alt="" />
+    <p class="text-4xl tracking-widest">Seal</p>
   </li>
 </a>
 <a href="index.html" class="w-full text-center">
@@ -126,9 +127,9 @@ if (currentURL.includes("index")) {
   listingsLI.classList.add(
     "bg-white",
     "text-blue",
-    "py-10",
-    "px-6",
-    "shadow-xl"
+    "py-9",
+    "w-[178px]",
+    "shadow-smallShadow"
   );
 }
 
@@ -138,8 +139,8 @@ if (currentURL.includes("id")) {
     "bg-white",
     "text-blue",
     "py-10",
-    "px-6",
-    "shadow-xl"
+    "w-[180px]",
+    "shadow-smallShadow"
   );
 
   searchIcon.classList.add("hidden");
@@ -151,8 +152,8 @@ if (currentURL.includes("myprofile")) {
     "bg-white",
     "text-blue",
     "py-10",
-    "px-6",
-    "shadow-xl"
+    "w-[180px]",
+    "shadow-smallShadow"
   );
 
   searchIcon.classList.add("hidden");
@@ -164,8 +165,8 @@ if (currentURL.includes("newlisting")) {
     "bg-white",
     "text-blue",
     "py-10",
-    "px-6",
-    "shadow-xl"
+    "w-[180px]",
+    "shadow-smallShadow"
   );
   searchIcon.classList.add("hidden");
 }

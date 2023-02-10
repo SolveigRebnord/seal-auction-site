@@ -17,18 +17,19 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
       rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
   </head>
   <body
     id="body"
-    class="bg-bgGrey mb-32 md:mb-20 transition-all duration-500 ease-out">
+    class=" bg-gradient-to-r from-bgGrey to-white mb-32 md:mb-20 transition-all duration-500 ease-out">
     <header id="header"></header>
-    <main class="px-6 md:px-8 md:pl-52 lg:px-32 lg:pl-72">
+    <main class="px-6 border-t border-mustardYellow shadow-inner md:px-8 md:pl-52 lg:px-32 lg:pl-72">
       <div class="w-full flex flex-row justify-between items-center py-6">
         <h1 class="font-fjalla text-2xl md:text-3xl">Listings</h1>
         <select
           name="filter"
           id="select_filter"
-          class="p-3 text-sm md:p-4 md:text-base bg-white shadow-md cursor-pointer font-robotoC font-light">
+          class="px-4 py-3 pr-6 pt-4 text-sm  md:text-base bg-white shadow-md appearance-none text-center cursor-pointer font-robotoC font-normal">
           <option value="newest">Newest</option>
           <option value="oldest">Oldest</option>
           <option value="a-aa">A - Å</option>
@@ -52,7 +53,7 @@
     <section id="mobile_nav" class="md:hidden"></section>
     <section
       id="limited_access_banner"
-      class="hidden fixed bottom-0 w-full bg-darkerBlue text-white text-center py-4 font-quickS">
+      class="hidden fixed bottom-0 w-full bg-mustardYellow text-center py-4 font-quickS">
       <a
         class="flex flex-row gap-2 items-center justify-center"
         href="login.html"
