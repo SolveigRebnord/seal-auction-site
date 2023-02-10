@@ -100,7 +100,7 @@ function listListing(lis) {
   let oneImg;
   for (let img of lis.media) {
     oneImg = `<li>
-      <img class="rounded-lg  object-cover" src=${img}>
+      <img class="rounded-lg object-cover w-96" src=${img}>
     </li>`;
     media += oneImg;
   }
@@ -175,7 +175,7 @@ function listListing(lis) {
           </div>
         </div>
       </div>
-      <ul class="flex flex-row overflow-scroll m-auto w-full max-w-lg gap-4 lg:h-80 l:w-1/2 outline outline-1 outline-blue rounded-lg outline-offset-4">${media}</ul>
+      <ul class="flex flex-row overflow-x-scroll m-auto w-fit max-w-lg gap-4 lg:h-80 l:w-1/2 outline outline-1 outline-blue rounded-lg outline-offset-4">${media}</ul>
     </div>
     <section class="lg:w-1/2 w-full  m-auto flex flex-col gap-6 p-6 shadow-md bg-white">
       <div class="flex flex-col items-center justify-between gap-4">
