@@ -1,11 +1,12 @@
 {
-  "name": "ca-auction",
+  "name": "seal-auction-site",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build --emptyOutDir",
+    "refresh": "rm -rf node_modules && rm package-lock.json && npm install",
     "pretty": "npx prettier --write .",
     "checkPretty": "npx prettier --check .",
     "prepare": "husky install",
