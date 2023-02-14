@@ -285,10 +285,10 @@ function listLis(data) {
 
       for (let bid of lis.bids) {
         bidder = bid["bidderName"];
-        bids = `<p class="text-sm rounded-b-md h-10 flex justify-center items-center bids border-t border-blue">${bid["amount"]} -,</p>`;
+        bids = `<p class="text-lg font-normal font-robotoC rounded-full m-2 h-14 border-2 border-mustardYellow w-14 float-right flex justify-center items-center bids">${bid["amount"]} -,</p>`;
       }
       if (amountOfBids == 0) {
-        bids = `<p class="bids border-t border-blue rounded-b-md h-10 flex justify-center items-center text-sm">Be nr. 1</p>`;
+        bids = `<p class="bids font-robotoC font-normal rounded-full m-2 h-14 border-2 border-mustardYellow w-14 flex justify-center items-center text-sm break-keep">Be the first</p>`;
         bidder = "";
       }
     }
@@ -300,7 +300,7 @@ function listLis(data) {
       let days = Math.floor(diff / (1000 * 60 * 60 * 24));
       let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      endsAt = `${days}d ${hours}h ${minutes}m`; //enten få til at de går nedover, eller ta vekk sekunder
+      endsAt = `${days} d  : ${hours} h  : ${minutes} m`; //enten få til at de går nedover, eller ta vekk sekunder
 
       let nowTime = dayjs().isAfter(dayjs(lis.endsAt));
       if (nowTime == true) {
@@ -308,15 +308,15 @@ function listLis(data) {
       }
     }
 
-    oneLi = `<a href="listing.html?id=${id}" class="w-full font-quickS font-light text-xs max-w-xs md:max-w-xxs hover:drop-shadow-lg">
+    oneLi = `<a href="listing.html?id=${id}" class="w-full font-quickS font-light text-xs max-w-xs border-t border-x border-gray-100 rounded-lg md:max-w-xxs hover:shadow-rightShadow">
       <div class="h-listingH w-full relative rounded-lg bg-cover bg-center flex flex-col justify-end" style="background-image: url('${media}')">
         <div class="w-full h-72 max-h-72 md:h-32 flex items-end">
-          <div class="w-full bg-white flex flex-col shadow-lg rounded-b-lg gap-2 pt-4">
-            <h2 class="text-base max-h-6 px-2 font-extralight font-sans tracking-wide overflow-hidden">${title}
+          <div class="w-full bg-white flex flex-col items-center shadow-lg rounded-b-lg gap-2 pt-4 p-2">
+            <h2 class="text-lg max-h-7 pl-2 font-light font-robotoC tracking-wide overflow-hidden">${title}
             </h2>
-            <div class="flex flex-row justify-between items-center px-2">
-              <p class="text-xs text-blue flex flex-row gap-1">
-                <img class="h-4" src="/clock.png">${endsAt}
+            <div class="w-fit self-center mt-4">
+              <p class="text-xs font-bold text-gray-600 flex flex-row gap-1 font-robotoC rounded-md px-3 py-1">
+                ${endsAt}
               </p>
             </div>
             <span class="">${bids}</span>
@@ -333,22 +333,22 @@ function listLis(data) {
     span.addEventListener("mouseenter", (e) => {
       e.preventDefault();
       span.classList.add(
-        "bg-blue",
-        "text-white",
+        "bg-mustardYellow",
+        "text-blue",
         "uppercase",
-        "font-light",
-        "font-cuprum",
+        "text-xs",
+        "font-fjalla",
         "tracking-widest"
       );
       span.innerHTML = "Make a bid";
       span.addEventListener("mouseleave", (e) => {
         e.preventDefault();
         span.classList.remove(
-          "bg-blue",
-          "text-white",
+          "bg-mustardYellow",
+          "text-blue",
           "uppercase",
-          "font-light",
-          "font-cuprum",
+          "text-xs",
+          "font-fjalla",
           "tracking-widest"
         );
 

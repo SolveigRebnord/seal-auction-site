@@ -8,24 +8,24 @@ const bigScreenNav = document.getElementById("bigScreen_nav");
 const logOut = document.getElementById("logout_div");
 const currentURL = window.location.toString();
 
-mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 md:p-8 gap-4">
-<div class="flex flex-row items-center justify-between">
-  <a href="index.html" class="font-shadow text-4xl">
+mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 md:p-2 md:pt-0 md:pr-20">
+<div class="flex flex-row items-start justify-end">
+  <a href="index.html" class="font-shadow text-4xl md:hidden">
   seal
 </a>
 <div class="flex flex-row justify-end">
-  <div class="mt-4 md:m-0 flex flex-row gap-4 relative">
+  <div class=" flex flex-row items-center gap-6 relative ">
     <input
       type="text"
       name="search_input"
       id="search_input"
-      class=" border-b border-gray-400 h-6 w-72 px-4 outline-none bg-transparent text-sm font-quickS pb-1 appearance-none transition-all ease-in duration-200"
+      class="hidden border-b border-gray-400 h-6 w-72 px-4 outline-none bg-transparent text-sm font-quickS pb-1 appearance-none"
       placeholder="What are you looking for?" />
     <img
       src="/icon_search.svg"
       id="search_btn"
       alt="Search icon"
-      class="hover:cursor-pointer" />
+      class="hover:cursor-pointer rounded-md px-2 py-2 pt-6 w-[50px] h-[50px] shadow-md" />
     <ul
       id="showSearch"
       class="absolute h-96 overflow-scroll top-8 right-0 z-20 hidden text-black p-4 rounded-md bg-white shadow-lg flex flex-col gap-6"></ul>
@@ -34,11 +34,11 @@ mobileHeader.innerHTML = ` <section id="mobile_header" class="flex flex-col p-6 
     <a
       href="myprofile.html"
       id="header_profile"
-      class="hover:cursor-pointer py-2 px-4">
+      class="hover:cursor-pointer px-4 ">
       <div
-        class="flex flex-row items-center justify-center gap-2 font-robotoC tracking-wide px-4 py-2 shadow-rightShadow rounded-md">
-        <p class="font-robotoC text-gray-800 text-xs" id="profile_name"></p>
-        <img class="w-8" src="/profile_icon.svg" alt="Profile icon" />
+        class="flex flex-row items-center justify-between gap-4 font-robotoC tracking-wide px-5 py-3 pt-5 shadow-md rounded-md">
+        <p class="font-fjalla tracking-wider text-bold uppercase text-darkerBlue pt-1" id="profile_name"></p>
+        <img class="w-7" src="/profile_icon.svg" alt="Profile icon" />
       </div>
     </a>
 </div>
@@ -82,8 +82,8 @@ const logOutMobile = document.getElementById("logout_small");
 
 bigScreenNav.innerHTML = `<ul class="flex flex-col pt-16 justify-start text-center items-center gap-20 py-6 fixed top-0 left-0 h-full text-base tracking-wider text-white font-fjalla bg-blue uppercase shadow-rightShadow md:w-40 lg:w-44">
 <a id="logo" href="index.html">
-  <li class=" pb-10">
-    <p class="text-4xl tracking-widest">Seal</p>
+  <li class=" pb-6">
+    <img src="/seal_logo.svg" class="w-24">
   </li>
 </a>
 <a href="index.html" class="w-full text-center">

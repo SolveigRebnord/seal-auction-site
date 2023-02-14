@@ -100,7 +100,7 @@ function listListing(lis) {
   let oneImg;
   for (let img of lis.media) {
     oneImg = `<li>
-      <img class="rounded-lg object-cover w-96" src=${img}>
+      <img class="rounded-lg object-cover min-w-[400px] h-80" src=${img}>
     </li>`;
     media += oneImg;
   }
@@ -158,7 +158,7 @@ function listListing(lis) {
 
   id = lis.id;
 
-  listing = `<div class="w-full p-4 rounded-md flex flex-col font-light font-robotoC md:mx-8 md:p-8 md:ml-48 gap-20 justify-center items-center  lg:p-14 shadow-lg">
+  listing = `<div class="w-full p-4 rounded-md flex flex-col font-light font-robotoC md:mx-8 md:p-8 md:ml-48 gap-20 justify-center items-center  lg:p-16 shadow-lg">
     <div class="w-full flex flex-col gap-2 text-base lg:flex-row lg:gap-20">
       <div class="lg:w-1/2 flex flex-col gap-6">
         <div class="flex flex-row gap-4 items-center">
@@ -175,7 +175,7 @@ function listListing(lis) {
           </div>
         </div>
       </div>
-      <ul class="flex flex-row overflow-x-scroll m-auto w-fit max-w-lg gap-4 lg:h-80 l:w-1/2 outline outline-1 outline-blue rounded-lg outline-offset-4">${media}</ul>
+      <ul class="flex flex-row overflow-x-scroll m-auto w-1/2 gap-2 lg:h-80 outline outline-1 outline-blue rounded-md outline-offset-8">${media}</ul>
     </div>
     <section class="lg:w-1/2 w-full  m-auto flex flex-col gap-6 p-6 shadow-md bg-white">
       <div class="flex flex-col items-center justify-between gap-4">
